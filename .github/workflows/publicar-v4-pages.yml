@@ -23,7 +23,7 @@ jobs:
       - name: Compilar
         working-directory: fuente
         run: |
-          npm ci
+          npm_config_cache="$RUNNER_TEMP/npm-cache" npm ci
           npm run build
           npm test
       - name: Obtener sitio actual
