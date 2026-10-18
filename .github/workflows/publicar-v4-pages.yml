@@ -1,0 +1,43 @@
+name: Publicar V4 en GitHub Pages sin alterar JAT Vet anterior
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener rama de desarrollo
+        uses: actions/checkout@v4
+        with:
+          ref: desarrollo-v4-firebase
+          path: fuente
+      - name: Preparar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Compilar
+        working-directory: fuente
+        run: |
+          npm ci
+          npm run build
+          npm test
+      - name: Obtener sitio actual
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: sitio
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Copiar únicamente la nueva V4
+        run: |
+          mkdir -p sitio/v4 sitio/assets
+          cp -R fuente/dist/v4/. sitio/v4/
+          cp -R fuente/dist/assets/. sitio/assets/
+          if [ -f fuente/dist/acceso-prueba.html ]; then cp fuente/dist/acceso-prueba.html sitio/acceso-prueba.html; fi
+      - name: Publicar sin modificar la aplicación anterior
+        working-directory: sitio
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add v4 assets acceso-prueba.html
+          if ! git diff --cached --quiet; then git commit -m 'Publicar JAT Vet V4 en ruta independiente de GitHub Pages'; git push origin main; fi
