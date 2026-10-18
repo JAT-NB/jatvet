@@ -28,6 +28,7 @@ jobs:
           npm test
           test -f dist/v4/index.html
           grep -q '/jatvet/assets/' dist/v4/index.html
+          test -f dist/v4/firebase-config.json
       - name: Obtener sitio actual
         uses: actions/checkout@v4
         with:
