@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "jat-vet-pruebas"
+  },
+  "targets": {
+    "jat-vet-pruebas": {
+      "hosting": {
+        "v4-preview": [
+          "jat-vet-pruebas"
+        ]
+      }
+    }
+  }
+}

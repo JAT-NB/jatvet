@@ -3,3 +3,5 @@ dist/
 .firebase/
 *-debug.log
 v4/firebase-config.json
+
+.test-secrets/

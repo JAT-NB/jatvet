@@ -1,13 +1,14 @@
 rules_version = '2';
 service cloud.firestore {
  match /databases/{database}/documents {
-  function admin() { return request.auth != null && request.auth.uid == 'gnkMytvd1KQWVagzp952Oc5qSsk1'; }
-  function access(uid) { return request.auth != null && (admin() || (request.auth.uid == uid &&
+  function signed() { return request.auth != null && request.auth.token.aud == 'jat-vet-pruebas'; }
+  function admin() { return signed() && 'jatvetAdmin' in request.auth.token && request.auth.token.jatvetAdmin == true; }
+  function access(uid) { return signed() && (admin() || (request.auth.uid == uid &&
    (!exists(/databases/$(database)/documents/profiles/$(uid)) || get(/databases/$(database)/documents/profiles/$(uid)).data.enabled == true))); }
   function path(uid) { return /databases/$(database)/documents/workspaces/$(uid); }
   function previous(uid) { return exists(path(uid)) ? get(path(uid)).data.revision : 0; }
   match /profiles/{uid} {
-   allow read: if admin() || (request.auth != null && request.auth.uid == uid);
+   allow read: if admin() || (signed() && request.auth.uid == uid);
    allow create, update: if admin() && request.resource.data.keys().hasOnly(['enabled','label']) && request.resource.data.enabled is bool && request.resource.data.label is string;
    allow delete: if false;
   }

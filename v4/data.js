@@ -1,4 +1,3 @@
-export const ADMIN_UID='gnkMytvd1KQWVagzp952Oc5qSsk1';
 export const COLLECTIONS=['pets','turns','procedures','services','money','studies','vaccinations','audit'];
 export function emptyData(){return Object.fromEntries(COLLECTIONS.map(k=>[k,[]]));}
 export function validateBackup(input){

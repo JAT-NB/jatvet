@@ -1,7 +1,7 @@
-import {ADMIN_UID,emptyData,mergeBackup,same,totals} from './data.js';
+import {emptyData,mergeBackup,same,totals} from './data.js';
 export function checkIdentities({admin,a,b,secondA}){
- if(admin.uid!==ADMIN_UID)throw Error('La cuenta de administrador no tiene el UID esperado.');
- if(a.uid===b.uid||[a.uid,b.uid].includes(ADMIN_UID)||secondA.uid!==a.uid)throw Error('Las identidades de prueba deben ser dos profesionales distintos y una segunda sesión del profesional A.');
+ if(admin.isAdmin!==true)throw Error('La cuenta de pruebas no tiene el permiso administrativo jatvetAdmin.');
+ if(a.uid===b.uid||[a.uid,b.uid].includes(admin.uid)||secondA.uid!==a.uid)throw Error('Las identidades de prueba deben ser dos profesionales distintos y una segunda sesión del profesional A.');
  for(const client of [a,b])if(!/^jatvet-v4-test[-+]/i.test(client.email||''))throw Error('Usá exclusivamente cuentas con correo que comience con jatvet-v4-test- o jatvet-v4-test+.');
 }
 export function syntheticBackup(run){return {...emptyData(),diagnosticRun:run,pets:[{id:run+'-p',pet:'Paciente sintético',species:'Canino',owner:'PRUEBA, sin datos reales',photo:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aV0cAAAAASUVORK5CYII='}],services:[{id:run+'-s',name:'Servicio sintético',price:123}],turns:[{id:run+'-t',petId:run+'-p',serviceId:run+'-s',date:'2099-01-01',time:'12:00',status:'Pendiente',price:123}],studies:[{id:run+'-st',petId:run+'-p',type:'Archivo sintético',file:'data:application/pdf;base64,JVBERi0xLjQKJSVFT0Y='}],money:[{id:run+'-m',petId:run+'-p',kind:'Ingreso',amount:123,date:'2099-01-01'}],vaccinations:[{id:run+'-v',petId:run+'-p',name:'Vacuna sintética',date:'2099-01-01',expiry:'2099-02-01',price:0}]};}
@@ -11,7 +11,7 @@ export async function verifyDevelopment(clients,report){
  checkIdentities(clients);const {admin,a,b,secondA}=clients;
  const ownA=a.repo(a.uid),ownB=b.repo(b.uid),beforeA=await ownA.read(),beforeB=await ownB.read();
  if(beforeA.revision!==0||beforeB.revision!==0||!same(beforeA.data,emptyData())||!same(beforeB.data,emptyData()))throw Error('Prueba cancelada sin escrituras: ambos espacios deben ser nuevos y estar vacíos. No se reemplaza ningún espacio existente.');
- report('PASS: administrador autenticado con UID esperado; dos profesionales de prueba; ambos espacios nuevos.');
+ report('PASS: administrador autenticado con permiso del proyecto de pruebas; dos profesionales de prueba; ambos espacios nuevos.');
  const run='v4-test-'+crypto.randomUUID(),backup=syntheticBackup(run),plan=mergeBackup(beforeA.data,backup);
  let revision=await ownA.save(plan.data,0,a.uid);const stored=await ownA.read();
  if(stored.revision!==revision||!same(stored.data,backup)||!same(totals(stored.data),plan.after))throw Error('No coincide el respaldo releído de Firestore.');

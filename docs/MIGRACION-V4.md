@@ -1,3 +1,5 @@
+> En esta entrega sólo se permiten respaldos sintéticos en jat-vet-pruebas. El procedimiento de migración real descrito abajo queda pospuesto y requiere autorización futura; no ejecutarlo con datos de la hermana.
+
 # Migración manual, revisable y aditiva
 
 No se ejecutó ninguna migración real. No hay UID asignado ni inventado para la hermana.

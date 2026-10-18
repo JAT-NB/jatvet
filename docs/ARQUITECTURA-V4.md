@@ -1,27 +1,13 @@
-# Arquitectura implementada y límites
+# Arquitectura del piloto de pruebas
 
-## Separación de la versión anterior
+La única aplicación Firebase aceptada es la registrada en `jat-vet-pruebas`. `v4/environment.js` verifica projectId, dominio de Authentication, bucket, appId, senderId y apiKey antes de `initializeApp`. El diagnóstico usa exactamente el mismo validador. No existe fallback a otro proyecto.
 
-El HTML original permanece sin cambios. Vite incorpora su fuente como texto al adaptador `v4/legacy.js`, que reemplaza exclusivamente los puntos de carga y guardado, bloquea la importación destructiva anterior y elimina el registro de service worker dentro de V4. Las pantallas se ejecutan en un iframe sandbox de origen opaco, sin acceso al almacenamiento local ni a la sesión Firebase del contenedor. La comunicación de guardado valida origen de ventana y un token efímero. CSP limita conexiones y recursos del iframe. Ningún respaldo se importa automáticamente.
+El administrador se reconoce por el custom claim booleano `jatvetAdmin:true` del token firmado por Firebase Authentication del proyecto de pruebas. Ningún UID tiene privilegios por estar escrito en el cliente. Las reglas requieren el audience `jat-vet-pruebas` y ese claim para operaciones administrativas. Los usuarios normales sólo acceden a su espacio. No pueden escribir perfiles ni claims. Un administrador puede etiquetar/suspender acceso a Firestore; esto no revoca tokens ni reemplaza una gestión completa del ciclo de vida de cuentas de Authentication.
 
-Se conservan las funciones de pacientes, responsables/mascotas, turnos, vacunas, procedimientos, estudios, servicios, caja, informes, fotos, adjuntos y exportación. El importador anterior que reemplazaba todos los datos se redirige al procedimiento revisable, para cumplir la protección solicitada. El nombre de bienvenida no se persiste en este primer adaptador; queda pendiente mover esa preferencia al perfil. El pie de página y algunas advertencias del HTML anterior siguen visibles y requieren revisión editorial posterior.
+`workspaces/{uid}` contiene revisión, cantidad de fragmentos y actor. `workspaces/{uid}/chunks/{n}` contiene partes del JSON; `profiles/{uid}` habilitación y etiqueta. Escrituras transaccionales con revisión esperada; los cambios simultáneos se rechazan. Un listener avisa cambios y el usuario recarga explícitamente. El guardado se relee y compara antes de confirmarlo. Fotografías y archivos se mantienen como data URLs. Límite del piloto: 4 MB por espacio, sin cola offline durable ni Storage. La copia pendiente puede descargarse ante un error; no cerrar sin conservarla.
 
-## Identidad y autorización
+Las pantallas anteriores se mantienen en un iframe de origen opaco con CSP, sin acceso al localStorage ni al token Firebase del contenedor. El adaptador cambia los puntos de carga/guardado y dirige importaciones a la revisión aditiva. El HTML original permanece intacto. La preferencia de nombre de bienvenida por perfil sigue pendiente.
 
-Firebase Authentication email/contraseña, persistencia de sesión, cierre y recuperación de contraseña. No hay registro público. El administrador es exclusivamente `gnkMytvd1KQWVagzp952Oc5qSsk1`. No se aceptan roles elegidos desde el navegador. Las reglas permiten al profesional leer/escribir su UID y al administrador asistir a otro UID. Un profesional no puede modificar perfiles ni habilitar usuarios. Un perfil `enabled:false` bloquea el acceso del profesional. Un usuario autenticado sin perfil puede usar su propio espacio.
+El diagnóstico sólo admite cuentas sintéticas nuevas, dos espacios inexistentes y confirmación antes de escribir. Verifica la copia, totales, reimportación, segundo cliente, aislamiento y soporte. La limpieza es explícita, revisa el marcador e IDs y rechaza cambios ajenos. No se cargaron datos reales.
 
-La interfaz de administración permite seleccionar un UID, poner una etiqueta y habilitar/suspender su acceso a Firestore. **No** crea, elimina, enumera ni deshabilita cuentas de Authentication ni revoca sus tokens. Esa gestión completa necesita un backend privilegiado con Admin SDK, autorización del administrador y auditoría. No se incluyeron secretos ni un Admin SDK en el navegador.
-
-## Persistencia de compatibilidad
-
-`workspaces/{uid}` contiene revisión, cantidad de fragmentos y UID del actor. `workspaces/{uid}/chunks/{n}` contiene fragmentos del JSON completo del espacio. `profiles/{uid}` contiene etiqueta y habilitación. Las fotografías y adjuntos conservan sus data URLs; aún no se trasladan a Cloud Storage. Se excluye `payload` de los índices propuestos.
-
-Es un adaptador inicial para preservar el formato y las relaciones sin reescribir de golpe toda la aplicación. Cada operación guarda una nueva revisión atómica del espacio. Los cambios simultáneos se rechazan mediante transacción: no se pisa una revisión de otro dispositivo. Un listener avisa cambios externos; el usuario recarga explícitamente para preservar formularios en edición. Se relee la revisión confirmada antes de mostrar el guardado como verificado. Esto todavía requiere pruebas con Firestore.
-
-Las escrituras fallidas bloquean el editor y ofrecen descargar la copia pendiente en memoria. No existe cola offline durable; cerrar/recargar puede perder cambios no descargados. La aplicación advierte antes de salir. No usarla aún con información real.
-
-Este diseño tiene costos y límites: reescribe todo el espacio, limita a **4 MB serializados por espacio** y no fusiona cambios concurrentes. El límite protege el piloto frente a los límites transaccionales; rechaza la operación completa sin recortar fotos ni borrar fuentes. Para una V4 definitiva se requiere persistencia por entidad, adjuntos en Storage con reglas equivalentes, escrituras incrementales, auditoría de soporte, borrados recuperables y pruebas de carga. No se afirma que este piloto sea la versión definitiva.
-
-## Bloqueos externos
-
-Firestore Emulator no pudo descargarse por la política de red. No hay login administrativo de Firebase CLI. No se conocen el UID ni una cuenta real de la hermana. No se ejecutaron despliegues ni migraciones reales. La configuración web pública no concede permisos de administración del proyecto.
+`entregar:pruebas` limita cada operación remota mediante `--project jat-vet-pruebas`; no despliega Hosting live. Las cuentas nuevas usan UUID aleatorio, contraseñas aleatorias y custom claim sólo para el administrador sintético. Sus credenciales no se commitean ni se imprimen. El flujo debe aprobar emuladores y diagnóstico real antes de publicar, y verificar la URL después. No está verificado de punta a punta en esta sesión.

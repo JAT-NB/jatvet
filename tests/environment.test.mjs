@@ -1,0 +1,7 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';
+import {EXPECTED_CONFIG,PROJECT_ID,validateConfig,hasAdminClaim} from '../v4/environment.js';
+import fs from 'node:fs';
+test('configuración registrada de pruebas coincide y se acepta',()=>{assert.equal(PROJECT_ID,'jat-vet-pruebas');assert.deepEqual(validateConfig(JSON.parse(fs.readFileSync('public/v4/firebase-config.json','utf8'))),EXPECTED_CONFIG);});
+test('rechaza otro proyecto y configuración mezclada antes de initializeApp',()=>{for(const key of Object.keys(EXPECTED_CONFIG))assert.throws(()=>validateConfig({...EXPECTED_CONFIG,[key]:'incorrecto'}),/exclusivamente/);assert.throws(()=>validateConfig(null),/exclusivamente/);});
+test('administración requiere claim booleano, nunca UID ni valor elegido desde interfaz',()=>{assert.equal(hasAdminClaim({aud:PROJECT_ID,jatvetAdmin:true}),true);for(const claims of [null,{}, {jatvetAdmin:true},{aud:'otro',jatvetAdmin:true},{aud:PROJECT_ID,jatvetAdmin:'true'},{aud:PROJECT_ID,jatvetAdmin:1},{role:'admin'}])assert.equal(hasAdminClaim(claims),false);});
+test('configuración de entrega sólo señala al proyecto de pruebas',()=>{const aliases=JSON.parse(fs.readFileSync('.firebaserc','utf8'));assert.deepEqual(aliases.projects,{default:PROJECT_ID});assert.equal(Object.keys(aliases.targets).every(k=>k===PROJECT_ID),true);const rules=fs.readFileSync('firestore.rules','utf8');assert(rules.includes("request.auth.token.aud == 'jat-vet-pruebas'"));assert(!rules.includes('gnkM'));});

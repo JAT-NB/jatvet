@@ -1,54 +1,51 @@
-# JAT Vet 4.0 — desarrollo aislado
+# JAT Vet 4.0 — entorno exclusivo de pruebas
 
-Rama de trabajo: `desarrollo-v4-firebase`. `index.html` y `acceso-prueba.html` permanecen intactos respecto de `80d0575`. No se desplegó ni se modificó `main` ni GitHub Pages. La entrada nueva es `/v4/`.
+Rama: **desarrollo-v4-firebase**. Único proyecto permitido: **jat-vet-pruebas**. El HTML anterior y `main` permanecen intactos. No importar datos reales. No usar el backend, las cuentas ni el UID administrador de producción.
 
-## Desarrollo
+## Abrir y verificar localmente
 
-Requisitos verificados: Node 24, npm 11, Python 3.12 y Chromium 154. Java 21 para Firestore Emulator. Cada tarea cloud ya está aislada: usar el checkout existente, sin crear worktrees salvo pedido explícito.
+Requisitos: Node 24, npm y Java 21 (Firestore Emulator). Cada tarea cloud ya está aislada; usar el checkout existente, sin worktrees salvo pedido explícito.
 
 ```sh
-cd /workspace/jatvet
-npm ci --cache /workspace/.npm-cache
-npm run dev -- --port 5173 --strictPort
+npm ci
+npm run dev -- --port 5180 --strictPort
+```
+
+Usar la dirección que imprime Vite, rutas `/v4/` o `/v4/diagnostico.html`, en el mismo equipo. Esas rutas locales no son una preview pública. Configuración pública registrada en `public/v4/firebase-config.json`; el cliente verifica sus seis campos antes de inicializar Firebase.
+
+```sh
 npm test
 npm run build
 npm run test:e2e
+npm run test:firebase
 ```
 
-`test:e2e` usa Playwright instalado en el runtime cloud y Chromium en `/usr/bin/chromium`. Para otra máquina, instalar Playwright como herramienta de pruebas y configurar esa ruta. Vite debe estar ejecutándose para esa suite. Los tests usan contextos de navegador descartables, datos sintéticos y no tocan respaldos del usuario.
+`test:e2e` requiere Vite en 5180. `test:firebase` inicia Authentication (9199), Firestore (8180), ejecuta las reglas y administra su propio Vite; esos puertos deben estar libres. En el runtime cloud usar `XDG_CONFIG_HOME=/workspace/.config` y `FIREBASE_EMULATORS_PATH=/workspace/.firebase-emulators` si los directorios personales no son escribibles. Playwright está declarado como dependencia; usa Chromium del sistema si está disponible, o su navegador instalado. La entrega instala el navegador de Playwright si hace falta.
 
-La configuración web pública registrada de `jat-vet` está en `public/v4/firebase-config.json` y se copia al build. No es una credencial de administrador. Nunca incorporar contraseñas, claves privadas ni archivos de cuentas de servicio. La autorización depende de Authentication y de las reglas de Firestore, que todavía no fueron desplegadas ni verificadas con el emulador.
+## Único comando de entrega en un terminal con Internet
 
-## Pruebas con emuladores
+Desde esta rama, con dependencias instaladas:
 
 ```sh
-cd /workspace/jatvet
-XDG_CONFIG_HOME=/workspace/.config FIREBASE_EMULATORS_PATH=/workspace/.firebase-emulators npm run test:rules
+npm run entregar:pruebas
 ```
 
-Ese comando descarga Firestore Emulator desde `storage.googleapis.com`. La política cloud actual impidió descargarlo. Se guardaron los dominios requeridos en el borrador del entorno; deben aplicarse desde la configuración antes de reintentar. Nunca desactivar verificaciones TLS, firmas ni checksums.
+Si no existe sesión de Firebase CLI, abre la autenticación de Google. Usa una cuenta con permisos de Firebase Authentication, reglas/índices de Firestore y Hosting **solamente en jat-vet-pruebas**. No pegar credenciales en el chat ni agregarlas al repositorio.
 
-Para la prueba de acceso con Authentication Emulator, mantener Vite en otro terminal:
+La entrega se detiene ante cualquier fallo. Primero valida el proyecto, la rama, las pruebas unitarias, el build y las pruebas completas con emuladores. Sólo si pasan: comprueba/crea el sitio de Hosting del proyecto de pruebas, crea tres cuentas sintéticas nuevas (administrador y dos profesionales), instala reglas e índices, ejecuta diagnóstico real con limpieza explícita de registros sintéticos, publica el canal temporal `v4-prueba` y verifica acceso administrativo en la URL. No publica Hosting live, no usa GitHub Pages y no modifica `main`.
+
+Las credenciales aleatorias de pruebas se guardan únicamente en `.test-secrets/` (ignorado por Git, permisos restrictivos). No se imprimen las contraseñas. El administrador recibe el custom claim `jatvetAdmin:true`; no se necesita conocer ningún UID previo. No existe autoasignación de administración en el navegador. Firebase CLI sincroniza el dominio de la preview con Authentication; la prueba posterior de URL debe confirmar el acceso.
+
+**Este flujo de entrega todavía no pudo ejecutarse de punta a punta aquí**: la descarga de Firestore Emulator recibe HTTP 403 y no hay autorización de Firebase CLI. No hay URL pública verificada. Ver [estado real](docs/PRUEBAS-V4.md).
+
+## Instalación manual mínima de reglas
+
+Con autorización administrativa en el proyecto de pruebas:
 
 ```sh
-XDG_CONFIG_HOME=/workspace/.config FIREBASE_EMULATORS_PATH=/workspace/.firebase-emulators npx firebase emulators:exec --only auth --project jat-vet 'JAT_TEST_AUTH=1 npm run test:e2e'
+npx firebase deploy --only firestore:rules,firestore:indexes --project jat-vet-pruebas --config firebase.json
 ```
 
-La suite crea únicamente en `127.0.0.1:9099` cuentas sintéticas `admin@example.test` y `vet@example.test`. El UID del segundo es un fixture y **no** representa a la hermana del titular. `?emulators=1` sólo funciona en localhost/127.0.0.1 y conecta ambos SDK a emuladores locales; fuera de esos hosts no activa ese modo. No usar credenciales reales en el emulador. La suite de reglas usa un proyecto `demo-jat-vet` independiente.
+Este comando sólo instala reglas/índices; no publica una app ni concede administración a una cuenta. Preferir la entrega automatizada anterior: prueba las reglas antes de instalarlas y crea exclusivamente cuentas sintéticas con permisos de prueba.
 
-## Entrega de prueba: pendiente, sin publicación
-
-No existe todavía una URL publicada de V4. Antes de crear un canal de Hosting:
-
-1. Habilitar y ejecutar la suite de Firestore; corregir cualquier fallo.
-2. Obtener acceso autorizado al proyecto mediante Firebase CLI, sin compartir secretos en chat.
-3. Revisar las reglas remotas existentes y combinar los cambios sin bloquear aplicaciones previas. El archivo local deniega rutas ajenas: no reemplazar reglas remotas a ciegas.
-4. Validar Authentication (email/contraseña y dominios autorizados), Firestore e índices con cuentas de prueba autorizadas. No se dispone de las contraseñas de usuarios reales ni se necesitan para implementar.
-5. Obtener autorización explícita de publicación. Crear un canal nuevo y temporal, por ejemplo `v4-prueba`, mediante `firebase hosting:channel:deploy v4-prueba --project jat-vet --expires 7d`. Esto **publica** una preview; no ejecutarlo antes de la autorización. Confirmar el sitio de Hosting de destino, la URL devuelta y su dominio autorizado en Authentication. No usar un deploy de Hosting a live ni modificar GitHub Pages.
-6. Verificar la URL real en escritorio y celular y adjuntar los resultados. Una preview usa el mismo backend configurado: no implica una base de datos aislada.
-
-No fusionar ni publicar en producción sin aprobación. Ver [arquitectura](docs/ARQUITECTURA-V4.md), [migración](docs/MIGRACION-V4.md) e [informe real de pruebas](docs/PRUEBAS-V4.md).
-
-## Revalidación tras publicar la configuración cloud
-
-Se confirmó que la versión publicada incluye los dominios, pero esta instancia sigue con la política anterior y devuelve un 403 del proxy al descargar Firestore Emulator. Ver [diagnóstico de Firebase](docs/DIAGNOSTICO-FIREBASE.md) para la evidencia y para usar la nueva página `/v4/diagnostico.html` sin publicar la aplicación. Esa página exige cuentas sintéticas nuevas y confirmación antes de realizar solicitudes a Firebase; no se ejecutó contra el servicio real.
+Persistencia inicial por espacio completo, con control de revisión y límite de 4 MB. Falta convertirla en persistencia incremental y Storage para una versión definitiva. [Arquitectura](docs/ARQUITECTURA-V4.md), [diagnóstico](docs/DIAGNOSTICO-FIREBASE.md), [entrega](docs/ENTREGA-PREVIEW.md), [migración](docs/MIGRACION-V4.md).
