@@ -1,6 +1,10 @@
 name: Publicar V4 en GitHub Pages sin alterar JAT Vet anterior
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publicar-v4-pages.yml'
 permissions:
   contents: write
 jobs:
