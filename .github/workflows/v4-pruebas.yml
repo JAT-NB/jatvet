@@ -32,7 +32,7 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Instalar dependencias
-        run: npm ci
+        run: npm ci --cache "$RUNNER_TEMP/npm-cache"
       - name: Pruebas unitarias
         run: npm test
       - name: Compilar app
