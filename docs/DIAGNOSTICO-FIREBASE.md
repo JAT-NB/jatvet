@@ -17,7 +17,7 @@ npm ci
 npm run dev
 ```
 
-Usar la dirección que imprima Vite y la ruta `/v4/` para la aplicación, o `/v4/diagnostico.html` para el diagnóstico. Las direcciones de loopback sólo funcionan en el equipo donde se ejecuta Vite; no son una URL pública ni un enlace de preview cloud. El servidor iniciado en la máquina cloud no es accesible desde el navegador de tu computadora mediante su loopback. Los cambios siguen locales, sin push ni despliegue.
+Usar la dirección que imprima Vite y la ruta `/v4/` para la aplicación, o `/v4/diagnostico.html` para el diagnóstico. Las direcciones de loopback sólo funcionan en el equipo donde se ejecuta Vite; no son una URL pública ni un enlace de preview cloud. El servidor iniciado en la máquina cloud no es accesible desde el navegador de tu computadora mediante su loopback. El código está guardado y subido a la rama `desarrollo-v4-firebase` de GitHub; no se desplegó la aplicación.
 
 ## Validar desde una computadora con acceso a Firebase
 

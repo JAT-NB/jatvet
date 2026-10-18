@@ -1,6 +1,6 @@
 # Entrega de prueba: bloqueos comprobados
 
-El código está en la rama de desarrollo `desarrollo-v4-firebase`. Se guarda como un commit separado, sin cambiar el commit de `main` ni los archivos originales `index.html` y `acceso-prueba.html`. No se migraron datos reales.
+El código está en la rama de desarrollo `desarrollo-v4-firebase`. Se guarda como un commit separado, sin cambiar el commit de `main` ni los archivos originales `index.html` y `acceso-prueba.html`. No se migraron datos reales. El push a `origin/desarrollo-v4-firebase` fue confirmado; `origin/main` conserva `80d0575044729e3a0b9a6e0e708937fbcb5f9663`. El código del piloto quedó guardado en el commit `d8ba72ae88a219b9b3a59cda3b47e8249848445d`; los informes posteriores se guardan en commits de la misma rama.
 
 ## Estado de publicación
 
