@@ -1,0 +1,30 @@
+name: Publicar JAT Vet 4.0 en Firebase Pruebas
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Obtener exclusivamente V4 desde rama de desarrollo
+        uses: actions/checkout@v4
+        with:
+          ref: desarrollo-v4-firebase
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Instalar dependencias
+        run: npm ci --cache "$RUNNER_TEMP/npm-cache"
+      - name: Compilar V4
+        run: npm run build
+      - name: Autenticar GitHub en Google Cloud sin claves
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/687038553989/locations/global/workloadIdentityPools/jat-vet-github/providers/github-actions
+          service_account: jat-vet-github-deploy@jat-vet-pruebas.iam.gserviceaccount.com
+      - name: Publicar solo Hosting en Firebase de pruebas
+        run: npx firebase-tools deploy --only hosting --project jat-vet-pruebas --non-interactive
