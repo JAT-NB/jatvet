@@ -1,16 +1,5 @@
 name: JAT Vet V4 - pruebas aisladas
 on:
-  push:
-    branches: [desarrollo-v4-firebase]
-    paths:
-      - 'v4/**'
-      - 'public/v4/**'
-      - 'scripts/**'
-      - 'tests/**'
-      - 'package*.json'
-      - 'firebase*.json'
-      - 'firestore.*'
-      - '.github/workflows/v4-pruebas.yml'
   workflow_dispatch:
 permissions:
   contents: read
