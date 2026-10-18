@@ -1,0 +1,8 @@
+{
+  "hosting": {
+    "target": "v4-preview",
+    "public": "dist",
+    "ignore": ["firebase.json", "firebase.preview.json", "**/.*", "**/node_modules/**"],
+    "redirects": [{"source": "/", "destination": "/v4/", "type": 302}]
+  }
+}
