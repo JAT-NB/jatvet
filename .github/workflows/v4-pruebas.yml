@@ -1,0 +1,47 @@
+name: JAT Vet V4 - pruebas aisladas
+on:
+  push:
+    branches: [desarrollo-v4-firebase]
+    paths:
+      - 'v4/**'
+      - 'public/v4/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - 'package*.json'
+      - 'firebase*.json'
+      - 'firestore.*'
+      - '.github/workflows/v4-pruebas.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Obtener rama de pruebas
+        uses: actions/checkout@v4
+      - name: Preparar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Preparar Java para emuladores
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Instalar dependencias
+        run: npm ci
+      - name: Pruebas unitarias
+        run: npm test
+      - name: Compilar app
+        run: npm run build
+      - name: Pruebas de Firebase con emuladores
+        run: npm run test:firebase
+      - name: Conservar build de pruebas
+        uses: actions/upload-artifact@v4
+        with:
+          name: jat-vet-v4-build
+          path: dist/
+          retention-days: 7
