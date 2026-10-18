@@ -1,0 +1,34 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+    function isAdmin() {
+      return signedIn() && request.auth.uid == 'gnkMytvd1KQWVagzp952Oc5qSsk1';
+    }
+    function owns(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    // Perfiles: cada usuario puede consultar el suyo; el admin gestiona perfiles.
+    match /users/{uid} {
+      allow read: if owns(uid) || isAdmin();
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Cada profesional mantiene sus datos en su propio espacio.
+    // El administrador puede acceder para soporte y migraciones.
+    match /workspaces/{uid} {
+      allow read, write: if owns(uid) || isAdmin();
+      match /{document=**} {
+        allow read, write: if owns(uid) || isAdmin();
+      }
+    }
+
+    // Todo lo demás queda cerrado.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
