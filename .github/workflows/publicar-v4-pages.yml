@@ -26,6 +26,7 @@ jobs:
           npm_config_cache="$RUNNER_TEMP/npm-cache" npm ci
           npm run build
           npm test
+          test -f dist/v4/index.html
       - name: Obtener sitio actual
         uses: actions/checkout@v4
         with:
