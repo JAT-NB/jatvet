@@ -1,0 +1,26 @@
+name: JAT Vet - Resumen diario de turnos
+on:
+  schedule:
+    - cron: '0 12 * * *' # 09:00 Argentina (UTC-3)
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  enviar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save --no-package-lock firebase-admin@13 nodemailer@7
+      - run: node scripts/enviar-agenda-diaria.cjs
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          SMTP_FROM: ${{ secrets.SMTP_FROM }}
+          AGENDA_DESTINATARIO: vbaraggiola@hotmail.com
