@@ -30,6 +30,7 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js',{scop
   later.addEventListener('click',()=>{dismissedVersion=availableVersion;notice.style.display='none';});
   update.addEventListener('click',()=>{
     const url=new URL(location.href);
+    url.searchParams.delete('jatvet_prueba_actualizacion');
     url.searchParams.set('actualizado',String(Date.now()));
     location.replace(url.href);
   });
@@ -40,6 +41,8 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js',{scop
       if(!response.ok)return;
       const info=await response.json();
       if(!info||typeof info.version!=='string')return;
+      // Prueba manual aislada: no modifica version.json ni afecta a otros usuarios.
+      if(new URL(location.href).searchParams.get('jatvet_prueba_actualizacion')==='1') info.version='4.1.0-prueba';
       if(info.version===runningVersion||info.version===dismissedVersion){notice.style.display='none';return;}
       availableVersion=info.version;
       mount();
