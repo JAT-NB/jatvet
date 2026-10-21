@@ -28,11 +28,35 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js',{scop
   const mount=()=>{if(!notice.isConnected)document.body.append(notice);};
   let availableVersion='';
   later.addEventListener('click',()=>{dismissedVersion=availableVersion;notice.style.display='none';});
-  update.addEventListener('click',()=>{
-    const url=new URL(location.href);
-    url.searchParams.delete('jatvet_prueba_actualizacion');
-    url.searchParams.set('actualizado',String(Date.now()));
-    location.replace(url.href);
+  update.addEventListener('click',async()=>{
+    update.disabled=true;
+    update.textContent='Verificando actualización…';
+    try{
+      // No mostrar un falso éxito si la nueva publicación aún no está disponible.
+      const entry=await fetch('/jatvet/?comprobar='+Date.now(),{cache:'no-store'});
+      if(!entry.ok)throw Error('No se pudo consultar la nueva publicación');
+      const html=await entry.text();
+      const installer=html.match(/<script[^>]+src=["']([^"']*\\/install\\.js[^"']*)["']/);
+      if(!installer)throw Error('La publicación no incluye el instalador');
+      const script=await fetch(new URL(installer[1],location.origin),{cache:'no-store'});
+      if(!script.ok)throw Error('No se pudo consultar el instalador nuevo');
+      const source=await script.text();
+      const version=source.match(/const runningVersion\\s*=\\s*['"]([^'"]+)['"]/);
+      if(!version||version[1]!==availableVersion)throw Error('La nueva versión todavía no está publicada completamente');
+      if('serviceWorker' in navigator){
+        const registration=await navigator.serviceWorker.getRegistration('/jatvet/');
+        if(registration)await registration.update();
+      }
+      const url=new URL(location.href);
+      url.searchParams.delete('jatvet_prueba_actualizacion');
+      url.searchParams.set('actualizado',String(Date.now()));
+      location.replace(url.href);
+    }catch(err){
+      description.textContent='No se pudo confirmar la actualización. Tus datos no se modificaron. Probá más tarde.';
+      update.disabled=false;
+      update.textContent='Reintentar';
+      console.warn('JAT Vet: actualización no confirmada',err);
+    }
   });
   async function check(){
     if(document.hidden)return;
