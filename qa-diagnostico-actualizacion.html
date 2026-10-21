@@ -1,0 +1,21 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Prueba segura de actualización JAT Vet</title><style>body{font:16px system-ui;max-width:600px;margin:40px auto;padding:20px;color:#123b50}button{padding:12px;border:0;border-radius:8px;background:#123b50;color:white}pre{white-space:pre-wrap;background:#eef4f6;padding:15px;border-radius:8px}</style></head><body><h1>🐾 Diagnóstico de actualización</h1><p>Esta página no carga Firebase ni modifica pacientes, turnos o datos de otros usuarios.</p><button id="run">Comprobar versión y recursos</button><pre id="output">Sin ejecutar</pre><script type="module">
+const out=document.querySelector('#output');
+document.querySelector('#run').onclick=async()=>{
+ const lines=[];
+ try{
+  const response=await fetch('/jatvet/version.json?nocache='+Date.now(),{cache:'no-store'});
+  const info=await response.json();
+  lines.push('Versión publicada: '+info.version);
+  const script=await fetch('/jatvet/install.js?nocache='+Date.now(),{cache:'no-store'});
+  const code=await script.text();
+  const match=code.match(/const runningVersion\\s*=\\s*['"]([^'"]+)['"]/);
+  lines.push('Versión del instalador: '+(match?.[1]??'no detectada'));
+  lines.push('Versiones coinciden: '+(match?.[1]===info.version?'SÍ':'NO'));
+  const sw=await fetch('/jatvet/sw.js?nocache='+Date.now(),{cache:'no-store'});
+  lines.push('Service worker disponible: '+(sw.ok?'SÍ':'NO'));
+  lines.push('PWA instalada en este navegador: '+(matchMedia('(display-mode: standalone)').matches?'SÍ':'NO / navegador'));
+  lines.push('Firebase: NO SE ACCEDIÓ (prueba segura)');
+ }catch(e){lines.push('Error: '+e.message)}
+ out.textContent=lines.join('\\n');
+};
+</script></body></html>
