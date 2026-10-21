@@ -37,3 +37,6 @@ PASS (10): manifiesto JSON; alcance PWA; registro SW; búsqueda de actualizació
 OBSERVACIÓN (2): código legacy persiste datos con localStorage.setItem(KEY); SW devuelve Response.error() sin red. Estos hallazgos no prueban explotación ni defecto funcional, requieren casos dinámicos.
 
 **Importante:** Los 10 PASS son de presencia/configuración estática, NO de funcionamiento extremo a extremo. Se mantiene estado NO CERTIFICADO hasta ejecutar seguridad real de Firestore, aislamiento A/B, backup/restore y pruebas móviles.
+
+## Evidencia manual reportada — 2026-10-21
+El propietario confirmó que publicó las reglas Firestore con `access(uid)` exigiendo existencia del perfil y `enabled == true`, y que pudo ingresar con las cuentas propias y de Verónica, visualizando los datos habituales en ambas. Resultado: PASS de regresión manual de acceso de dos cuentas, basado en reporte del usuario. No implica validación de denegación cross-tenant ni inspección independiente de las reglas efectivamente desplegadas.
