@@ -28,3 +28,12 @@ La existencia de código no equivale a pruebas funcionales ejecutadas. No realiz
 
 ## Criterio de liberación
 100% casos críticos PASS; 0 defectos bloqueantes o altos de seguridad; prueba A/B de aislamiento; restauración y reversión probadas; verificación de despliegue contra commit; respaldo recuperable y aprobación manual.
+
+## Ejecución adicional — 12 comprobaciones estáticas
+Fecha: 2026-10-21. Se evaluó contenido obtenido del repositorio, sin abrir sesiones reales ni mutar datos.
+
+PASS (10): manifiesto JSON; alcance PWA; registro SW; búsqueda de actualización SW; navegación no-store; etiqueta visible 4.0.1; control enabled; revalidación periódica; comprobación UID backup; presencia de validación de solapamiento.
+
+OBSERVACIÓN (2): código legacy persiste datos con localStorage.setItem(KEY); SW devuelve Response.error() sin red. Estos hallazgos no prueban explotación ni defecto funcional, requieren casos dinámicos.
+
+**Importante:** Los 10 PASS son de presencia/configuración estática, NO de funcionamiento extremo a extremo. Se mantiene estado NO CERTIFICADO hasta ejecutar seguridad real de Firestore, aislamiento A/B, backup/restore y pruebas móviles.
