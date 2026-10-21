@@ -1,0 +1,12 @@
+const fs=require('node:fs');const assert=require('node:assert/strict');
+const read=f=>fs.readFileSync(f,'utf8');
+const install=read('install.js'),html=read('index.html'),sw=read('sw.js'),manifest=JSON.parse(read('manifest.webmanifest'));
+assert(!install.includes("Actualizar ahora"),'No debe haber boton de actualizacion');
+assert(!install.includes("setInterval("),'No se debe consultar versiones durante sesiones');
+assert(!html.includes("piloto-nico-402.js"),'No cargar piloto fallido');
+assert(!html.includes("nicoRiverBadge"),'No cargar codigo del badge roto');
+assert(install.includes("registration.update()"),'Debe verificar service worker al reabrir');
+assert(sw.includes("event.request.mode==='navigate'"),'Las navegaciones deben ir a la red');
+assert(sw.includes("fetch(event.request)"),'Las navegaciones deben cargar el HTML publicado');
+assert.equal(manifest.start_url,'/jatvet/');
+console.log('PASS: 8 comprobaciones estaticas de actualizacion silenciosa');
