@@ -1,4 +1,4 @@
-name: Publicar V4 en GitHub Pages sin alterar JAT Vet anterior
+name: Publicar JAT Vet en URL única con control de versión
 on:
   workflow_dispatch:
   push:
@@ -28,23 +28,23 @@ jobs:
           npm test
           test -f dist/v4/index.html
           grep -q '/jatvet/assets/' dist/v4/index.html
-          test -f dist/v4/firebase-config.json
+          test -f dist/v4/firebase-config.json\n          test -f dist/v4/install.js\n          test -f dist/v4/manifest.webmanifest
       - name: Obtener sitio actual
         uses: actions/checkout@v4
         with:
           ref: main
           path: sitio
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Copiar únicamente la nueva V4
+      - name: Copiar V4 y actualizar la URL principal
         run: |
           mkdir -p sitio/v4 sitio/assets
           cp -R fuente/dist/v4/. sitio/v4/
-          cp -R fuente/dist/assets/. sitio/assets/
+          cp -R fuente/dist/assets/. sitio/assets/\n          cp fuente/dist/v4/index.html sitio/index.html\n          cp fuente/dist/v4/install.js sitio/install.js\n          cp fuente/dist/v4/sw.js sitio/sw.js\n          cp fuente/dist/v4/firebase-config.json sitio/firebase-config.json\n          cp fuente/dist/v4/manifest.webmanifest sitio/manifest.webmanifest\n          # Mantener la identidad PWA en la URL definitiva.\n          python3 - <<'PY'\n          import json\n          p='sitio/manifest.webmanifest'\n          m=json.load(open(p))\n          m.update({'id':'/jatvet/','start_url':'/jatvet/','scope':'/jatvet/'})\n          for icon in m.get('icons',[]):\n              icon['src']='/jatvet/v4/'+icon['src'].lstrip('./')\n          open(p,'w').write(json.dumps(m,ensure_ascii=False,indent=2)+'\\n')\n          p='sitio/index.html'\n          h=open(p).read().replace('href="./manifest.webmanifest"','href="/jatvet/manifest.webmanifest"').replace('src="./install.js"','src="/jatvet/install.js"').replace('href="./icon-192.png"','href="/jatvet/v4/icon-192.png"').replace('href="./apple-touch-icon.png"','href="/jatvet/v4/apple-touch-icon.png"')\n          open(p,'w').write(h)\n          # Sincronizar versión del cliente con el indicador remoto.\n          import re\n          p='sitio/install.js'\n          s=open(p).read()\n          v=re.search(r"runningVersion\\s*=\\s*['\\\"]([^'\\\"]+)",s)\n          if not v: raise SystemExit('No se encontró runningVersion: abortar publicación')\n          open('sitio/version.json','w').write(json.dumps({'version':v.group(1)})+'\\n')\n          PY
           if [ -f fuente/dist/acceso-prueba.html ]; then cp fuente/dist/acceso-prueba.html sitio/acceso-prueba.html; fi
       - name: Publicar sin modificar la aplicación anterior
         working-directory: sitio
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add v4 assets acceso-prueba.html
-          if ! git diff --cached --quiet; then git commit -m 'Publicar JAT Vet V4 en ruta independiente de GitHub Pages'; git push origin main; fi
+          git add v4 assets acceso-prueba.html index.html install.js sw.js firebase-config.json manifest.webmanifest version.json
+          if ! git diff --cached --quiet; then git commit -m 'Publicar JAT Vet en URL única'; git push origin main; fi

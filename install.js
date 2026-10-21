@@ -10,7 +10,7 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js',{scop
 
 /* Verifica nuevas versiones sin interrumpir el trabajo del usuario. */
 (() => {
-  const runningVersion = '4.0.0';
+  const runningVersion = '4.0.0'; // Actualizar junto con version.json en cada publicación
   let dismissedVersion = '';
   const notice = document.createElement('aside');
   notice.setAttribute('role','status');
