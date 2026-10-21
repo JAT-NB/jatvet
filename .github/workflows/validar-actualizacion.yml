@@ -8,6 +8,7 @@ on:
       - 'index.html'
       - 'sw.js'
       - 'scripts/validar-actualizacion.mjs'
+      - 'scripts/probar-actualizacion.mjs'
       - '.github/workflows/validar-actualizacion.yml'
   workflow_dispatch:
 permissions:
@@ -21,4 +22,6 @@ jobs:
         with:
           node-version: '22'
       - name: Comprobar coherencia de versión y archivos
-        run: node scripts/validar-actualizacion.mjs
+        run: |
+          node scripts/validar-actualizacion.mjs
+          node scripts/probar-actualizacion.mjs
