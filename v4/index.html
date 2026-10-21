@@ -3,126 +3,39 @@
   <link rel="stylesheet" crossorigin href="/jatvet/assets/repository-CQZTQ0JS.css">
 <style>
 header{flex-wrap:nowrap}header .brand{flex:1;min-width:0;display:flex;align-items:center;gap:16px}header .brand p{margin:0;font-size:14px}#logout{flex-shrink:0}@media(max-width:640px){header .brand{display:block}header .brand p{font-size:12px;margin-top:4px}}#status:empty{display:none}#status{padding:8px 20px;font-size:13px;background:transparent;color:#526a75}#workspace{padding:0}#settings{margin:0 16px 12px;background:#fff;border-radius:12px}#settings>summary{cursor:pointer;color:#526a75;font-size:14px}#editor iframe{height:calc(100dvh - 80px);min-height:480px}header{position:sticky;top:0;z-index:90}#status:empty{display:none}#logout{font-size:13px}#settings[open]{position:fixed;z-index:1000;top:50%;left:50%;transform:translate(-50%,-50%);width:min(680px,calc(100vw - 32px));max-height:85dvh;overflow:auto;box-sizing:border-box;padding:20px 24px;border:1px solid #d9e4e8;box-shadow:0 0 0 100vmax rgba(5,27,41,.52),0 16px 45px rgba(0,0,0,.22);border-radius:16px}#settings[open]>summary{font-size:19px;font-weight:700;color:#123b50;margin-bottom:16px}#settings #review{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;max-height:250px;overflow:auto;background:#f5f8fa;border-radius:8px;padding:10px}#settings input[type=file]{max-width:100%}#closeBackup{float:right;border:0;border-radius:8px;padding:7px 12px;cursor:pointer;background:#e9f1f3;color:#123b50}
-header{justify-content:center;text-align:center}header .brand{flex:0 1 auto;display:flex;flex-direction:column;align-items:center;gap:4px}header .brand p{margin:0}</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#123b50"><link rel="icon" type="image/png" href="./icon-192.png"><link rel="apple-touch-icon" href="./apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="JAT Vet"><script type="module" src="./install.js?v=nico-20261021b"></script><style id="jatLoginDesign">
-body:has(#login:not([hidden])){background:linear-gradient(160deg,#e1f6f8,#f7fbfc 56%,#c9e9e9);min-height:100dvh}
-body:has(#login:not([hidden]))>header{background:transparent;color:#123b50;box-shadow:none;padding:30px 16px 12px}
-body:has(#login:not([hidden]))>header h1{font-size:32px;color:#087e88;letter-spacing:-.7px}
-body:has(#login:not([hidden]))>header .brand p{color:#365a6a;font-size:13px}
-#login:not([hidden]){width:min(420px,calc(100% - 32px));margin:10px auto 24px;box-sizing:border-box;padding:24px 22px 20px;border-radius:24px;background:rgba(255,255,255,.94);box-shadow:0 14px 40px #0b4e611c;border:1px solid #d9edf0}
-#login:not([hidden]) h2{font-size:24px;text-align:center;color:#123b50;margin:4px 0 7px}
-#login:not([hidden]) #jatLoginHint{text-align:center;font-size:13px;color:#55727c;margin:0 0 22px}
-#login:not([hidden]) label{display:block;color:#163e50;font-weight:600;font-size:13px;margin-bottom:14px}
-#login:not([hidden]) input{box-sizing:border-box;width:100%;margin-top:7px;border:1px solid #cfdee4;border-radius:12px;padding:13px 14px;min-height:46px;background:#fff;color:#123b50;font-size:16px}
-#login:not([hidden]) input[readonly]{background:#eff7f8}
-#login:not([hidden]) #loginForm>button[type=submit],#login:not([hidden]) #loginForm>button:not([type]){width:100%;background:#078391;color:#fff;border:0;border-radius:12px;padding:14px;font-weight:700;font-size:16px;min-height:48px}
-#login:not([hidden]) #reset{display:block;margin:12px auto 0;background:transparent;border:0;color:#087c89;text-decoration:underline;font-size:13px}
-#jatSwitchUser{display:block;margin:0 0 16px auto;border:0;background:transparent;color:#087c89;text-decoration:underline;font-size:13px;cursor:pointer}
-#jatLoginFooter{text-align:center;font-size:11px;color:#6b8590;margin:18px 0 0}
-#jatLoginPets{text-align:center;font-size:43px;margin:12px auto 0;letter-spacing:8px}
-body:not(:has(#login:not([hidden]))) #jatLoginPets{display:none}
-</style><style id="jatLoginFinal">
-#jatLoginBrand{display:none}
-body:has(#login:not([hidden]))>header{padding:12px 16px 0;position:relative}
+header{justify-content:center;text-align:center}header .brand{flex:0 1 auto;display:flex;flex-direction:column;align-items:center;gap:4px}header .brand p{margin:0}</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#123b50"><link rel="icon" type="image/png" href="./icon-192.png"><link rel="apple-touch-icon" href="./apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="JAT Vet"><script type="module" src="./install.js?v=nico-20261021b"></script><style id="jatLoginUnified">
+body:has(#login:not([hidden])){min-height:100dvh;background:radial-gradient(ellipse at 85% 10%,#d6f4f5,transparent 45%),linear-gradient(150deg,#f6ffff,#d9f2f2);font-family:system-ui,sans-serif}
+body:has(#login:not([hidden]))>header{position:relative;background:transparent;box-shadow:none;padding:23px 12px 0;color:#10334d;text-align:center}
+body:has(#login:not([hidden]))>header .brand{display:flex;flex-direction:column;align-items:center;gap:0}
 body:has(#login:not([hidden]))>header .brand>h1,body:has(#login:not([hidden]))>header .brand>p{display:none}
-body:has(#login:not([hidden])) #jatLoginBrand{display:flex;flex-direction:column;align-items:center;gap:1px}
-.jatVetLogo{width:92px;height:84px;filter:drop-shadow(0 3px 4px #13667818)}
-.jatBrandName{font-size:32px;font-weight:800;color:#0b7180;letter-spacing:-1px;line-height:1.1}
-.jatBrandName strong{color:#143d50}
-.jatBrandTag{font-size:12px;color:#587f8b}
-body:has(#login:not([hidden])){background:radial-gradient(circle at 10% 18%,#cceef3 0,transparent 40%),linear-gradient(160deg,#e3f6f8,#f9fcfd 60%,#d5f1ee);font-family:system-ui,sans-serif}
-#login:not([hidden]){margin:8px auto 20px;padding:20px 24px 18px;box-shadow:0 18px 50px #15556821}
-#login:not([hidden]) h2{font-size:23px;margin:2px 0 4px}
-#login:not([hidden]) #jatLoginHint{margin-bottom:17px}
-#login:not([hidden]) label{position:relative}
-#login:not([hidden]) input{border:1px solid #c6dfe5;box-shadow:0 2px 5px #103b4d0b}
-#login:not([hidden]) #loginForm>button:not([type]){background:linear-gradient(90deg,#008994,#087582);box-shadow:0 4px 12px #00899436}
-#jatLoginPets{display:flex;justify-content:center;gap:16px;letter-spacing:normal;margin:19px auto 4px}
-#jatLoginPets img{width:112px;height:96px;object-fit:cover;border-radius:19px;border:4px solid white;box-shadow:0 5px 18px #0c57602b;background:#e6f4f5}
-#jatLoginPets img:first-child{transform:rotate(-4deg)}
-#jatLoginPets img:last-child{transform:rotate(4deg)}
-#jatLoginFooter{margin-top:14px;color:#477680}
-#jatLoginFinal~*{box-sizing:border-box}
-@media(max-height:700px){.jatVetLogo{width:66px;height:58px}.jatBrandName{font-size:26px}#login:not([hidden]){padding:14px 20px}#jatLoginPets img{height:70px;width:88px}}
-</style><style id="jatLoginReference20261021">
-body:has(#login:not([hidden])){background:radial-gradient(circle at 9% 25%,#d1f3f1,transparent 40%),linear-gradient(160deg,#effbfc,#d9f5f4);overflow-x:hidden}
-body:has(#login:not([hidden]))>header{padding:22px 12px 0}
-body:has(#login:not([hidden])) #jatLoginBrand{gap:2px}
-body:has(#login:not([hidden])) .jatVetLogo{width:115px;height:100px}
-body:has(#login:not([hidden])) .jatBrandName{font-size:33px}
-body:has(#login:not([hidden])) .jatBrandTag{display:none}
-#login:not([hidden]){width:min(420px,calc(100% - 30px));margin:10px auto 12px;padding:15px 18px 0;border-radius:24px;background:linear-gradient(165deg,#f7ffff 0%,#eaf9f9 78%,#d2eeeb 100%);border:2px solid #b5dfe0;box-shadow:0 12px 34px #06495728;overflow:hidden}
-#login:not([hidden]) h2{font-size:21px;margin:7px 0 5px}
-#login:not([hidden]) #jatLoginHint{font-size:12px;margin-bottom:18px}
-#login:not([hidden]) label{font-size:11px;margin:0 0 10px;color:#41636e}
-#login:not([hidden]) input{margin-top:4px;border:0;border-radius:9px;background:#fff;min-height:49px;padding:12px 12px 12px 39px;font-size:13px;box-shadow:0 2px 9px #164d5d12}
-#login:not([hidden]) label:has(#email):before{content:"✉";position:absolute;left:13px;bottom:14px;font-size:17px;color:#517c88}
-#login:not([hidden]) label:has(#password):before{content:"♙";position:absolute;left:13px;bottom:14px;font-size:18px;color:#517c88}
-#login:not([hidden]) #loginForm>button:not([type]){min-height:46px;border-radius:9px;background:linear-gradient(90deg,#008a96,#067786);font-size:15px}
+#jatLoginBrand{display:none}
+body:has(#login:not([hidden])) #jatLoginBrand{display:grid;grid-template-columns:110px 1fr;grid-template-rows:58px 46px;column-gap:10px;max-width:355px;align-items:center;text-align:left}
+.jatVetLogo{grid-column:1;grid-row:1/3;width:110px;height:104px}
+.jatBrandName{grid-column:2;grid-row:1;font-size:35px;letter-spacing:-1.5px;font-weight:850;color:#0d2947;align-self:end;white-space:nowrap}
+.jatBrandName strong{color:#078e98}
+.jatBrandTag{grid-column:2;grid-row:2;display:block;font-size:12px;line-height:1.3;color:#596e83;align-self:start}
+#login:not([hidden]){box-sizing:border-box;width:min(440px,calc(100% - 28px));margin:22px auto 0;padding:0 8px;background:transparent;border:0;border-radius:0;box-shadow:none}
+#login:not([hidden]) h2{text-align:center;font-size:clamp(22px,5.4vw,29px);letter-spacing:-.7px;line-height:1.2;color:#0b2546;margin:0 0 8px}
+#jatLoginHint{text-align:center;color:#617487;font-size:14px;margin:0 0 22px}
+#jatSwitchUser{display:none!important}
+#jatLastUser{display:flex;align-items:center;gap:9px;background:white;border-radius:14px;padding:13px 12px;min-height:42px;margin-bottom:14px;box-shadow:0 5px 16px #1c647414;font-size:13px;color:#183950}
+#jatLastUser[hidden]{display:none}
+#jatLastUser:before{content:"✉";font-size:21px;color:#153b54}
+#jatLastUserEmail{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#jatLastUserChange{border:0;background:none;text-decoration:underline;color:#058a92;font-size:12px}
+#login:not([hidden]) label{display:block;position:relative;font-size:12px;font-weight:650;color:#16334f;margin-bottom:12px}
+#login:not([hidden]) label:has(#email):not(:has(input:read-only)){font-size:12px}
+#login:not([hidden]) label:has(#email:read-only){display:none}
+#login:not([hidden]) input{box-sizing:border-box;display:block;width:100%;height:55px;margin-top:5px;padding:12px 14px 12px 46px;border:1px solid #e4edf0;border-radius:14px;background:white;font-size:15px;color:#15344c;box-shadow:0 4px 14px #20586b13}
+#login:not([hidden]) label:has(#email):before{content:"✉";position:absolute;bottom:15px;left:15px;color:#17435b;font-size:19px}
+#login:not([hidden]) label:has(#password):before{content:"♙";position:absolute;bottom:14px;left:15px;color:#17435b;font-size:19px}
+#login:not([hidden]) #loginForm>button:not([type]){width:100%;height:54px;border:0;border-radius:13px;background:linear-gradient(90deg,#0096a0,#058c94);color:white;font-size:17px;font-weight:750;box-shadow:0 5px 15px #0b79801a}
 #login:not([hidden]) #loginForm>button:not([type]):after{content:"  →"}
-#login:not([hidden]) #reset{margin:13px auto 0;font-size:12px}
-#jatLoginPets{margin:12px -18px 0!important;gap:0!important;height:150px;overflow:hidden;align-items:end;background:linear-gradient(0deg,#9bd3cf,#d6f4f1)}
-#jatLoginPets img{width:50%!important;height:150px!important;object-fit:cover!important;border:0!important;border-radius:0!important;box-shadow:none!important;transform:none!important}
-#jatLoginFooter{margin:0 -18px;padding:9px 0;background:#d5e9e7;color:#547b82;font-size:10px}
-#jatSwitchUser{font-size:12px;margin:0 0 10px auto}
-#jatLastUser{display:flex;align-items:center;gap:9px;background:#fff;border-radius:10px;padding:11px;margin-bottom:11px;color:#365b66;font-size:12px;box-shadow:0 2px 8px #164d5d12}
-#jatLastUser:before{content:"●";display:grid;place-items:center;background:#078994;color:white;border-radius:50%;width:27px;height:27px;flex:none}
-#jatLastUser button{border:0;background:none;color:#07818d;text-decoration:underline;margin-left:auto;font-size:11px;cursor:pointer}
-#login:not([hidden]):has(#jatLastUser:not([hidden])) label:has(#email){display:none}
-@media(max-height:760px){body:has(#login:not([hidden]))>header{padding-top:7px}body:has(#login:not([hidden])) .jatVetLogo{height:72px;width:84px}#login:not([hidden]){margin-top:5px}#jatLoginPets,#jatLoginPets img{height:105px!important}}
-</style><style id="jatLoginCompactFix">
-body:has(#login:not([hidden])){background:linear-gradient(150deg,#eaf9f8,#d8f1ef);min-height:100dvh}
-body:has(#login:not([hidden]))>header{padding:14px 12px 0!important}
-body:has(#login:not([hidden])) #jatLoginBrand{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap;max-width:310px;margin:auto}
-body:has(#login:not([hidden])) .jatVetLogo{width:70px!important;height:64px!important}
-body:has(#login:not([hidden])) .jatBrandName{font-size:26px!important}
-body:has(#login:not([hidden]))>header .brand>p{display:block!important;font-size:10px!important;margin:0!important;text-align:center;color:#456a72}
-#login:not([hidden]){width:min(370px,calc(100% - 32px))!important;margin:10px auto 12px!important;padding:15px 15px 0!important;border-radius:20px!important;box-shadow:0 9px 25px #0a59601b!important}
-#login:not([hidden]) h2{font-size:18px!important;margin:2px 0 4px!important}
-#login:not([hidden]) #jatLoginHint{font-size:11px!important;margin:0 0 13px!important}
-#login:not([hidden]) label{font-size:11px!important;margin-bottom:8px!important}
-#login:not([hidden]) input{min-height:42px!important;font-size:13px!important;padding-top:9px!important;padding-bottom:9px!important}
-#jatLastUser{padding:8px!important;font-size:11px!important;margin-bottom:9px!important;min-height:36px}
-#jatLastUserEmail{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
-#login:not([hidden]) #loginForm>button:not([type]){min-height:42px!important;padding:9px!important;font-size:14px!important}
-#login:not([hidden]) #reset{margin:9px auto 0!important;font-size:11px!important}
-#jatLoginPets{height:160px!important;margin:9px -15px 0!important;background:linear-gradient(#e2f8f4,#a7d9d4)!important;gap:0!important}
-#jatLoginPets img{height:160px!important;width:50%!important;object-fit:cover!important;object-position:center 32%!important}
-#jatLoginFooter{margin:0 -15px!important;padding:7px 0!important;font-size:9px!important}
-@media(min-height:780px){#jatLoginPets,#jatLoginPets img{height:185px!important}}
-@media(max-height:680px){body:has(#login:not([hidden]))>header{padding-top:3px!important}#jatLoginPets,#jatLoginPets img{height:95px!important}}
-</style><style id="jatReferenceLogoFix">
-body:has(#login:not([hidden]))>header{padding:16px 10px 0!important}
-body:has(#login:not([hidden]))>header .brand{display:flex!important;align-items:center!important}
-body:has(#login:not([hidden])) #jatLoginBrand{display:grid!important;grid-template-columns:96px auto;grid-template-rows:auto auto;column-gap:8px;row-gap:0;max-width:320px!important;align-items:center;justify-content:center;margin:0 auto}
-body:has(#login:not([hidden])) .jatVetLogo{width:94px!important;height:83px!important;grid-column:1;grid-row:1 / 3}
-body:has(#login:not([hidden])) .jatBrandName{font-size:29px!important;grid-column:2;grid-row:1;align-self:end;white-space:nowrap;letter-spacing:-1px}
-body:has(#login:not([hidden])) .jatBrandTag{display:block!important;grid-column:2;grid-row:2;align-self:start;font-size:10px!important;max-width:170px;text-align:left;color:#416875}
-body:has(#login:not([hidden]))>header .brand>p{display:none!important}
-</style><style id="jatLoginImageMatch">
-body:has(#login:not([hidden])){background:radial-gradient(ellipse at 85% 15%,#d6f6f5,transparent 45%),linear-gradient(165deg,#f6ffff,#e3f8f7)!important}
-body:has(#login:not([hidden]))>header{padding:25px 12px 0!important}
-body:has(#login:not([hidden])) #jatLoginBrand{grid-template-columns:105px auto!important;max-width:350px!important;gap:8px!important}
-body:has(#login:not([hidden])) .jatVetLogo{width:105px!important;height:96px!important}
-body:has(#login:not([hidden])) .jatBrandName{font-size:35px!important;color:#112e4b!important}
-body:has(#login:not([hidden])) .jatBrandName strong{color:#078c93!important}
-body:has(#login:not([hidden])) .jatBrandTag{font-size:11px!important;line-height:1.35!important}
-#login:not([hidden]){width:min(440px,calc(100% - 20px))!important;background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;margin:12px auto 0!important;padding:0 12px!important;overflow:visible!important}
-#login:not([hidden]) h2{font-size:clamp(22px,5.6vw,29px)!important;color:#102f49!important;letter-spacing:-.8px;margin:14px 0 4px!important}
-#login:not([hidden]) #jatLoginHint{font-size:13px!important;color:#566c7b!important;margin-bottom:22px!important}
-#login:not([hidden]) label{font-size:0!important;margin:0 0 12px!important}
-#login:not([hidden]) input{min-height:56px!important;border-radius:14px!important;background:#fff!important;padding:14px 14px 14px 47px!important;font-size:15px!important;border:1px solid #e1edf0!important;box-shadow:0 3px 10px #153a4d12!important}
-#login:not([hidden]) label:has(#email):before{left:15px!important;bottom:17px!important;font-size:19px!important}
-#login:not([hidden]) label:has(#password):before{content:"♙";left:16px!important;bottom:16px!important;font-size:19px!important}
-#jatLastUser{min-height:50px!important;border-radius:13px!important;padding:9px 12px!important;margin:0 0 12px!important;background:#fff!important;font-size:12px!important;box-shadow:0 3px 10px #153a4d12!important}
-#jatLastUser:before{content:"✉"!important;font-size:14px!important}
-#jatLastUser button{font-size:11px!important}
-#login:not([hidden]) #loginForm>button:not([type]){min-height:53px!important;border-radius:12px!important;font-size:16px!important;background:linear-gradient(100deg,#008f98,#078c91)!important;box-shadow:none!important}
-#login:not([hidden]) #reset{margin:17px auto 9px!important;font-size:13px!important;text-decoration:underline!important}
-#jatLoginPets{height:245px!important;margin:8px -12px 0!important;position:relative;border-radius:0!important;background:linear-gradient(145deg,#e0f9f7,#79c9c8)!important}
-#jatLoginPets:before{content:"🐾";position:absolute;left:7px;top:12px;opacity:.13;font-size:40px;z-index:1}
-#jatLoginPets img{height:245px!important;width:50%!important;object-fit:cover!important;object-position:center 38%!important}
-#jatLoginFooter{margin:0 -12px!important;border-radius:18px 18px 0 0!important;background:#edf8f9!important;padding:13px!important;font-size:11px!important;color:#4c6472!important}
-@media(max-height:760px){body:has(#login:not([hidden]))>header{padding-top:9px!important}#login:not([hidden]) h2{margin-top:5px!important}#jatLoginPets,#jatLoginPets img{height:155px!important}}
+#login:not([hidden]) #reset{display:block;margin:18px auto 12px;border:0;background:transparent;color:#078d95;text-decoration:underline;font-size:13px}
+#jatLoginPets{display:flex;height:230px;margin:4px -8px 0;gap:0;overflow:hidden;background:linear-gradient(150deg,#c9f3f0,#65c3c5)}
+#jatLoginPets img{width:50%;height:230px;object-fit:cover;object-position:center 40%;border:0;border-radius:0;transform:none;box-shadow:none}
+#jatLoginFooter{text-align:center;margin:0 -8px;padding:12px 0;border-radius:18px 18px 0 0;background:#e8f6f7;color:#546c7c;font-size:11px}
+@media(max-height:760px){body:has(#login:not([hidden]))>header{padding-top:9px}#login:not([hidden]){margin-top:12px}#jatLoginPets,#jatLoginPets img{height:150px}}
 </style></head><body>
 <header><div class="brand"><h1><span aria-hidden="true">🐾</span> JAT Vet</h1><div id="jatLoginBrand" aria-hidden="true"><svg class="jatVetLogo" viewBox="0 0 130 110" role="img" aria-label="Casa con perro, gato y huella"><path d="M10 54 64 10l55 44" fill="none" stroke="#087f88" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 52v49h82V52" fill="none" stroke="#087f88" stroke-width="5" stroke-linecap="round"/><path d="M39 82q-13-8-9-23l9-15 11 12q13-4 20 8v28H39Z" fill="#fff" stroke="#087f88" stroke-width="3" stroke-linejoin="round"/><circle cx="48" cy="68" r="2.5" fill="#087f88"/><path d="m45 76 5 3 5-3" fill="none" stroke="#087f88" stroke-width="2"/><path d="M72 91V66l8-13 8 11 10-10 3 16v21Z" fill="#fff" stroke="#087f88" stroke-width="3" stroke-linejoin="round"/><circle cx="83" cy="74" r="2" fill="#087f88"/><circle cx="94" cy="74" r="2" fill="#087f88"/><path d="m86 81 4 3 4-3" fill="none" stroke="#087f88" stroke-width="2"/><ellipse cx="72" cy="37" rx="6" ry="5" fill="#087f88"/><ellipse cx="59" cy="28" rx="4" ry="6" fill="#087f88"/><ellipse cx="69" cy="24" rx="4" ry="6" fill="#087f88"/><ellipse cx="80" cy="27" rx="4" ry="6" fill="#087f88"/></svg><div class="jatBrandName">JAT <strong>Vet</strong></div><div class="jatBrandTag">Cuidamos lo que más querés</div></div><p>Gestión de servicios veterinarios a domicilio</p></div><span id="identity" hidden></span></header><div style="text-align:center"><button id="installApp" hidden>Instalar app</button></div><button id="logout" hidden style="display:none" aria-hidden="true" tabindex="-1">Cerrar sesión</button>
 <p id="status" role="status">Cargando configuración…</p>
