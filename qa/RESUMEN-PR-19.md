@@ -1,5 +1,9 @@
-Certificación automatizada sobre `f7a40a3aebbd9433cb248814c4716feb9615a91a`: **60 PASS, 1 FAIL, 20 BLOQUEADOS y 0 PENDIENTES** (81 planificados; 61 ejecutados). Ver `qa/INFORME-CERTIFICACION.md` y `qa/resultados/matriz.csv`.
+Certificación ampliada: **85 casos, 77 PASS, 4 FAIL y 4 BLOQUEADOS**. De los 81 originales: 74 PASS, 3 FAIL y 4 BLOQUEADOS. Se resolvieron 16 de los 20 bloqueos iniciales (14 PASS, 2 FAIL) y se añadieron cuatro casos complementarios.
 
-FAIL: navegación offline no utilizable. Auth emulado y editor local verificados; sin certificar reglas Firestore, getAfter, aislamiento A/B, persistencia integral ni dispositivos reales. No se modificaron producción ni datos reales.
+Reglas actuales copiadas de Firebase por el propietario, sin cambios de lógica. Auth y Firestore emulados con usuarios/datos ficticios. PASS de aislamiento A/B, perfiles, permisos, chunks/getAfter, persistencia, concurrencia y restauración con fotos/adjuntos.
 
-Veredicto: **NO APTO PARA COMERCIALIZACIÓN por certificación incompleta**. Se requieren reglas efectivas, integración emulada segura y cierre de casos críticos. Los resultados manuales anteriores no se contabilizaron como pruebas propias.
+FAIL: suscripciones vencidas conservan acceso; desconexión prolongada elimina recuperación de pendientes; revocación durante guardado oculta la copia que promete conservar; uso de la aplicación tras recarga offline. El aviso offline y Reintentar funcionan; se corrigió el diagnóstico anterior sobre Response.error().
+
+BLOQUEADOS: instalación Android/iOS, actualización en dispositivos, comparación del despliegue por red y entrega real de correo prohibida por alcance. Evidencias en qa/resultados/matriz.csv y qa/resultados/continuacion/. Propuestas sin cambios productivos en qa/PROPUESTA-CORRECCIONES.md.
+
+**NO APTO PARA COMERCIALIZACIÓN.** No se modificó producción ni se hizo merge o despliegue; solo datos ficticios.

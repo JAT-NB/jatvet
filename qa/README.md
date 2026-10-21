@@ -1,3 +1,7 @@
+## Estado actualizado de certificación
+
+La continuación sobre reglas actuales aportadas por el propietario está en [INFORME-CERTIFICACION.md](INFORME-CERTIFICACION.md). **85 casos: 77 PASS, 4 FAIL, 4 BLOQUEADOS. NO APTO PARA COMERCIALIZACIÓN.** De los 81 originales: 74 PASS, 3 FAIL, 4 BLOQUEADOS; se añadieron cuatro casos complementarios. La matriz con evidencias es [resultados/matriz.csv](resultados/matriz.csv). El contenido siguiente conserva antecedentes históricos; no reemplaza el informe actualizado.
+
 # Certificación interna JAT Vet — 2026-10-21
 
 Base auditada: c1547865e276efdd0e98d8779bc58544b7c86f76

@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-21T22:19:48.075Z",
-  "commit": "f7a40a3aebbd9433cb248814c4716feb9615a91a",
+  "timestamp": "2026-10-21T22:37:21.996Z",
+  "commit": "eeb22256f5fc99d56fe1a775b2bf7b5d8dbea06d",
   "scope": "Editor real mediante adaptador S; guardado en memoria, sin backend. No prueba autenticación, reglas ni persistencia Firestore.",
   "browser": "154.0.8037.57",
   "externalRequestsBlocked": [],
@@ -274,7 +274,7 @@
       "id": "PWA-03",
       "title": "Navegación sin conexión utilizable",
       "status": "FAIL",
-      "error": "La navegación offline falla: SW devuelve Response.error()\n\ntrue !== false\n"
+      "error": "La navegación offline no entrega la aplicación utilizable; el SW actual responde con pantalla HTTP 503\n\ntrue !== false\n"
     }
   ]
 }

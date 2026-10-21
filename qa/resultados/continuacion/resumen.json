@@ -1,0 +1,21 @@
+{
+  "total": 85,
+  "counts": {
+    "PASS": 77,
+    "FAIL": 4,
+    "BLOQUEADA": 4
+  },
+  "original81": {
+    "PASS": 74,
+    "FAIL": 3,
+    "BLOQUEADA": 4
+  },
+  "additional_cases": [
+    "OFFLINE-UX-01",
+    "OFFLINE-SEC-01",
+    "OFFLINE-REC-01",
+    "DATA-04-REVOKE"
+  ],
+  "blocked_resolved": 16,
+  "verdict": "NO APTO PARA COMERCIALIZACIÓN"
+}

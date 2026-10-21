@@ -1,7 +1,7 @@
 {
   "pets": [
     {
-      "id": "b7bf524b-ed99-4058-b1ea-4f104d1918d1",
+      "id": "3950a458-dfb9-418c-bd1c-e28775534ccd",
       "pet": "QA Canino",
       "species": "Perro",
       "breed": "",
@@ -17,22 +17,22 @@
   ],
   "turns": [
     {
-      "id": "69ea436d-9a2c-4e35-98cd-fc5ac8eaba9d",
+      "id": "b1322441-7505-4563-bb95-f7baf0186b15",
       "date": "2026-10-21",
       "time": "09:00",
-      "petId": "b7bf524b-ed99-4058-b1ea-4f104d1918d1",
-      "serviceId": "96fc61b8-d8bd-4ec0-ad87-c261ede05626",
+      "petId": "3950a458-dfb9-418c-bd1c-e28775534ccd",
+      "serviceId": "dbbe6000-f063-48ae-961c-e504f457bc15",
       "status": "Realizado",
       "price": "1200",
       "notes": "",
-      "completedAt": "2026-10-21T22:19:45.239Z"
+      "completedAt": "2026-10-21T22:37:19.232Z"
     },
     {
-      "id": "ab616887-0dd2-4987-9650-eddc71060ac2",
+      "id": "71db0b91-f40c-4236-b5b5-d5d8179b992c",
       "date": "2026-10-21",
       "time": "09:30",
-      "petId": "b7bf524b-ed99-4058-b1ea-4f104d1918d1",
-      "serviceId": "96fc61b8-d8bd-4ec0-ad87-c261ede05626",
+      "petId": "3950a458-dfb9-418c-bd1c-e28775534ccd",
+      "serviceId": "dbbe6000-f063-48ae-961c-e504f457bc15",
       "status": "Pendiente",
       "price": "1200",
       "notes": ""
@@ -41,26 +41,26 @@
   "procedures": [],
   "services": [
     {
-      "id": "96fc61b8-d8bd-4ec0-ad87-c261ede05626",
+      "id": "dbbe6000-f063-48ae-961c-e504f457bc15",
       "name": "Consulta QA",
       "price": "1200"
     }
   ],
   "money": [
     {
-      "id": "turn-income-69ea436d-9a2c-4e35-98cd-fc5ac8eaba9d",
-      "turnId": "69ea436d-9a2c-4e35-98cd-fc5ac8eaba9d",
+      "id": "turn-income-b1322441-7505-4563-bb95-f7baf0186b15",
+      "turnId": "b1322441-7505-4563-bb95-f7baf0186b15",
       "automatic": true,
       "date": "2026-10-21",
       "kind": "Ingreso",
       "amount": 1200,
       "concept": "Turno realizado · Consulta QA",
       "method": "No especificado",
-      "petId": "b7bf524b-ed99-4058-b1ea-4f104d1918d1",
+      "petId": "3950a458-dfb9-418c-bd1c-e28775534ccd",
       "notes": "Ingreso automático generado desde Turnos"
     },
     {
-      "id": "4b7f3c2e-13cf-4e20-9a89-45002c6b2f4c",
+      "id": "5c3c8de1-50f3-487c-b982-e1ca0838a80e",
       "date": "2026-10-21",
       "kind": "Ingreso",
       "amount": "500",
@@ -70,7 +70,7 @@
       "notes": ""
     },
     {
-      "id": "af959fe0-cf52-46fe-857b-1aa63f874665",
+      "id": "cfb8b054-1573-488e-b82f-efa150e2a936",
       "date": "2026-10-21",
       "kind": "Gasto",
       "amount": "200",
@@ -84,11 +84,11 @@
   "vaccinations": [],
   "audit": [
     {
-      "id": "80334c6f-7525-49a4-8054-6e7ec12fbe53",
-      "turnId": "69ea436d-9a2c-4e35-98cd-fc5ac8eaba9d",
+      "id": "c8fa5aee-4bb6-488e-a267-71c843f23a8a",
+      "turnId": "b1322441-7505-4563-bb95-f7baf0186b15",
       "action": "REALIZADO",
       "details": "Cobro confirmado por $ 1.200",
-      "dateTime": "2026-10-21T22:19:45.239Z"
+      "dateTime": "2026-10-21T22:37:19.232Z"
     }
   ]
 }

@@ -1,64 +1,99 @@
-# Certificación QA JAT Vet 4.0.1 — 21/10/2026
+# Certificación QA JAT Vet 4.0.1 — continuación del 21/10/2026
 
-**Veredicto: NO APTO PARA COMERCIALIZACIÓN por certificación incompleta.** No afirma una vulnerabilidad explotada: faltan comprobaciones críticas de seguridad, integridad y dispositivos.
+**Veredicto: NO APTO PARA COMERCIALIZACIÓN.** Hay fallos reproducidos de vencimiento de suscripciones y recuperación de cambios pendientes, además del requisito de funcionamiento offline y cuatro verificaciones externas bloqueadas.
 
-Base auditada: `f7a40a3aebbd9433cb248814c4716feb9615a91a` (HEAD del PR #19 comprobado con Git). Rama exclusiva `qa/certificacion-2026-10-21`. Chromium 154.0.8037.57; Node 24.19.0; Playwright 1.58.2; Firebase CLI 15.14.0; emulador Authentication, proyecto `demo-jatvet-qa`.
+## Resultado
 
-## Resultado de esta ejecución
+| Alcance | Planificados | Ejecutados | PASS | FAIL | BLOQUEADOS |
+|---|---:|---:|---:|---:|---:|
+| 81 casos originales | 81 | 77 | 74 | 3 | 4 |
+| Cuatro casos complementarios nuevos | 4 | 4 | 3 | 1 | 0 |
+| **Total actual** | **85** | **81** | **77** | **4** | **4** |
 
-- Casos planificados en matriz: 81.
-- Ejecutados: 61; PASS: 60; FAIL: 1.
-- BLOQUEADOS: 20; PENDIENTES no ejecutados: 0.
-- REG-01 cuenta como un caso con ocho aserciones estáticas, separado de la ejecución funcional.
-- Los 20 PASS manuales anteriores y la prueba 21 inconclusa son antecedentes del usuario, no resultados automatizados de esta ejecución.
+De los 20 bloqueos iniciales se resolvieron 16: 14 PASS y dos FAIL. Se añadieron OFFLINE-UX-01, OFFLINE-SEC-01, OFFLINE-REC-01 y DATA-04-REVOKE. Cada ID cuenta una sola vez aunque tenga comprobaciones Node y navegador. REG-01 es un caso con ocho aserciones estáticas. No se contabilizan ejecuciones de preparación fallidas ni pruebas omitidas como PASS.
 
-## Alcance real y evidencia
+Los 20 resultados manuales anteriores y la prueba 21 inconclusa son antecedentes del propietario, no ejecución propia. El informe anterior se conserva en Git (`eeb2225`).
 
-`resultados/matriz.csv` enumera todos los casos y estados. `resultados/ejecucion.json` conserva resultados del editor, login y PWA; `resultados/auth-emulador.json` conserva resultados Authentication y cuentas ficticias; `resultados/regresion-estatica.txt` registra el test existente. Hay capturas desktop, móvil y login y un JSON exportado ficticio.
+## Base, reglas e infraestructura
 
-El runner funcional ejecuta el adaptador S y editor reales del bundle sin modificarlo. Las secciones se seleccionan mediante la función de navegación del editor; los formularios, botones, fotos y descarga se manejan con Playwright. El guardado se captura en memoria del padre, **no** Firestore. La restauración aditiva se comprueba mediante helpers reales exportados, no mediante el panel autenticado. La foto se comprueba en el editor y mensaje de guardado, no después de recargar desde backend. La prueba de claim admin solo acredita Authentication en un proyecto demo, no privilegios efectivos de la aplicación.
+- Rama exclusiva `qa/certificacion-2026-10-21`; aplicación compilada de `eeb22256f5fc99d56fe1a775b2bf7b5d8dbea06d`. No se cambió código productivo, main, reglas remotas ni datos reales; no hubo merge ni despliegue.
+- Se inspeccionaron todas las ramas e historia disponibles. En desarrollo-v4-firebase se encontraron reglas y fuentes, pero el propietario confirmó que las reglas históricas no coincidían con las desplegadas. **No se usaron para la certificación final.**
+- Reglas de referencia: texto completo copiado por el propietario desde Firestore → Reglas de jat-vet-pruebas, guardado sin cambios de lógica en `qa/firestore/firestore.rules`. SHA-256: `6dac84f09a73458c96e56afc93f1ef20c14614f20e3836cc259a255fe1733cba`. Procedencia en `qa/firestore/PROCEDENCIA.json`. No se afirma lectura administrativa independiente del despliegue.
+- Firestore Emulator 1.22.0 en 127.0.0.1:8180; Authentication separado en 127.0.0.1:9299, proyecto local jat-vet-pruebas para que la audiencia de tokens coincida con las reglas. También se repitió Auth original con proyecto demo en 9199. El nombre del proyecto en un emulador no implica acceso remoto.
+- La descarga Firebase CLI falló por HTTP 403 en storage.googleapis.com. Se obtuvo el emulador desde la imagen oficial Google Cloud CLI en el registro permitido gcr.io, fijada por digest; se verificaron capas y SHA-256 del JAR. No se desactivó TLS ni se alteraron checksums del CLI. Imagen, versión y hash constan en PROCEDENCIA.json y en el script reproducible.
+- Node 24.19.0, Java 21, Firebase SDK 12.4.0, rules-unit-testing 5.0.0, Playwright 1.58.2 y Chromium del entorno. Dependencias y emulador conservados fuera del checkout, en /workspace/qa-tools.
+- Node usa las fuentes reales repository/data recuperadas, con cambios de loader e import para compartir el SDK del runner. El navegador usa los bundles actuales de la aplicación, sin alterar su lógica.
 
-Se verificaron alta y edición de paciente y servicio, campos obligatorios, turnos con referencias, superposición a 0 y 29 minutos, aceptación a 30 minutos, ingreso por turno realizado sin duplicación, ingresos/egresos y balance, exportación, mezcla aditiva y rechazos de respaldos inválidos, aislamiento sandbox y escape de texto malicioso, fotos agregar/quitar, render de once secciones, login, contraseña visible, correo recordado, manifest y registro SW. Authentication verificó login, logout, contraseña inválida, cuenta deshabilitada, código local de recuperación y claim admin.
+## Comprobaciones ejecutadas
 
-La comprobación de errores JS cubre el editor en ese recorrido; no certifica toda la aplicación. Solo se usó Chromium con viewport móvil, sin equivalencia a Safari o dispositivos físicos.
+**Seguridad:** lecturas/escrituras A/B y anónimo denegadas por permission-denied; un error de red no cuenta como denegación aprobada. Protección de perfiles propios y ajenos, administración por claim, rechazo de campos no admitidos y borrados de perfil. Perfil habilitado permitido; suspendido y ausente denegados. Esquema de manifiestos, identidad del actor, revisión y límites de count verificados.
 
-## Hallazgos y riesgos
+**Prueba 21 / SEC-07:** guardado multichunk con Unicode, lectura íntegra, negativa de escritura directa de chunks sin actualizar manifiesto, rechazo de revisión obsoleta y reducción a respaldo vacío. La transacción válida con getAfter() pasó. Los errores de reglas en las pruebas negativas del log son denegaciones esperadas comprobadas por código, no PASS inferidos de texto del simulador.
 
-1. **Media — PWA-03 FAIL reproducido:** navegar/recargar sin conexión no entrega una página utilizable. `v4/sw.js` devuelve `Response.error()` si fetch falla. Impacto: sin acceso offline al iniciar/recargar; no se demuestra pérdida de datos. Es un comportamiento deliberado del SW actual que incumple el caso offline, no un fallo de instalación.
-2. **Alta — validación de seguridad bloqueada:** no hay reglas Firestore, fuentes ni configuración de emulador Firestore en el checkout. No se acredita aislamiento A/B, perfiles, suscripciones ni getAfter/chunks. No se crearon reglas sustitutas que producirían falsa confianza.
-3. **Alta — riesgo de herramientas QA:** `verifyAccess` usa una URL Firestore remota fija incluso con `?emulators=1`. No iniciar sesiones reales en pruebas locales. Los navegadores de estos runners abortan destinos externos; el runner Auth usa exclusivamente el emulador local demo. Integrar verificación de perfiles con Firestore emulado requiere una tarea de código separada y autorización.
-4. **Alta — garantías de datos aún no acreditadas:** concurrencia, persistencia en backend, restauración integral y cambio entre usuarios siguen bloqueados.
-5. **Media — cobertura limitada al editor:** se completaron eliminación protegida de paciente, eliminación de servicio sin relaciones, edición/eliminación de turno, corrección de realizado con reversión de ingreso y auditoría, CRUD de vacunas con caja y reportes por día/mes/histórico. La persistencia tras recarga desde backend sigue bloqueada.
+**Persistencia y concurrencia:** alta por formulario, confirmación Firestore y recarga; reapertura desde otro cliente; dos escrituras con la misma revisión producen exactamente una ganadora y una rechazada; listener recibe la revisión y se compara el contenido con el ganador. La denegación del perdedor puede ser permission-denied en el emulador, no siempre el mensaje amistoso de revisión obsoleta. Se acredita integridad, no resolución completa de esa UX.
 
-## Reproducción y preparación del entorno
+**Backup y fotos:** importación revisada autenticada, confirmación del titular y descarga de copia previa; comparación de registros, fotos, adjuntos y totales tras recarga. Restauración aditiva, reimportación sin duplicados y reversión al respaldo previo desde el repositorio. Cambio de foto mediante selector real y comparación después de recargar. Cambio A/B sin fichas del otro usuario ni datos clínicos en localStorage.
 
-Dependencias fuera del checkout en `/workspace/qa-tools`. Servidor estático verificado con GET local y etiqueta 4.0.1. Emulador Auth iniciado y listo en 127.0.0.1:9199. El servidor estático utiliza puerto 8000 y los runners 8765/8766. No hay compilación disponible: este repositorio contiene artefactos web.
+**Regresión:** pacientes, servicios, turnos, caja, vacunas, informes, respaldos, login, sandbox y PWA; seis pruebas Auth y test estático existente. Se ejecutaron además desconexión prolongada durante guardado y revocación inmediata del perfil. La recuperación de contraseña solo generó códigos locales; no se enviaron correos.
+
+## Fallos reproducidos
+
+| ID | Severidad | Resultado observado | Evidencia bajo qa/resultados/continuacion/ |
+|---|---|---|---|
+| SEC-05 | Alta | Perfil enabled=true con expiry="2000-01-01" puede leer y escribir. access(uid) no comprueba el vencimiento. | expiry-evidence.json, firestore.json |
+| DATA-04 | Alta | Tras 13 segundos sin red durante guardado, la revalidación limpia editor y copia pendiente. La revisión confirmada durante la desconexión sigue en 3, igual que antes. | network-evidence.json, DATA-04-fail.png, navegador-integrado.json |
+| DATA-04-REVOKE | Alta | Si el perfil se suspende antes del guardado, se promete conservar la copia pendiente pero el botón de descarga queda oculto. | DATA-04-REVOKE-fail.png, navegador-integrado.json |
+| PWA-03 | Media | Recargar sin red no permite usar la aplicación veterinaria: devuelve pantalla HTTP 503. | offline.json, offline-503.png |
+
+DATA-04 y DATA-04-REVOKE son dos escenarios del mismo problema de recuperación. No se demuestra pérdida de registros previamente confirmados; sí falla la disponibilidad prometida de la copia de cambios no confirmados.
+
+**Corrección del diagnóstico offline anterior:** el SW actual ya tiene pantalla Sin conexión; no devuelve Response.error() como decía el mensaje del runner anterior. La pantalla, Cache-Control: no-store, ausencia de fichas/caché clínica y Reintentar al recuperar Internet dieron PASS. PWA-03 sigue FAIL porque exige aplicación utilizable al recargar sin red. No se redefinió el criterio para hacerlo pasar ni se modificó v4/sw.js.
+
+Propuestas sin implementación productiva: `qa/PROPUESTA-CORRECCIONES.md`. Incluyen vencimiento en servidor, recuperación segura de pendientes por UID y separación de errores transitorios frente a revocación; trabajo de diseño separado si se exige operación clínica offline.
+
+## Cuatro bloqueos restantes
+
+| Caso | Requisito exacto |
+|---|---|
+| PWA-04 | Android e iOS reales o servicio de dispositivos que permita instalar/verificar la PWA. Viewport Chromium no sustituye esos dispositivos. |
+| PWA-05 | Dispositivos con versión previa instalada y versión destino autorizada en QA para verificar actualización/migración. No se desplegó producción. |
+| OPS-01 | Permitir GET HTTPS a jat-nb.github.io en la red efectiva para comparar HTML y bundles públicos. El proxy devolvió CONNECT 403; el borrador incluye el dominio pero la instancia aún no lo permite. |
+| AUTH-REAL-01 | Entrega de correo real prohibida por alcance. Requeriría buzón exclusivo QA y autorización específica de envío; no se solicita contraseña real. El código emulado sí fue verificado. |
+
+No faltan credenciales de veterinarios para estas pruebas emuladas. El texto actual de reglas permitió validarlas sin permisos administrativos de producción.
+
+## Evidencias y reproducción
+
+Matriz completa con rutas de evidencia: `qa/resultados/matriz.csv`; resumen: `qa/casos-certificacion.csv`. Totales: `qa/resultados/continuacion/resumen.json`. JSON, logs, descargas y capturas contienen únicamente datos ficticios. Se eliminaron capturas de fallos de preparación superados; no se presentaron como defectos de aplicación.
 
 ```sh
-cd /workspace/jatvet
+bash /workspace/jatvet/qa/preparar-entorno.sh
+```
+
+Arrancar en procesos separados y esperar API endpoint y All emulators ready:
+
+```sh
+bash /workspace/qa-tools/firestore-official/cloud_firestore_emulator --host 127.0.0.1 --port 8180 --project_id jat-vet-pruebas --single_project_mode true --single_project_mode_error true --rules /workspace/jatvet/qa/firestore/firestore.rules
+cd /workspace/qa-tools
+XDG_CONFIG_HOME=/workspace/qa-tools/config FIREBASE_CLI_DISABLE_TELEMETRY=1 ./node_modules/.bin/firebase emulators:start --only auth --project jat-vet-pruebas --config /workspace/jatvet/qa/firestore/firebase.json
+```
+
+Ejecutar secuencialmente desde /workspace/jatvet:
+
+```sh
+NODE_PATH=/workspace/qa-tools/node_modules node qa/firestore/integracion.cjs
+NODE_PATH=/workspace/qa-tools/node_modules node qa/firestore/navegador.cjs
+NODE_PATH=/workspace/qa-tools/node_modules node qa/offline.cjs
 NODE_PATH=/workspace/qa-tools/node_modules node qa/certificacion.cjs
-# Retorna 1 por PWA-03, no ocultar ese resultado.
-NODE_PATH=/workspace/qa-tools/node_modules node qa/auth-emulador.cjs
 node tests/actualizacion-silenciosa.cjs
 ```
 
-Antes del runner Auth, desde `/workspace/qa-tools`:
+El runner de reglas limpia exclusivamente Firestore local del proyecto emulado; no ejecutarlo junto al navegador. Retornan 1 por fallos conocidos, 2 por preparación bloqueada y 0 solo sin fallos. Auth original (qa/auth-emulador.cjs) requiere el emulador demo de qa/firebase.json en 9199, independiente del integrado en 9299. Los runners reemplazan sus resultados; conservar esta versión en Git antes de repetir.
 
-```sh
-XDG_CONFIG_HOME=/workspace/qa-tools/config FIREBASE_CLI_DISABLE_TELEMETRY=1 ./node_modules/.bin/firebase emulators:start --only auth --project demo-jatvet-qa --config /workspace/jatvet/qa/firebase.json
-```
+El navegador integrado sirve en 8768, bloquea destinos externos y redirige solo Auth 9199→9299 y verificación REST de perfiles ficticios hacia 8180. Esa adaptación del test es necesaria por la URL REST remota fija que usa la aplicación incluso en modo emulador. No iniciar sesiones reales en ese servidor. Offline y editor usan 8767 y 8765; no hay previews públicos.
 
-El runner Auth reinicializa únicamente las cuentas del proyecto demo en el emulador local. Las credenciales ficticias son fixtures, no credenciales reales. El emulador no envía correos. Las salidas se reemplazan en cada ejecución. No hay cambios en archivos productivos, reglas, datos remotos, despliegues ni merges.
+Se prepararon instrucciones reutilizables de instalación/arranque. Guardar el borrador no publica la aplicación ni demuestra restauración en otra tarea. No se modificaron datos de Verónica ni de ningún otro veterinario.
 
-Se guardaron `install_script` y `start_skill` en el borrador del entorno. Guardar el borrador no publica ni ejecuta esos campos: revisar y guardar en configuración del entorno, luego publicar. No se verificó restauración en una tarea nueva.
+## Qué falta para comercializar
 
-## Acciones priorizadas
-
-1. Aportar exportación de reglas Firestore efectivas y preparar conexión de perfiles totalmente emulada; ejecutar aislamiento, perfiles, vencimientos y prueba 21 getAfter con identidades ficticias.
-2. Completar recorridos de integridad, concurrencia, restauración y persistencia con backend indicados como bloqueados en matriz antes de certificar.
-3. Definir requisito offline y corregirlo en tarea separada si se exige funcionamiento sin red.
-4. Validar instalación/actualización en Android e iOS y correspondencia con la versión desplegada sin alterar datos reales.
-
-## PR #19
-
-La API GitHub devolvió `Forbidden` tanto por GraphQL como REST al leer el PR. La rama QA y su correspondencia con refs/pull/19/head sí fueron verificadas con Git. El resumen listo para el PR se conserva en `qa/RESUMEN-PR-19.md`. La publicación de cambios por Git se documenta en el cierre de esta tarea; no se afirma que un comentario API haya sido enviado.
+Corregir y repetir vencimientos y recuperación segura de pendientes; resolver el requisito offline sin rebajar el caso existente; completar los cuatro bloqueos externos. Repetir seguridad e integridad contra la versión final aprobada. Las pruebas aprobadas de aislamiento y persistencia no bastan para certificar con los fallos actuales.

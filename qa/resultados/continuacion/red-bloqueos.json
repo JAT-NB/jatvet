@@ -1,0 +1,20 @@
+{
+  "observations": [
+    {
+      "url": "https://storage.googleapis.com/firebase-preview-drop/emulator/cloud-firestore-emulator-v1.19.8.jar",
+      "method": "HEAD",
+      "proxyConnectStatus": 403,
+      "curlExit": 56
+    },
+    {
+      "url": "https://jat-nb.github.io/jatvet/v4/",
+      "method": "HEAD",
+      "proxyConnectStatus": 403,
+      "curlExit": 56
+    }
+  ],
+  "currentCustomAllowedHosts": [],
+  "resolutionFirestore": "Distribución oficial alternativa GCR, ver PROCEDENCIA.json",
+  "remainingBlockedCase": "OPS-01",
+  "note": "El borrador tiene dominios; no implica aplicación de política en esta instancia."
+}

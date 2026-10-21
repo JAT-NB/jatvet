@@ -51,7 +51,7 @@ PASS LOGIN-UI-01 Pantalla de login visible
 PASS LOGIN-UI-02 Mostrar y ocultar contraseña 
 PASS LOGIN-UI-03 Recuperación exige correo válido sin enviar solicitud 
 PASS LOGIN-UI-04 Recuerda correo precargado después de recarga 
-FAIL PWA-03 Navegación sin conexión utilizable La navegación offline falla: SW devuelve Response.error()
+FAIL PWA-03 Navegación sin conexión utilizable La navegación offline no entrega la aplicación utilizable; el SW actual responde con pantalla HTTP 503
 
 true !== false
 

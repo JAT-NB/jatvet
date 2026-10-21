@@ -1,0 +1,41 @@
+PASS SEC-01 Lecturas A/B y anónimo denegadas
+[2026-10-21T22:34:02.371Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x24ed932a error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L64, false for 'create' @ L93, false for 'update' @ L64, false for 'update' @ L93
+[2026-10-21T22:34:02.382Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x24ed932b error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L64, false for 'create' @ L93, false for 'update' @ L64, false for 'update' @ L93
+PASS SEC-02 Escrituras A/B denegadas
+[2026-10-21T22:34:02.403Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x24ed932c error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L39, false for 'create' @ L93, false for 'update' @ L39, false for 'update' @ L93
+[2026-10-21T22:34:02.412Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x24ed932d error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L39, false for 'create' @ L93, false for 'update' @ L39, false for 'update' @ L93
+[2026-10-21T22:34:02.445Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x24ed932f error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L39, false for 'create' @ L93, false for 'update' @ L39, false for 'update' @ L93
+[2026-10-21T22:34:02.469Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x24ed9330 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'delete' @ L58, false for 'delete' @ L93
+PASS SEC-03 Perfiles y permisos administrativos
+PASS SEC-04 Perfil habilitado, suspendido y ausente
+FAIL SEC-05 Suscripción vencida debe impedir lectura y escritura
+[2026-10-21T22:34:02.666Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x24ed933c error. Code: 7 Message: 7 PERMISSION_DENIED: 
+evaluation error at L64:32 for 'create' @ L64, false for 'create' @ L93, evaluation error at L64:32 for 'update' @ L64, false for 'update' @ L93, false for 'update' @ L64, false for 'update' @ L93
+[2026-10-21T22:34:02.675Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x24ed933d error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L64, false for 'create' @ L93, false for 'update' @ L64, false for 'update' @ L93
+[2026-10-21T22:34:02.684Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x24ed933e error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L64, false for 'create' @ L93, false for 'update' @ L64, false for 'update' @ L93
+[2026-10-21T22:34:02.692Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x24ed933f error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L64, false for 'create' @ L93, false for 'update' @ L64, false for 'update' @ L93
+[2026-10-21T22:34:02.701Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x24ed9340 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L64, false for 'create' @ L93, false for 'update' @ L64, false for 'update' @ L93
+[2026-10-21T22:34:02.708Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x24ed9341 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L93, false for 'update' @ L93
+[2026-10-21T22:34:02.714Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x24ed9342 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'delete' @ L74, false for 'delete' @ L93
+PASS SEC-06 Validación de esquema y accesos con reglas actuales
+[2026-10-21T22:34:02.764Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x24ed9344 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+evaluation error at L79:25 for 'create' @ L79, false for 'create' @ L93, evaluation error at L79:25 for 'update' @ L79, false for 'update' @ L93, Null value error. for 'create' @ L79, false for 'create' @ L93
+[2026-10-21T22:34:02.933Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x24ed934c error. Code: 7 Message: 7 PERMISSION_DENIED: 
+evaluation error at L79:25 for 'create' @ L79, false for 'create' @ L93, evaluation error at L79:25 for 'update' @ L79, false for 'update' @ L93, false for 'update' @ L79, false for 'update' @ L93
+PASS SEC-07 Chunks, getAfter y revisión atómica
+PASS DATA-01 Persistencia de revisión y datos entre clientes
+PASS DATA-03 Concurrencia real y listener de segunda sesión
+PASS DATA-05 Backup, restauración integral y reversión
+PASS DATA-06 Fotos y adjuntos intactos tras reabrir repositorio
