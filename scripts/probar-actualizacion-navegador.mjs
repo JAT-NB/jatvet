@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {chromium} from 'playwright';
 
 let published='4.0.0';
-const installer=await readFile(new URL('../install.js',import.meta.url),'utf8');
+const installer=await readFile(new URL('./install.js',import.meta.url),'utf8');
 const html=`<!doctype html><html lang="es"><head><meta charset="utf-8"></head><body><button id="installApp" hidden>Instalar</button><input id="dato"><button id="guardar">Guardar</button><div id="resultado"></div><script>document.getElementById('dato').value=localStorage.getItem('qa-update-dato')||'';document.getElementById('guardar').onclick=()=>localStorage.setItem('qa-update-dato',document.getElementById('dato').value);document.getElementById('resultado').textContent=localStorage.getItem('qa-update-dato')||'';</script><script src="/jatvet/install.js"></script></body></html>`;
 const server=http.createServer((req,res)=>{
   const url=new URL(req.url,'http://localhost');
