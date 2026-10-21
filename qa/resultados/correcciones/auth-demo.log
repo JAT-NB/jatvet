@@ -1,0 +1,20 @@
+i  emulators: Starting emulators: auth
+i  emulators: Detected demo project ID "demo-jatvet-qa", emulated services will use a demo configuration and attempts to access non-emulated services for this project will fail.
+⚠  emulators: The Emulator UI is not starting because none of the running emulators have a UI component.
+⚠  Unable to fetch the CLI MOTD and remote config. This is not a fatal error, but may indicate an issue with your network connection.
+
+[90m┌─────────────────────────────────────────────────────────────┐[39m
+[90m│[39m ✔  All emulators ready! It is now safe to connect your app. [90m│[39m
+[90m└─────────────────────────────────────────────────────────────┘[39m
+
+[90m┌────────────────[39m[90m┬────────────────┐[39m
+[90m│[39m[33m Emulator       [39m[90m│[39m[33m Host:Port      [39m[90m│[39m
+[90m├────────────────[39m[90m┼────────────────┤[39m
+[90m│[39m Authentication [90m│[39m 127.0.0.1:9199 [90m│[39m
+[90m└────────────────[39m[90m┴────────────────┘[39m
+  Emulator Hub host: 127.0.0.1 port: 4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+i  To reset the password for normal@qa.invalid, follow this link: http://127.0.0.1:9199/emulator/action?mode=resetPassword&lang=en&oobCode=pX7aT-PHxeL--5M0afDAAHxdlH6gVNlR_jeNVWlWenWmbVW2927cum&apiKey=fake-api-key&newPassword=NEW_PASSWORD_HERE

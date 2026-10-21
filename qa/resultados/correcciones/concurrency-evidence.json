@@ -1,0 +1,6 @@
+{
+  "revision": 1,
+  "winner": "b",
+  "rejectedCode": "permission-denied",
+  "rejectedMessage": "7 PERMISSION_DENIED: \nevaluation error at L103:25 for 'create' @ L103, false for 'create' @ L117, evaluation error at L103:25 for 'update' @ L103, false for 'update' @ L117, evaluation error at L88:32 for 'create' @ L88, false for 'create' @ L117, false for 'create' @ L88, false for 'create' @ L117"
+}

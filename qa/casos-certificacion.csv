@@ -5,23 +5,23 @@ AUTH-EMU-03,AUTH,Rechazo de contraseña inválida,Alta,PASS
 AUTH-EMU-04,AUTH,Cuenta deshabilitada rechazada,Alta,PASS
 AUTH-EMU-05,AUTH,Recuperación genera código local sin enviar correo,Alta,PASS
 AUTH-EMU-06,AUTH,Cuenta admin con claim y audiencia demo,Alta,PASS
-REG-01,REG,Regresión existente: 8 aserciones estáticas de actualización silenciosa,Alta,PASS
-SEC-01,SEC,Lectura cross-tenant A/B,Critica,PASS
-SEC-02,SEC,Escritura cross-tenant A/B,Critica,PASS
-SEC-03,SEC,Protección de perfiles y escalada de permisos,Critica,PASS
-SEC-04,SEC,Acceso con perfil Firestore deshabilitado,Critica,PASS
-SEC-05,SEC,Vencimiento de suscripciones,Critica,FAIL
-SEC-06,SEC,Lecturas y escrituras según reglas efectivas,Critica,PASS
-SEC-07,SEC,"Lotes, revisiones y chunks con getAfter (prueba 21)",Critica,PASS
-DATA-01,DATA,Persistencia Firestore tras recarga,Critica,PASS
-DATA-02,DATA,Cambio de usuario sin información residual,Critica,PASS
-DATA-03,DATA,Concurrencia entre dos dispositivos,Critica,PASS
-DATA-04,DATA,Recuperación tras fallo de guardado de red,Critica,FAIL
-DATA-05,DATA,Restauración integral Firestore y reversión,Critica,PASS
-DATA-06,DATA,Integridad de fotos después de recarga desde backend,Critica,PASS
-UI-REAL-01,UI,Ingreso y cierre extremo a extremo con perfil,Alta,PASS
-UI-REAL-02,UI,Restauración revisada desde panel autenticado,Alta,PASS
-PHOTO-04,PHOTO,Cambio de foto y persistencia tras recarga,Alta,PASS
+REG-01,REG,Regresión existente: 8 aserciones estáticas,Alta,PASS
+SEC-01,SEC,Lecturas A/B y anónimo denegadas,Critica,PASS
+SEC-02,SEC,Escrituras A/B denegadas,Critica,PASS
+SEC-03,SEC,Perfiles y permisos administrativos,Critica,PASS
+SEC-04,SEC,"Perfil habilitado, suspendido y ausente",Critica,PASS
+SEC-05,SEC,Suscripción vencida debe impedir lectura y escritura,Critica,PASS
+SEC-06,SEC,Validación de esquema y accesos con reglas actuales,Critica,PASS
+SEC-07,SEC,"Chunks, getAfter y revisión atómica",Critica,PASS
+DATA-01,DATA,Persistencia de revisión y datos entre clientes,Critica,PASS
+DATA-02,DATA,Cambio A/B sin datos clínicos residuales,Critica,PASS
+DATA-03,DATA,Concurrencia real y listener de segunda sesión,Critica,PASS
+DATA-04,DATA,Desconexión durante guardado conserva copia descargable,Critica,PASS
+DATA-05,DATA,"Backup, restauración integral y reversión",Critica,PASS
+DATA-06,DATA,Fotos y adjuntos intactos tras reabrir repositorio,Critica,PASS
+UI-REAL-01,UI,Ingreso y cierre con perfil en emuladores,Alta,PASS
+UI-REAL-02,UI,Importación revisada autenticada con copia previa,Alta,PASS
+PHOTO-04,PHOTO,Cambio de foto real y persistencia tras recarga,Alta,PASS
 PWA-04,PWA,Instalación real Android e iOS,Alta,BLOQUEADA
 PWA-05,PWA,Migración entre versiones instaladas en dispositivos,Alta,BLOQUEADA
 OPS-01,OPS,Correspondencia binaria con despliegue publicado,Alta,BLOQUEADA
@@ -79,8 +79,32 @@ LOGIN-UI-01,LOGIN,Pantalla de login visible,Alta,PASS
 LOGIN-UI-02,LOGIN,Mostrar y ocultar contraseña,Alta,PASS
 LOGIN-UI-03,LOGIN,Recuperación exige correo válido sin enviar solicitud,Alta,PASS
 LOGIN-UI-04,LOGIN,Recuerda correo precargado después de recarga,Alta,PASS
-PWA-03,PWA,Navegación sin conexión utilizable,Alta,FAIL
-DATA-04-REVOKE,DATA,Revocación durante guardado conserva copia descargable,Critica,FAIL
+PWA-03,PWA,Internet obligatorio: desconexión sin operaciones clínicas y retorno seguro,Alta,PASS
+DATA-04-REVOKE,DATA,Propietario recupera copia tras revocación sin recuperar permisos,Critica,PASS
 OFFLINE-UX-01,OFFLINE,SW real entrega pantalla accesible de desconexión con HTTP 503,Alta,PASS
 OFFLINE-SEC-01,OFFLINE,Pantalla offline no expone fichas ni guarda caches clínicas,Alta,PASS
 OFFLINE-REC-01,OFFLINE,Reintentar vuelve al login al recuperar conexión,Alta,PASS
+RECOVERY-TIMEOUT,RECOVERY,Timeout con Internet aparente conserva copia y bloquea operaciones,Critica,PASS
+RECOVERY-CONFLICT,RECOVERY,Guardados simultáneos conservan revisión ajena y copia propia,Critica,PASS
+RECOVERY-AUTH-RACE,RECOVERY,Cambio de identidad durante guardado no filtra ni guarda datos A en B,Critica,PASS
+PROFILE-METADATA,PROFILE,Edición administrativa conserva expiry y metadatos existentes,Alta,PASS
+APP-RUNTIME,APP,Aplicación integrada sin excepciones JavaScript no controladas,Alta,PASS
+EXP-01,EXP,Perfil legacy sin expiry,Critica,PASS
+EXP-02,EXP,Expiry vacío,Critica,PASS
+EXP-03,EXP,Ayer vencido,Critica,PASS
+EXP-04,EXP,Hoy sigue vigente hasta fin del día argentino,Critica,PASS
+EXP-05,EXP,Mañana vigente,Critica,PASS
+EXP-06,EXP,Día inexistente,Critica,PASS
+EXP-07,EXP,Formato no ISO,Critica,PASS
+EXP-08,EXP,Bisiesto válido futuro,Critica,PASS
+EXP-09,EXP,Bisiesto inválido,Critica,PASS
+EXP-10,EXP,Tipo inválido legacy,Critica,PASS
+EXP-11,EXP,Suspendido con fecha futura,Critica,PASS
+EXP-12,EXP,Suspendido sin vencimiento,Critica,PASS
+EXP-13,EXP,Mes inexistente,Critica,PASS
+EXP-14,EXP,Fecha vacía parcial,Critica,PASS
+EXP-15,EXP,Admin suspendido no accede ni se reactiva,Critica,PASS
+EXP-16,EXP,Último nanosegundo del día argentino permitido,Critica,PASS
+EXP-17,EXP,Medianoche siguiente argentina denegada,Critica,PASS
+EXP-18,EXP,Después de medianoche argentina denegado,Critica,PASS
+EXP-19,EXP,Admin vencido no accede ni elimina su vencimiento,Critica,PASS

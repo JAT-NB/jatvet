@@ -1,5 +1,5 @@
 const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),assert=require('node:assert/strict');
-const {chromium}=require('playwright');const project='demo-jatvet-qa',base='http://127.0.0.1:9199',out=path.join(__dirname,'resultados');
+const {chromium}=require('playwright');const project='demo-jatvet-qa',base='http://127.0.0.1:9199',out=path.join(__dirname,'resultados/correcciones');
 async function api(method,p,body){const r=await fetch(base+p,{method,headers:{'Content-Type':'application/json',Authorization:'Bearer owner'},body:body?JSON.stringify(body):undefined});const j=await r.json();if(!r.ok)throw Error(JSON.stringify(j));return j}
 async function main(){
  await api('DELETE',`/emulator/v1/projects/${project}/accounts`);const users=[];for(const [name,disabled,claims] of [['normal',false,{}],['admin',false,{jatvetAdmin:true}],['disabled',true,{}]]){const u=await api('POST','/identitytoolkit.googleapis.com/v1/accounts:signUp?key=demo-key',{email:`${name}@qa.invalid`,password:'Ficticia-QA-2026!',returnSecureToken:true});await api('POST','/identitytoolkit.googleapis.com/v1/accounts:update?key=demo-key',{localId:u.localId,disableUser:disabled,customAttributes:JSON.stringify(claims)});users.push({name,uid:u.localId,disabled,claims})}

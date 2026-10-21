@@ -1,99 +1,110 @@
 id,title,status,error,reason,evidence
-AUTH-EMU-01,Login válido con SDK real y cuenta ficticia,PASS,,,qa/resultados/auth-emulador.json
-AUTH-EMU-02,Cierre de sesión,PASS,,,qa/resultados/auth-emulador.json
-AUTH-EMU-03,Rechazo de contraseña inválida,PASS,,,qa/resultados/auth-emulador.json
-AUTH-EMU-04,Cuenta deshabilitada rechazada,PASS,,,qa/resultados/auth-emulador.json
-AUTH-EMU-05,Recuperación genera código local sin enviar correo,PASS,,,qa/resultados/auth-emulador.json
-AUTH-EMU-06,Cuenta admin con claim y audiencia demo,PASS,,,qa/resultados/auth-emulador.json
-REG-01,Regresión existente: 8 aserciones estáticas de actualización silenciosa,PASS,,,qa/resultados/continuacion/regresion-estatica.txt
-SEC-01,Lectura cross-tenant A/B,PASS,,,qa/resultados/continuacion/firestore.json
-SEC-02,Escritura cross-tenant A/B,PASS,,,qa/resultados/continuacion/firestore.json
-SEC-03,Protección de perfiles y escalada de permisos,PASS,,,qa/resultados/continuacion/firestore.json
-SEC-04,Acceso con perfil Firestore deshabilitado,PASS,,,qa/resultados/continuacion/firestore.json
-SEC-05,Vencimiento de suscripciones,FAIL,"AssertionError [ERR_ASSERTION]: Perfil enabled=true con expiry=2000-01-01 puede leer o escribir; access(uid) no valida expiry
-    at /workspace/jatvet/qa/firestore/integracion.cjs:23:754
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async test (/workspace/jatvet/qa/firestore/integracion.cjs:18:38)
-    at async main (/workspace/jatvet/qa/firestore/integracion.cjs:23:2)",,qa/resultados/continuacion/firestore.json
-SEC-06,Lecturas y escrituras según reglas efectivas,PASS,,,qa/resultados/continuacion/firestore.json
-SEC-07,"Lotes, revisiones y chunks con getAfter (prueba 21)",PASS,,,qa/resultados/continuacion/firestore.json
-DATA-01,Persistencia Firestore tras recarga,PASS,,,qa/resultados/continuacion/firestore.json; qa/resultados/continuacion/navegador-integrado.json
-DATA-02,Cambio de usuario sin información residual,PASS,,,qa/resultados/continuacion/navegador-integrado.json
-DATA-03,Concurrencia entre dos dispositivos,PASS,,,qa/resultados/continuacion/firestore.json
-DATA-04,Recuperación tras fallo de guardado de red,FAIL,"AssertionError [ERR_ASSERTION]: Tras 13 segundos sin red, la revalidación de acceso elimina el editor y la copia pendiente deja de estar disponible
-    at /workspace/jatvet/qa/firestore/navegador.cjs:27:1069
-    at async test (/workspace/jatvet/qa/firestore/navegador.cjs:15:37)
-    at async main (/workspace/jatvet/qa/firestore/navegador.cjs:27:1)",,qa/resultados/continuacion/navegador-integrado.json
-DATA-05,Restauración integral Firestore y reversión,PASS,,,qa/resultados/continuacion/firestore.json
-DATA-06,Integridad de fotos después de recarga desde backend,PASS,,,qa/resultados/continuacion/firestore.json; qa/resultados/continuacion/navegador-integrado.json
-UI-REAL-01,Ingreso y cierre extremo a extremo con perfil,PASS,,,qa/resultados/continuacion/navegador-integrado.json
-UI-REAL-02,Restauración revisada desde panel autenticado,PASS,,,qa/resultados/continuacion/navegador-integrado.json
-PHOTO-04,Cambio de foto y persistencia tras recarga,PASS,,,qa/resultados/continuacion/navegador-integrado.json
+AUTH-EMU-01,Login válido con SDK real y cuenta ficticia,PASS,,,qa/resultados/correcciones/auth-emulador.json
+AUTH-EMU-02,Cierre de sesión,PASS,,,qa/resultados/correcciones/auth-emulador.json
+AUTH-EMU-03,Rechazo de contraseña inválida,PASS,,,qa/resultados/correcciones/auth-emulador.json
+AUTH-EMU-04,Cuenta deshabilitada rechazada,PASS,,,qa/resultados/correcciones/auth-emulador.json
+AUTH-EMU-05,Recuperación genera código local sin enviar correo,PASS,,,qa/resultados/correcciones/auth-emulador.json
+AUTH-EMU-06,Cuenta admin con claim y audiencia demo,PASS,,,qa/resultados/correcciones/auth-emulador.json
+REG-01,Regresión existente: 8 aserciones estáticas,PASS,,,qa/resultados/correcciones/regresion-estatica.txt
+SEC-01,Lecturas A/B y anónimo denegadas,PASS,,,qa/resultados/correcciones/firestore.json
+SEC-02,Escrituras A/B denegadas,PASS,,,qa/resultados/correcciones/firestore.json
+SEC-03,Perfiles y permisos administrativos,PASS,,,qa/resultados/correcciones/firestore.json
+SEC-04,"Perfil habilitado, suspendido y ausente",PASS,,,qa/resultados/correcciones/firestore.json
+SEC-05,Suscripción vencida debe impedir lectura y escritura,PASS,,,qa/resultados/correcciones/firestore.json
+SEC-06,Validación de esquema y accesos con reglas actuales,PASS,,,qa/resultados/correcciones/firestore.json
+SEC-07,"Chunks, getAfter y revisión atómica",PASS,,,qa/resultados/correcciones/firestore.json
+DATA-01,Persistencia de revisión y datos entre clientes,PASS,,,qa/resultados/correcciones/firestore.json; qa/resultados/correcciones/navegador-integrado.json
+DATA-02,Cambio A/B sin datos clínicos residuales,PASS,,,qa/resultados/correcciones/navegador-integrado.json
+DATA-03,Concurrencia real y listener de segunda sesión,PASS,,,qa/resultados/correcciones/firestore.json
+DATA-04,Desconexión durante guardado conserva copia descargable,PASS,,,qa/resultados/correcciones/navegador-integrado.json
+DATA-05,"Backup, restauración integral y reversión",PASS,,,qa/resultados/correcciones/firestore.json
+DATA-06,Fotos y adjuntos intactos tras reabrir repositorio,PASS,,,qa/resultados/correcciones/firestore.json; qa/resultados/correcciones/navegador-integrado.json
+UI-REAL-01,Ingreso y cierre con perfil en emuladores,PASS,,,qa/resultados/correcciones/navegador-integrado.json
+UI-REAL-02,Importación revisada autenticada con copia previa,PASS,,,qa/resultados/correcciones/navegador-integrado.json
+PHOTO-04,Cambio de foto real y persistencia tras recarga,PASS,,,qa/resultados/correcciones/navegador-integrado.json
 PWA-04,Instalación real Android e iOS,BLOQUEADA,,Requiere Android e iOS reales o granja de dispositivos con instalación PWA. Viewport Chromium no lo acredita.,qa/INFORME-CERTIFICACION.md
 PWA-05,Migración entre versiones instaladas en dispositivos,BLOQUEADA,,"Requiere dispositivos con versión previa y versión de destino aprobada en entorno de QA, sin despliegue productivo.",qa/INFORME-CERTIFICACION.md
 OPS-01,Correspondencia binaria con despliegue publicado,BLOQUEADA,,GET HTTPS a jat-nb.github.io bloqueado por proxy (CONNECT 403). Dominio guardado en borrador; aún no aplicado en instancia.,qa/INFORME-CERTIFICACION.md
 AUTH-REAL-01,Entrega real de recuperación de contraseña,BLOQUEADA,,Envíos de correo reales prohibidos por el alcance. Generación del código y recuperación en Auth Emulator sí verificadas.,qa/INFORME-CERTIFICACION.md
-NAV-1,Renderizar sección Inicio,PASS,,,qa/resultados/ejecucion.json
-NAV-2,Renderizar sección Clientes y mascotas,PASS,,,qa/resultados/ejecucion.json
-NAV-3,Renderizar sección Nuevo paciente,PASS,,,qa/resultados/ejecucion.json
-NAV-4,Renderizar sección Turnos,PASS,,,qa/resultados/ejecucion.json
-NAV-5,Renderizar sección Vacunación,PASS,,,qa/resultados/ejecucion.json
-NAV-6,Renderizar sección Servicios,PASS,,,qa/resultados/ejecucion.json
-NAV-7,Renderizar sección Caja,PASS,,,qa/resultados/ejecucion.json
-NAV-8,Renderizar sección Informes,PASS,,,qa/resultados/ejecucion.json
-NAV-9,Renderizar sección Cómo llegar,PASS,,,qa/resultados/ejecucion.json
-NAV-10,Renderizar sección Respaldo,PASS,,,qa/resultados/ejecucion.json
-NAV-11,Renderizar sección Manual,PASS,,,qa/resultados/ejecucion.json
-PET-01,Campos obligatorios impiden alta vacía,PASS,,,qa/resultados/ejecucion.json
-PET-02,Alta paciente y responsable ficticios,PASS,,,qa/resultados/ejecucion.json
-SRV-01,Alta servicio,PASS,,,qa/resultados/ejecucion.json
-SRV-02,Edición servicio,PASS,,,qa/resultados/ejecucion.json
-TURN-01,Alta turno con relación paciente/servicio,PASS,,,qa/resultados/ejecucion.json
-TURN-02,Intervalo 09:00,PASS,,,qa/resultados/ejecucion.json
-TURN-03,Intervalo 09:29,PASS,,,qa/resultados/ejecucion.json
-TURN-04,Intervalo 09:30,PASS,,,qa/resultados/ejecucion.json
-TURN-05,Turno realizado genera un ingreso,PASS,,,qa/resultados/ejecucion.json
-TURN-06,Sin duplicación al sincronizar ingresos,PASS,,,qa/resultados/ejecucion.json
-CASH-01,Registro ingreso manual,PASS,,,qa/resultados/ejecucion.json
-CASH-02,Registro egreso manual,PASS,,,qa/resultados/ejecucion.json
-REPORT-01,Balance general consistente con movimientos,PASS,,,qa/resultados/ejecucion.json
-BKP-01,Exportación JSON conserva colecciones y cantidades,PASS,,,qa/resultados/ejecucion.json
-BKP-02,Validación y restauración aditiva conserva foto y adjunto,PASS,,,qa/resultados/ejecucion.json
-BKP-03,Rechaza colección inválida,PASS,,,qa/resultados/ejecucion.json
-BKP-04,Rechaza IDs duplicados,PASS,,,qa/resultados/ejecucion.json
-BKP-05,Rechaza referencia huérfana,PASS,,,qa/resultados/ejecucion.json
-BKP-06,Rechaza adjunto ejecutable,PASS,,,qa/resultados/ejecucion.json
-BKP-07,Rechaza movimiento negativo,PASS,,,qa/resultados/ejecucion.json
-BKP-08,Conflicto de IDs no sobrescribe original,PASS,,,qa/resultados/ejecucion.json
-BKP-09,Importación idéntica no duplica registros,PASS,,,qa/resultados/ejecucion.json
-SEC-UI-01,Iframe aislado y sin acceso al almacenamiento del padre,PASS,,,qa/resultados/ejecucion.json
-SEC-UI-02,Nombre malicioso escapado al renderizar,PASS,,,qa/resultados/ejecucion.json
-PHOTO-01,Agregar foto PNG desde selector real,PASS,,,qa/resultados/ejecucion.json
-PHOTO-02,Foto incluida en guardado al padre,PASS,,,qa/resultados/ejecucion.json
-PHOTO-03,Eliminar foto,PASS,,,qa/resultados/ejecucion.json
-PET-03,Editar ficha paciente,PASS,,,qa/resultados/ejecucion.json
-CRUD-01,Protege paciente asociado y elimina paciente sin relaciones,PASS,,,qa/resultados/ejecucion.json
-CRUD-02,Alta y eliminación servicio sin relaciones,PASS,,,qa/resultados/ejecucion.json
-TURN-07,Edición y eliminación de turno pendiente,PASS,,,qa/resultados/ejecucion.json
-TURN-08,Corrección de realizado revierte ingreso y registra auditoría,PASS,,,qa/resultados/ejecucion.json
-VACC-01,Alta edición vencimiento y eliminación vacuna con caja,PASS,,,qa/resultados/ejecucion.json
-REPORT-02,Filtro diario mensual e histórico,PASS,,,qa/resultados/ejecucion.json
-UI-02,Editor sin errores JavaScript no controlados,PASS,,,qa/resultados/ejecucion.json
-UI-03,Inicio móvil sin desborde horizontal,PASS,,,qa/resultados/ejecucion.json
-PWA-01,Manifiesto y recursos locales existentes,PASS,,,qa/resultados/ejecucion.json
-PWA-02,Service Worker instalado con scope correcto,PASS,,,qa/resultados/ejecucion.json
-LOGIN-UI-01,Pantalla de login visible,PASS,,,qa/resultados/ejecucion.json
-LOGIN-UI-02,Mostrar y ocultar contraseña,PASS,,,qa/resultados/ejecucion.json
-LOGIN-UI-03,Recuperación exige correo válido sin enviar solicitud,PASS,,,qa/resultados/ejecucion.json
-LOGIN-UI-04,Recuerda correo precargado después de recarga,PASS,,,qa/resultados/ejecucion.json
-PWA-03,Navegación sin conexión utilizable,FAIL,"La navegación offline no entrega la aplicación utilizable; el SW actual responde con pantalla HTTP 503
-
-true !== false
-",,qa/resultados/ejecucion.json; qa/resultados/continuacion/offline.json
-DATA-04-REVOKE,Revocación durante guardado conserva copia descargable,FAIL,"AssertionError [ERR_ASSERTION]: El mensaje promete copia pendiente pero el botón debe seguir disponible
-    at /workspace/jatvet/qa/firestore/navegador.cjs:29:606
-    at async test (/workspace/jatvet/qa/firestore/navegador.cjs:15:37)
-    at async main (/workspace/jatvet/qa/firestore/navegador.cjs:29:1)",,qa/resultados/continuacion/navegador-integrado.json
-OFFLINE-UX-01,SW real entrega pantalla accesible de desconexión con HTTP 503,PASS,,,qa/resultados/continuacion/offline.json
-OFFLINE-SEC-01,Pantalla offline no expone fichas ni guarda caches clínicas,PASS,,,qa/resultados/continuacion/offline.json
-OFFLINE-REC-01,Reintentar vuelve al login al recuperar conexión,PASS,,,qa/resultados/continuacion/offline.json
+NAV-1,Renderizar sección Inicio,PASS,,,qa/resultados/correcciones/ejecucion.json
+NAV-2,Renderizar sección Clientes y mascotas,PASS,,,qa/resultados/correcciones/ejecucion.json
+NAV-3,Renderizar sección Nuevo paciente,PASS,,,qa/resultados/correcciones/ejecucion.json
+NAV-4,Renderizar sección Turnos,PASS,,,qa/resultados/correcciones/ejecucion.json
+NAV-5,Renderizar sección Vacunación,PASS,,,qa/resultados/correcciones/ejecucion.json
+NAV-6,Renderizar sección Servicios,PASS,,,qa/resultados/correcciones/ejecucion.json
+NAV-7,Renderizar sección Caja,PASS,,,qa/resultados/correcciones/ejecucion.json
+NAV-8,Renderizar sección Informes,PASS,,,qa/resultados/correcciones/ejecucion.json
+NAV-9,Renderizar sección Cómo llegar,PASS,,,qa/resultados/correcciones/ejecucion.json
+NAV-10,Renderizar sección Respaldo,PASS,,,qa/resultados/correcciones/ejecucion.json
+NAV-11,Renderizar sección Manual,PASS,,,qa/resultados/correcciones/ejecucion.json
+PET-01,Campos obligatorios impiden alta vacía,PASS,,,qa/resultados/correcciones/ejecucion.json
+PET-02,Alta paciente y responsable ficticios,PASS,,,qa/resultados/correcciones/ejecucion.json
+SRV-01,Alta servicio,PASS,,,qa/resultados/correcciones/ejecucion.json
+SRV-02,Edición servicio,PASS,,,qa/resultados/correcciones/ejecucion.json
+TURN-01,Alta turno con relación paciente/servicio,PASS,,,qa/resultados/correcciones/ejecucion.json
+TURN-02,Intervalo 09:00,PASS,,,qa/resultados/correcciones/ejecucion.json
+TURN-03,Intervalo 09:29,PASS,,,qa/resultados/correcciones/ejecucion.json
+TURN-04,Intervalo 09:30,PASS,,,qa/resultados/correcciones/ejecucion.json
+TURN-05,Turno realizado genera un ingreso,PASS,,,qa/resultados/correcciones/ejecucion.json
+TURN-06,Sin duplicación al sincronizar ingresos,PASS,,,qa/resultados/correcciones/ejecucion.json
+CASH-01,Registro ingreso manual,PASS,,,qa/resultados/correcciones/ejecucion.json
+CASH-02,Registro egreso manual,PASS,,,qa/resultados/correcciones/ejecucion.json
+REPORT-01,Balance general consistente con movimientos,PASS,,,qa/resultados/correcciones/ejecucion.json
+BKP-01,Exportación JSON conserva colecciones y cantidades,PASS,,,qa/resultados/correcciones/ejecucion.json
+BKP-02,Validación y restauración aditiva conserva foto y adjunto,PASS,,,qa/resultados/correcciones/ejecucion.json
+BKP-03,Rechaza colección inválida,PASS,,,qa/resultados/correcciones/ejecucion.json
+BKP-04,Rechaza IDs duplicados,PASS,,,qa/resultados/correcciones/ejecucion.json
+BKP-05,Rechaza referencia huérfana,PASS,,,qa/resultados/correcciones/ejecucion.json
+BKP-06,Rechaza adjunto ejecutable,PASS,,,qa/resultados/correcciones/ejecucion.json
+BKP-07,Rechaza movimiento negativo,PASS,,,qa/resultados/correcciones/ejecucion.json
+BKP-08,Conflicto de IDs no sobrescribe original,PASS,,,qa/resultados/correcciones/ejecucion.json
+BKP-09,Importación idéntica no duplica registros,PASS,,,qa/resultados/correcciones/ejecucion.json
+SEC-UI-01,Iframe aislado y sin acceso al almacenamiento del padre,PASS,,,qa/resultados/correcciones/ejecucion.json
+SEC-UI-02,Nombre malicioso escapado al renderizar,PASS,,,qa/resultados/correcciones/ejecucion.json
+PHOTO-01,Agregar foto PNG desde selector real,PASS,,,qa/resultados/correcciones/ejecucion.json
+PHOTO-02,Foto incluida en guardado al padre,PASS,,,qa/resultados/correcciones/ejecucion.json
+PHOTO-03,Eliminar foto,PASS,,,qa/resultados/correcciones/ejecucion.json
+PET-03,Editar ficha paciente,PASS,,,qa/resultados/correcciones/ejecucion.json
+CRUD-01,Protege paciente asociado y elimina paciente sin relaciones,PASS,,,qa/resultados/correcciones/ejecucion.json
+CRUD-02,Alta y eliminación servicio sin relaciones,PASS,,,qa/resultados/correcciones/ejecucion.json
+TURN-07,Edición y eliminación de turno pendiente,PASS,,,qa/resultados/correcciones/ejecucion.json
+TURN-08,Corrección de realizado revierte ingreso y registra auditoría,PASS,,,qa/resultados/correcciones/ejecucion.json
+VACC-01,Alta edición vencimiento y eliminación vacuna con caja,PASS,,,qa/resultados/correcciones/ejecucion.json
+REPORT-02,Filtro diario mensual e histórico,PASS,,,qa/resultados/correcciones/ejecucion.json
+UI-02,Editor sin errores JavaScript no controlados,PASS,,,qa/resultados/correcciones/ejecucion.json
+UI-03,Inicio móvil sin desborde horizontal,PASS,,,qa/resultados/correcciones/ejecucion.json
+PWA-01,Manifiesto y recursos locales existentes,PASS,,,qa/resultados/correcciones/ejecucion.json
+PWA-02,Service Worker instalado con scope correcto,PASS,,,qa/resultados/correcciones/ejecucion.json
+LOGIN-UI-01,Pantalla de login visible,PASS,,,qa/resultados/correcciones/ejecucion.json
+LOGIN-UI-02,Mostrar y ocultar contraseña,PASS,,,qa/resultados/correcciones/ejecucion.json
+LOGIN-UI-03,Recuperación exige correo válido sin enviar solicitud,PASS,,,qa/resultados/correcciones/ejecucion.json
+LOGIN-UI-04,Recuerda correo precargado después de recarga,PASS,,,qa/resultados/correcciones/ejecucion.json
+PWA-03,Internet obligatorio: desconexión sin operaciones clínicas y retorno seguro,PASS,,,qa/resultados/correcciones/ejecucion.json; qa/resultados/correcciones/offline.json; qa/CRITERIOS-ACEPTACION.md
+DATA-04-REVOKE,Propietario recupera copia tras revocación sin recuperar permisos,PASS,,,qa/resultados/correcciones/navegador-integrado.json
+OFFLINE-UX-01,SW real entrega pantalla accesible de desconexión con HTTP 503,PASS,,,qa/resultados/correcciones/offline.json
+OFFLINE-SEC-01,Pantalla offline no expone fichas ni guarda caches clínicas,PASS,,,qa/resultados/correcciones/offline.json
+OFFLINE-REC-01,Reintentar vuelve al login al recuperar conexión,PASS,,,qa/resultados/correcciones/offline.json
+RECOVERY-TIMEOUT,Timeout con Internet aparente conserva copia y bloquea operaciones,PASS,,,qa/resultados/correcciones/navegador-integrado.json
+RECOVERY-CONFLICT,Guardados simultáneos conservan revisión ajena y copia propia,PASS,,,qa/resultados/correcciones/navegador-integrado.json
+RECOVERY-AUTH-RACE,Cambio de identidad durante guardado no filtra ni guarda datos A en B,PASS,,,qa/resultados/correcciones/navegador-integrado.json
+PROFILE-METADATA,Edición administrativa conserva expiry y metadatos existentes,PASS,,,qa/resultados/correcciones/navegador-integrado.json
+APP-RUNTIME,Aplicación integrada sin excepciones JavaScript no controladas,PASS,,,qa/resultados/correcciones/navegador-integrado.json
+EXP-01,Perfil legacy sin expiry,PASS,,,qa/resultados/correcciones/expiry-cases.json
+EXP-02,Expiry vacío,PASS,,,qa/resultados/correcciones/expiry-cases.json
+EXP-03,Ayer vencido,PASS,,,qa/resultados/correcciones/expiry-cases.json
+EXP-04,Hoy sigue vigente hasta fin del día argentino,PASS,,,qa/resultados/correcciones/expiry-cases.json
+EXP-05,Mañana vigente,PASS,,,qa/resultados/correcciones/expiry-cases.json
+EXP-06,Día inexistente,PASS,,,qa/resultados/correcciones/expiry-cases.json
+EXP-07,Formato no ISO,PASS,,,qa/resultados/correcciones/expiry-cases.json
+EXP-08,Bisiesto válido futuro,PASS,,,qa/resultados/correcciones/expiry-cases.json
+EXP-09,Bisiesto inválido,PASS,,,qa/resultados/correcciones/expiry-cases.json
+EXP-10,Tipo inválido legacy,PASS,,,qa/resultados/correcciones/expiry-cases.json
+EXP-11,Suspendido con fecha futura,PASS,,,qa/resultados/correcciones/expiry-cases.json
+EXP-12,Suspendido sin vencimiento,PASS,,,qa/resultados/correcciones/expiry-cases.json
+EXP-13,Mes inexistente,PASS,,,qa/resultados/correcciones/expiry-cases.json
+EXP-14,Fecha vacía parcial,PASS,,,qa/resultados/correcciones/expiry-cases.json
+EXP-15,Admin suspendido no accede ni se reactiva,PASS,,,qa/resultados/correcciones/expiry-cases.json
+EXP-16,Último nanosegundo del día argentino permitido,PASS,,,qa/resultados/correcciones/expiry-boundary.json
+EXP-17,Medianoche siguiente argentina denegada,PASS,,,qa/resultados/correcciones/expiry-boundary.json
+EXP-18,Después de medianoche argentina denegado,PASS,,,qa/resultados/correcciones/expiry-boundary.json
+EXP-19,Admin vencido no accede ni elimina su vencimiento,PASS,,,qa/resultados/correcciones/expiry-boundary.json

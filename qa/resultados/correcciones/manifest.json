@@ -1,0 +1,20 @@
+{
+  "baseline_commit": "fd21f2eee0b02a8ee913338164ae557822af5007",
+  "branch": "fix/qa-seguridad-recuperacion-2026-10-21",
+  "files_sha256": {
+    "v4/app-session.js": "32dd15897aff637bd4ac59672bd1f3fd37b3b9f68d1437a130c314c12e7416fc",
+    "v4/index.html": "6bead2dd2b6397c05db9c592d232f6e151ab0fa328cb6ebb47f89504415dde63",
+    "v4/sw.js": "ddea47496f6300c012688d3a2863c0760e977d80a1cd06e9e9a6b1c29428fb67",
+    "assets/v4-backup-restauracion-20261019.js": "9c6da9806c410b2c71306ccd5f0cfa11c46d33661e8662232b4a12a7f35add6c",
+    "assets/repository-CdXTqB56.js": "88b05ab6885bc25c73df1dde6765fc056c835401c553eb4b5402603e372710fc",
+    "qa/firestore/firestore.rules": "6dac84f09a73458c96e56afc93f1ef20c14614f20e3836cc259a255fe1733cba",
+    "qa/firestore/firestore.proposed.rules": "181374298bc0b9b7b23c56027467f45128fb203b9c78eb0ae68c29286c53d62d",
+    "qa/firestore/integracion.cjs": "2aaa412a1955197474c8e92351a02ecf44cde105e4d6f8017293988ac169d6c6",
+    "qa/firestore/expiry.cjs": "371cfe088dfd331ff4843294f63205f6ab1d0dac01dec9dc87e086d50e83fbb3",
+    "qa/firestore/boundary.cjs": "52e3553465eea17c5610475800ccfdf612073af657d3b2018c39ebc6c6847eb9",
+    "qa/firestore/navegador.cjs": "f3e8e6ca218a6e39f09db02c20ae2023eb2ae6ac29013825446dc0477e7b88dd",
+    "qa/certificacion.cjs": "365b6ad8460f5b4f47744a4a553fe32d9304dacae1317cda4f41192bda61b229",
+    "qa/offline.cjs": "150bf1f19666b3e836b88768c20bbc40cd9bcb323c14b963d6c19c2349fd8fee",
+    "qa/auth-emulador.cjs": "2b0a03f87d54156f67bd90a9a99d24dc46bb76bb413a018323e9259b5ea86b9c"
+  }
+}

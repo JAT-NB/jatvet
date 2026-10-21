@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-10-21T22:59:04.401Z",
+  "scope": "Helper exacto extraído de reglas propuestas, invocado con instantes deterministas en reglas temporales de prueba; reglas propuestas completas restauradas al finalizar.",
+  "results": [
+    {
+      "id": "EXP-16",
+      "title": "Último nanosegundo del día argentino permitido",
+      "status": "PASS",
+      "instant": "timestamp.date(2026,10,22) + duration.value(3,'h') - duration.value(1,'ns')",
+      "allowed": true
+    },
+    {
+      "id": "EXP-17",
+      "title": "Medianoche siguiente argentina denegada",
+      "status": "PASS",
+      "instant": "timestamp.date(2026,10,22) + duration.value(3,'h')",
+      "allowed": false
+    },
+    {
+      "id": "EXP-18",
+      "title": "Después de medianoche argentina denegado",
+      "status": "PASS",
+      "instant": "timestamp.date(2026,10,22) + duration.value(3,'h') + duration.value(1,'ns')",
+      "allowed": false
+    },
+    {
+      "id": "EXP-19",
+      "title": "Admin vencido no accede ni elimina su vencimiento",
+      "status": "PASS"
+    }
+  ]
+}

@@ -1,3 +1,7 @@
+## Correcciones actuales para revisión
+
+Rama `fix/qa-seguridad-recuperacion-2026-10-21`: **109 casos, 105 PASS, 0 FAIL, 4 BLOQUEADOS**. Reglas propuestas y código corregido sin publicación. Ver [informe](INFORME-CERTIFICACION.md), [criterios aprobados](CRITERIOS-ACEPTACION.md) y [despliegue futuro](DESPLIEGUE-SEGURO.md). Los apartados siguientes conservan antecedentes históricos y no reemplazan el informe actual.
+
 ## Estado actualizado de certificación
 
 La continuación sobre reglas actuales aportadas por el propietario está en [INFORME-CERTIFICACION.md](INFORME-CERTIFICACION.md). **85 casos: 77 PASS, 4 FAIL, 4 BLOQUEADOS. NO APTO PARA COMERCIALIZACIÓN.** De los 81 originales: 74 PASS, 3 FAIL, 4 BLOQUEADOS; se añadieron cuatro casos complementarios. La matriz con evidencias es [resultados/matriz.csv](resultados/matriz.csv). El contenido siguiente conserva antecedentes históricos; no reemplaza el informe actualizado.

@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-10-21T23:19:48.654085+00:00",
+  "total": 109,
+  "counts": {
+    "PASS": 105,
+    "FAIL": 0,
+    "BLOQUEADA": 4
+  },
+  "executed_unique": 105,
+  "acceptance": "qa/CRITERIOS-ACEPTACION.md",
+  "production_changed": false,
+  "rules_deployed": false,
+  "verdict": "Correcciones listas para revisión; certificación comercial final pendiente de bloqueos externos"
+}

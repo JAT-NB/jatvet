@@ -1,0 +1,120 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signed() {
+      return request.auth != null
+        && request.auth.token.aud == 'jat-vet-pruebas';
+    }
+
+    function admin() {
+      return signed()
+        && 'jatvetAdmin' in request.auth.token
+        && request.auth.token.jatvetAdmin == true;
+    }
+
+    // ISO expiry is inclusive through the end of that day in Argentina (UTC-03).
+    // Missing/empty expiry preserves existing enabled profiles. Malformed dates fail closed.
+    function validExpiry(profile) {
+      return !('expiry' in profile) || profile.expiry == '' ||
+        (profile.expiry is string && profile.expiry.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$') && datedExpiry(profile.expiry, request.time));
+    }
+    function datedExpiry(value, instant) {
+      let parts = value.split('-');
+      let year = int(parts[0]);
+      let month = int(parts[1]);
+      let day = int(parts[2]);
+      let date = timestamp.date(year, month, day);
+      return year >= 1 && date.year() == year && date.month() == month && date.day() == day &&
+        instant < date + duration.value(27, 'h');
+    }
+
+    function adminActive() {
+      return admin() &&
+        (!exists(/databases/$(database)/documents/profiles/$(request.auth.uid)) ||
+          (get(/databases/$(database)/documents/profiles/$(request.auth.uid)).data.enabled == true &&
+           validExpiry(get(/databases/$(database)/documents/profiles/$(request.auth.uid)).data)));
+    }
+
+    function access(uid) {
+      return signed() && (
+        adminActive() ||
+        (
+          request.auth.uid == uid
+          && exists(/databases/$(database)/documents/profiles/$(uid))
+          && get(/databases/$(database)/documents/profiles/$(uid)).data.enabled == true
+          && validExpiry(get(/databases/$(database)/documents/profiles/$(uid)).data)
+        )
+      );
+    }
+
+    function path(uid) {
+      return /databases/$(database)/documents/workspaces/$(uid);
+    }
+
+    function previous(uid) {
+      return exists(path(uid)) ? get(path(uid)).data.revision : 0;
+    }
+
+    match /profiles/{uid} {
+      allow read: if adminActive() || (signed() && request.auth.uid == uid);
+
+      allow create, update: if adminActive()
+        && request.resource.data.keys().hasOnly([
+          'enabled', 'label', 'email',
+          'application', 'plan', 'expiry'
+        ])
+        && request.resource.data.keys().hasAll([
+          'enabled', 'label'
+        ])
+        && request.resource.data.enabled is bool
+        && request.resource.data.label is string
+        && (!('email' in request.resource.data)
+            || request.resource.data.email is string)
+        && (!('application' in request.resource.data)
+            || request.resource.data.application is string)
+        && (!('plan' in request.resource.data)
+            || request.resource.data.plan is string)
+        && (!('expiry' in request.resource.data)
+            || request.resource.data.expiry is string);
+
+      allow delete: if false;
+    }
+
+    match /workspaces/{uid} {
+      allow read: if access(uid);
+
+      allow create, update: if access(uid)
+        && request.resource.data.keys().hasOnly([
+          'revision', 'count', 'updatedBy'
+        ])
+        && request.resource.data.revision == previous(uid) + 1
+        && request.resource.data.updatedBy == request.auth.uid
+        && request.resource.data.count is int
+        && request.resource.data.count > 0
+        && request.resource.data.count <= 390;
+
+      allow delete: if false;
+
+      match /chunks/{chunk} {
+        allow read: if access(uid);
+
+        allow write: if access(uid)
+          && getAfter(path(uid)).data.revision == previous(uid) + 1
+          && (
+            request.resource == null ||
+            (
+              request.resource.data.keys().hasOnly(['payload'])
+              && request.resource.data.payload is string
+              && request.resource.data.payload.size() <= 400000
+            )
+          );
+      }
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

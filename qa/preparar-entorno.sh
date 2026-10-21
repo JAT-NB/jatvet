@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd /workspace/jatvet
-test "$(git branch --show-current)" = qa/certificacion-2026-10-21
+test "$(git branch --show-current)" = fix/qa-seguridad-recuperacion-2026-10-21
 node --version
 python3 --version
 java -version

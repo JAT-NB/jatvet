@@ -1,3 +1,5 @@
+> Documento histórico previo a la implementación. La propuesta implementada y probada se describe en `qa/INFORME-CERTIFICACION.md`; las reglas nuevas están separadas en `qa/firestore/firestore.proposed.rules`.
+
 # Propuestas para revisión — sin cambios productivos
 
 ## 1. Suscripciones vencidas (alta)

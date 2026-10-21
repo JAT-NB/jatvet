@@ -1,0 +1,99 @@
+id,title,status,error,reason,evidence
+AUTH-EMU-01,Login válido con SDK real y cuenta ficticia,PASS,,,qa/resultados/auth-emulador.json
+AUTH-EMU-02,Cierre de sesión,PASS,,,qa/resultados/auth-emulador.json
+AUTH-EMU-03,Rechazo de contraseña inválida,PASS,,,qa/resultados/auth-emulador.json
+AUTH-EMU-04,Cuenta deshabilitada rechazada,PASS,,,qa/resultados/auth-emulador.json
+AUTH-EMU-05,Recuperación genera código local sin enviar correo,PASS,,,qa/resultados/auth-emulador.json
+AUTH-EMU-06,Cuenta admin con claim y audiencia demo,PASS,,,qa/resultados/auth-emulador.json
+REG-01,Regresión existente: 8 aserciones estáticas de actualización silenciosa,PASS,,,qa/resultados/continuacion/regresion-estatica.txt
+SEC-01,Lectura cross-tenant A/B,PASS,,,qa/resultados/continuacion/firestore.json
+SEC-02,Escritura cross-tenant A/B,PASS,,,qa/resultados/continuacion/firestore.json
+SEC-03,Protección de perfiles y escalada de permisos,PASS,,,qa/resultados/continuacion/firestore.json
+SEC-04,Acceso con perfil Firestore deshabilitado,PASS,,,qa/resultados/continuacion/firestore.json
+SEC-05,Vencimiento de suscripciones,FAIL,"AssertionError [ERR_ASSERTION]: Perfil enabled=true con expiry=2000-01-01 puede leer o escribir; access(uid) no valida expiry
+    at /workspace/jatvet/qa/firestore/integracion.cjs:23:754
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async test (/workspace/jatvet/qa/firestore/integracion.cjs:18:38)
+    at async main (/workspace/jatvet/qa/firestore/integracion.cjs:23:2)",,qa/resultados/continuacion/firestore.json
+SEC-06,Lecturas y escrituras según reglas efectivas,PASS,,,qa/resultados/continuacion/firestore.json
+SEC-07,"Lotes, revisiones y chunks con getAfter (prueba 21)",PASS,,,qa/resultados/continuacion/firestore.json
+DATA-01,Persistencia Firestore tras recarga,PASS,,,qa/resultados/continuacion/firestore.json; qa/resultados/continuacion/navegador-integrado.json
+DATA-02,Cambio de usuario sin información residual,PASS,,,qa/resultados/continuacion/navegador-integrado.json
+DATA-03,Concurrencia entre dos dispositivos,PASS,,,qa/resultados/continuacion/firestore.json
+DATA-04,Recuperación tras fallo de guardado de red,FAIL,"AssertionError [ERR_ASSERTION]: Tras 13 segundos sin red, la revalidación de acceso elimina el editor y la copia pendiente deja de estar disponible
+    at /workspace/jatvet/qa/firestore/navegador.cjs:27:1069
+    at async test (/workspace/jatvet/qa/firestore/navegador.cjs:15:37)
+    at async main (/workspace/jatvet/qa/firestore/navegador.cjs:27:1)",,qa/resultados/continuacion/navegador-integrado.json
+DATA-05,Restauración integral Firestore y reversión,PASS,,,qa/resultados/continuacion/firestore.json
+DATA-06,Integridad de fotos después de recarga desde backend,PASS,,,qa/resultados/continuacion/firestore.json; qa/resultados/continuacion/navegador-integrado.json
+UI-REAL-01,Ingreso y cierre extremo a extremo con perfil,PASS,,,qa/resultados/continuacion/navegador-integrado.json
+UI-REAL-02,Restauración revisada desde panel autenticado,PASS,,,qa/resultados/continuacion/navegador-integrado.json
+PHOTO-04,Cambio de foto y persistencia tras recarga,PASS,,,qa/resultados/continuacion/navegador-integrado.json
+PWA-04,Instalación real Android e iOS,BLOQUEADA,,Requiere Android e iOS reales o granja de dispositivos con instalación PWA. Viewport Chromium no lo acredita.,qa/INFORME-CERTIFICACION.md
+PWA-05,Migración entre versiones instaladas en dispositivos,BLOQUEADA,,"Requiere dispositivos con versión previa y versión de destino aprobada en entorno de QA, sin despliegue productivo.",qa/INFORME-CERTIFICACION.md
+OPS-01,Correspondencia binaria con despliegue publicado,BLOQUEADA,,GET HTTPS a jat-nb.github.io bloqueado por proxy (CONNECT 403). Dominio guardado en borrador; aún no aplicado en instancia.,qa/INFORME-CERTIFICACION.md
+AUTH-REAL-01,Entrega real de recuperación de contraseña,BLOQUEADA,,Envíos de correo reales prohibidos por el alcance. Generación del código y recuperación en Auth Emulator sí verificadas.,qa/INFORME-CERTIFICACION.md
+NAV-1,Renderizar sección Inicio,PASS,,,qa/resultados/ejecucion.json
+NAV-2,Renderizar sección Clientes y mascotas,PASS,,,qa/resultados/ejecucion.json
+NAV-3,Renderizar sección Nuevo paciente,PASS,,,qa/resultados/ejecucion.json
+NAV-4,Renderizar sección Turnos,PASS,,,qa/resultados/ejecucion.json
+NAV-5,Renderizar sección Vacunación,PASS,,,qa/resultados/ejecucion.json
+NAV-6,Renderizar sección Servicios,PASS,,,qa/resultados/ejecucion.json
+NAV-7,Renderizar sección Caja,PASS,,,qa/resultados/ejecucion.json
+NAV-8,Renderizar sección Informes,PASS,,,qa/resultados/ejecucion.json
+NAV-9,Renderizar sección Cómo llegar,PASS,,,qa/resultados/ejecucion.json
+NAV-10,Renderizar sección Respaldo,PASS,,,qa/resultados/ejecucion.json
+NAV-11,Renderizar sección Manual,PASS,,,qa/resultados/ejecucion.json
+PET-01,Campos obligatorios impiden alta vacía,PASS,,,qa/resultados/ejecucion.json
+PET-02,Alta paciente y responsable ficticios,PASS,,,qa/resultados/ejecucion.json
+SRV-01,Alta servicio,PASS,,,qa/resultados/ejecucion.json
+SRV-02,Edición servicio,PASS,,,qa/resultados/ejecucion.json
+TURN-01,Alta turno con relación paciente/servicio,PASS,,,qa/resultados/ejecucion.json
+TURN-02,Intervalo 09:00,PASS,,,qa/resultados/ejecucion.json
+TURN-03,Intervalo 09:29,PASS,,,qa/resultados/ejecucion.json
+TURN-04,Intervalo 09:30,PASS,,,qa/resultados/ejecucion.json
+TURN-05,Turno realizado genera un ingreso,PASS,,,qa/resultados/ejecucion.json
+TURN-06,Sin duplicación al sincronizar ingresos,PASS,,,qa/resultados/ejecucion.json
+CASH-01,Registro ingreso manual,PASS,,,qa/resultados/ejecucion.json
+CASH-02,Registro egreso manual,PASS,,,qa/resultados/ejecucion.json
+REPORT-01,Balance general consistente con movimientos,PASS,,,qa/resultados/ejecucion.json
+BKP-01,Exportación JSON conserva colecciones y cantidades,PASS,,,qa/resultados/ejecucion.json
+BKP-02,Validación y restauración aditiva conserva foto y adjunto,PASS,,,qa/resultados/ejecucion.json
+BKP-03,Rechaza colección inválida,PASS,,,qa/resultados/ejecucion.json
+BKP-04,Rechaza IDs duplicados,PASS,,,qa/resultados/ejecucion.json
+BKP-05,Rechaza referencia huérfana,PASS,,,qa/resultados/ejecucion.json
+BKP-06,Rechaza adjunto ejecutable,PASS,,,qa/resultados/ejecucion.json
+BKP-07,Rechaza movimiento negativo,PASS,,,qa/resultados/ejecucion.json
+BKP-08,Conflicto de IDs no sobrescribe original,PASS,,,qa/resultados/ejecucion.json
+BKP-09,Importación idéntica no duplica registros,PASS,,,qa/resultados/ejecucion.json
+SEC-UI-01,Iframe aislado y sin acceso al almacenamiento del padre,PASS,,,qa/resultados/ejecucion.json
+SEC-UI-02,Nombre malicioso escapado al renderizar,PASS,,,qa/resultados/ejecucion.json
+PHOTO-01,Agregar foto PNG desde selector real,PASS,,,qa/resultados/ejecucion.json
+PHOTO-02,Foto incluida en guardado al padre,PASS,,,qa/resultados/ejecucion.json
+PHOTO-03,Eliminar foto,PASS,,,qa/resultados/ejecucion.json
+PET-03,Editar ficha paciente,PASS,,,qa/resultados/ejecucion.json
+CRUD-01,Protege paciente asociado y elimina paciente sin relaciones,PASS,,,qa/resultados/ejecucion.json
+CRUD-02,Alta y eliminación servicio sin relaciones,PASS,,,qa/resultados/ejecucion.json
+TURN-07,Edición y eliminación de turno pendiente,PASS,,,qa/resultados/ejecucion.json
+TURN-08,Corrección de realizado revierte ingreso y registra auditoría,PASS,,,qa/resultados/ejecucion.json
+VACC-01,Alta edición vencimiento y eliminación vacuna con caja,PASS,,,qa/resultados/ejecucion.json
+REPORT-02,Filtro diario mensual e histórico,PASS,,,qa/resultados/ejecucion.json
+UI-02,Editor sin errores JavaScript no controlados,PASS,,,qa/resultados/ejecucion.json
+UI-03,Inicio móvil sin desborde horizontal,PASS,,,qa/resultados/ejecucion.json
+PWA-01,Manifiesto y recursos locales existentes,PASS,,,qa/resultados/ejecucion.json
+PWA-02,Service Worker instalado con scope correcto,PASS,,,qa/resultados/ejecucion.json
+LOGIN-UI-01,Pantalla de login visible,PASS,,,qa/resultados/ejecucion.json
+LOGIN-UI-02,Mostrar y ocultar contraseña,PASS,,,qa/resultados/ejecucion.json
+LOGIN-UI-03,Recuperación exige correo válido sin enviar solicitud,PASS,,,qa/resultados/ejecucion.json
+LOGIN-UI-04,Recuerda correo precargado después de recarga,PASS,,,qa/resultados/ejecucion.json
+PWA-03,Navegación sin conexión utilizable,FAIL,"La navegación offline no entrega la aplicación utilizable; el SW actual responde con pantalla HTTP 503
+
+true !== false
+",,qa/resultados/ejecucion.json; qa/resultados/continuacion/offline.json
+DATA-04-REVOKE,Revocación durante guardado conserva copia descargable,FAIL,"AssertionError [ERR_ASSERTION]: El mensaje promete copia pendiente pero el botón debe seguir disponible
+    at /workspace/jatvet/qa/firestore/navegador.cjs:29:606
+    at async test (/workspace/jatvet/qa/firestore/navegador.cjs:15:37)
+    at async main (/workspace/jatvet/qa/firestore/navegador.cjs:29:1)",,qa/resultados/continuacion/navegador-integrado.json
+OFFLINE-UX-01,SW real entrega pantalla accesible de desconexión con HTTP 503,PASS,,,qa/resultados/continuacion/offline.json
+OFFLINE-SEC-01,Pantalla offline no expone fichas ni guarda caches clínicas,PASS,,,qa/resultados/continuacion/offline.json
+OFFLINE-REC-01,Reintentar vuelve al login al recuperar conexión,PASS,,,qa/resultados/continuacion/offline.json

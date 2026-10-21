@@ -1,99 +1,86 @@
-# Certificación QA JAT Vet 4.0.1 — continuación del 21/10/2026
+# Correcciones QA JAT Vet 4.0.1 — 21/10/2026
 
-**Veredicto: NO APTO PARA COMERCIALIZACIÓN.** Hay fallos reproducidos de vencimiento de suscripciones y recuperación de cambios pendientes, además del requisito de funcionamiento offline y cuatro verificaciones externas bloqueadas.
+**Correcciones listas para revisión. No desplegadas. La certificación comercial final sigue pendiente de cuatro verificaciones externas.**
 
-## Resultado
+Rama: `fix/qa-seguridad-recuperacion-2026-10-21`, creada desde `fd21f2eee0b02a8ee913338164ae557822af5007`. No hubo merge, cambios en main, publicación de reglas, despliegue ni acceso a datos reales.
 
-| Alcance | Planificados | Ejecutados | PASS | FAIL | BLOQUEADOS |
-|---|---:|---:|---:|---:|---:|
-| 81 casos originales | 81 | 77 | 74 | 3 | 4 |
-| Cuatro casos complementarios nuevos | 4 | 4 | 3 | 1 | 0 |
-| **Total actual** | **85** | **81** | **77** | **4** | **4** |
+## Resultado automatizado
 
-De los 20 bloqueos iniciales se resolvieron 16: 14 PASS y dos FAIL. Se añadieron OFFLINE-UX-01, OFFLINE-SEC-01, OFFLINE-REC-01 y DATA-04-REVOKE. Cada ID cuenta una sola vez aunque tenga comprobaciones Node y navegador. REG-01 es un caso con ocho aserciones estáticas. No se contabilizan ejecuciones de preparación fallidas ni pruebas omitidas como PASS.
+| Alcance | Casos | PASS | FAIL | BLOQUEADOS |
+|---|---:|---:|---:|---:|
+| Matriz anterior, reevaluada con el criterio aprobado | 85 | 81 | 0 | 4 |
+| Pruebas nuevas de fechas y recuperación | 24 | 24 | 0 | 0 |
+| **Total actual** | **109** | **105** | **0** | **4** |
 
-Los 20 resultados manuales anteriores y la prueba 21 inconclusa son antecedentes del propietario, no ejecución propia. El informe anterior se conserva en Git (`eeb2225`).
+Se ejecutaron 105 IDs únicos. Hay comprobaciones repetidas por Node y navegador, que no aumentan el número de casos. REG-01 cuenta como un caso con ocho aserciones estáticas. Los cuatro bloqueos no se ejecutaron ni se convirtieron en PASS. Los antecedentes manuales del propietario no se contabilizan como ejecución propia.
 
-## Base, reglas e infraestructura
+Matriz con evidencias: `qa/resultados/matriz.csv`; vista resumida: `qa/casos-certificacion.csv`. Resultados actuales: `qa/resultados/correcciones/`. Se preservaron la matriz de 85 casos y el informe previos en `qa/historico/`, junto con las evidencias originales de fallos en `qa/resultados/continuacion/` y los JSON anteriores. El fallo anterior de PWA-03 no se borró.
 
-- Rama exclusiva `qa/certificacion-2026-10-21`; aplicación compilada de `eeb22256f5fc99d56fe1a775b2bf7b5d8dbea06d`. No se cambió código productivo, main, reglas remotas ni datos reales; no hubo merge ni despliegue.
-- Se inspeccionaron todas las ramas e historia disponibles. En desarrollo-v4-firebase se encontraron reglas y fuentes, pero el propietario confirmó que las reglas históricas no coincidían con las desplegadas. **No se usaron para la certificación final.**
-- Reglas de referencia: texto completo copiado por el propietario desde Firestore → Reglas de jat-vet-pruebas, guardado sin cambios de lógica en `qa/firestore/firestore.rules`. SHA-256: `6dac84f09a73458c96e56afc93f1ef20c14614f20e3836cc259a255fe1733cba`. Procedencia en `qa/firestore/PROCEDENCIA.json`. No se afirma lectura administrativa independiente del despliegue.
-- Firestore Emulator 1.22.0 en 127.0.0.1:8180; Authentication separado en 127.0.0.1:9299, proyecto local jat-vet-pruebas para que la audiencia de tokens coincida con las reglas. También se repitió Auth original con proyecto demo en 9199. El nombre del proyecto en un emulador no implica acceso remoto.
-- La descarga Firebase CLI falló por HTTP 403 en storage.googleapis.com. Se obtuvo el emulador desde la imagen oficial Google Cloud CLI en el registro permitido gcr.io, fijada por digest; se verificaron capas y SHA-256 del JAR. No se desactivó TLS ni se alteraron checksums del CLI. Imagen, versión y hash constan en PROCEDENCIA.json y en el script reproducible.
-- Node 24.19.0, Java 21, Firebase SDK 12.4.0, rules-unit-testing 5.0.0, Playwright 1.58.2 y Chromium del entorno. Dependencias y emulador conservados fuera del checkout, en /workspace/qa-tools.
-- Node usa las fuentes reales repository/data recuperadas, con cambios de loader e import para compartir el SDK del runner. El navegador usa los bundles actuales de la aplicación, sin alterar su lógica.
+## Código corregido
 
-## Comprobaciones ejecutadas
+### SEC-05: vencimiento en servidor
 
-**Seguridad:** lecturas/escrituras A/B y anónimo denegadas por permission-denied; un error de red no cuenta como denegación aprobada. Protección de perfiles propios y ajenos, administración por claim, rechazo de campos no admitidos y borrados de perfil. Perfil habilitado permitido; suspendido y ausente denegados. Esquema de manifiestos, identidad del actor, revisión y límites de count verificados.
+`qa/firestore/firestore.proposed.rules` es una propuesta separada de la copia publicada aportada por el propietario (`qa/firestore/firestore.rules`, sin cambios). Firestore decide con `request.time`, no con el reloj o la interfaz del usuario.
 
-**Prueba 21 / SEC-07:** guardado multichunk con Unicode, lectura íntegra, negativa de escritura directa de chunks sin actualizar manifiesto, rechazo de revisión obsoleta y reducción a respaldo vacío. La transacción válida con getAfter() pasó. Los errores de reglas en las pruebas negativas del log son denegaciones esperadas comprobadas por código, no PASS inferidos de texto del simulador.
+La fecha ISO incluye todo el día argentino UTC-03: el límite exclusivo es la medianoche argentina siguiente, equivalente a las 03:00 UTC. Se conservan perfiles habilitados sin expiry o con string vacío. Fechas inválidas, tipos inválidos y perfiles suspendidos se deniegan. Un admin con perfil suspendido/vencido no accede ni puede reactivarse desde la app; se conserva el bootstrap previo por claim cuando no existe perfil administrativo.
 
-**Persistencia y concurrencia:** alta por formulario, confirmación Firestore y recarga; reapertura desde otro cliente; dos escrituras con la misma revisión producen exactamente una ganadora y una rechazada; listener recibe la revisión y se compara el contenido con el ganador. La denegación del perdedor puede ser permission-denied en el emulador, no siempre el mensaje amistoso de revisión obsoleta. Se acredita integridad, no resolución completa de esa UX.
+Se ejecutaron 19 casos de fechas: sin campo, vacío, ayer, hoy, mañana, formatos inválidos, bisiestos, tipos incorrectos, mes/día inexistentes, suspensión y administradores suspendidos/vencidos. El helper exacto de la propuesta se comprobó en el emulador un nanosegundo antes del límite, exactamente en él y un nanosegundo después, mediante reglas temporales sin rutas clínicas. Se restauró la propuesta completa en finally. Los casos generales ejercen la propuesta completa y request.time real.
 
-**Backup y fotos:** importación revisada autenticada, confirmación del titular y descarga de copia previa; comparación de registros, fotos, adjuntos y totales tras recarga. Restauración aditiva, reimportación sin duplicados y reversión al respaldo previo desde el repositorio. Cambio de foto mediante selector real y comparación después de recargar. Cambio A/B sin fichas del otro usuario ni datos clínicos en localStorage.
+**No se publicaron reglas ni se modificó ningún perfil real.** Los hashes de referencia y propuesta figuran en `correcciones/manifest.json`.
 
-**Regresión:** pacientes, servicios, turnos, caja, vacunas, informes, respaldos, login, sandbox y PWA; seis pruebas Auth y test estático existente. Se ejecutaron además desconexión prolongada durante guardado y revocación inmediata del perfil. La recuperación de contraseña solo generó códigos locales; no se enviaron correos.
+### DATA-04 / DATA-04-REVOKE: recuperación por propietario
 
-## Fallos reproducidos
+`v4/app-session.js` separa la copia pendiente de la limpieza del editor y de los cambios de autenticación. Mantiene snapshots por UID dentro de una closure privada; no guarda información clínica en localStorage ni sessionStorage. El adaptador existente del editor delega guardado, revisión e importación en ese módulo.
 
-| ID | Severidad | Resultado observado | Evidencia bajo qa/resultados/continuacion/ |
-|---|---|---|---|
-| SEC-05 | Alta | Perfil enabled=true con expiry="2000-01-01" puede leer y escribir. access(uid) no comprueba el vencimiento. | expiry-evidence.json, firestore.json |
-| DATA-04 | Alta | Tras 13 segundos sin red durante guardado, la revalidación limpia editor y copia pendiente. La revisión confirmada durante la desconexión sigue en 3, igual que antes. | network-evidence.json, DATA-04-fail.png, navegador-integrado.json |
-| DATA-04-REVOKE | Alta | Si el perfil se suspende antes del guardado, se promete conservar la copia pendiente pero el botón de descarga queda oculto. | DATA-04-REVOKE-fail.png, navegador-integrado.json |
-| PWA-03 | Media | Recargar sin red no permite usar la aplicación veterinaria: devuelve pantalla HTTP 503. | offline.json, offline-503.png |
+- Desconexión/timeout bloquean el editor; revocación confirmada bloquea el acceso sin borrar la copia del propietario.
+- Se comprueba el acceso antes de guardar; las reglas vuelven a decidir en Firestore. Una cuenta revocada no puede escribir ni mediante SDK directo.
+- Reintentar conexión no reproduce escrituras. Un reintento explícito de guardado exige confirmación y la misma revisión.
+- Solo una confirmación exacta de datos/revisión guardados retira el snapshot como pendiente. Descargarlo o cerrar sesión no lo borra; el descarte requiere una acción explícita del propietario.
+- El propietario puede autenticarse otra vez y recuperar su copia aun con el perfil revocado, sin rehabilitar permisos. B no recibe la copia de A.
+- Las respuestas tardías se verifican contra generación de sesión y propietario; no se asocian a la nueva identidad.
+- La edición administrativa usa merge para conservar expiry, email, application y plan existentes, en lugar de eliminarlos al cambiar enabled/label.
 
-DATA-04 y DATA-04-REVOKE son dos escenarios del mismo problema de recuperación. No se demuestra pérdida de registros previamente confirmados; sí falla la disponibilidad prometida de la copia de cambios no confirmados.
+Se probaron cortes de más de 13 segundos, timeout de ocho segundos con navigator.onLine aún verdadero, revocación, cierre de sesión, recuperación por el mismo propietario, acceso B, conflicto con otra escritura y cambio de identidad durante un guardado en curso. Se descargaron y compararon los JSON completos de recuperación. Las descargas se conservan con nombres únicos por secuencia.
 
-**Corrección del diagnóstico offline anterior:** el SW actual ya tiene pantalla Sin conexión; no devuelve Response.error() como decía el mensaje del runner anterior. La pantalla, Cache-Control: no-store, ausencia de fichas/caché clínica y Reintentar al recuperar Internet dieron PASS. PWA-03 sigue FAIL porque exige aplicación utilizable al recargar sin red. No se redefinió el criterio para hacerlo pasar ni se modificó v4/sw.js.
+### PWA-03: requisito aprobado y ejecución nueva
 
-Propuestas sin implementación productiva: `qa/PROPUESTA-CORRECCIONES.md`. Incluyen vencimiento en servidor, recuperación segura de pendientes por UID y separación de errores transitorios frente a revocación; trabajo de diseño separado si se exige operación clínica offline.
+El propietario confirmó que JAT Vet requiere Internet y no debe permitir trabajo clínico offline. El criterio actualizado está en `qa/CRITERIOS-ACEPTACION.md`. PWA-03 volvió a ejecutarse y dio PASS: pantalla Sin conexión, HTTP 503/no-store, Reintentar, ausencia de operaciones clínicas y retorno al login tras reconectar. DATA-04 comprueba además la conservación del pendiente y el retorno seguro al editor sin reproducción automática del guardado.
 
-## Cuatro bloqueos restantes
+No se modificó `v4/sw.js` ni se rehízo la pantalla existente. La aplicación abierta bloquea el espacio clínico cuando detecta desconexión o una verificación fallida, y revalida antes de habilitarlo nuevamente.
 
-| Caso | Requisito exacto |
+## Regresión completa ejecutada
+
+- Reglas: aislamiento A/B y anónimo; perfiles habilitados, suspendidos y ausentes; permisos administrativos y esquema; chunks/getAfter y revisiones; lectura/escritura de suscripciones vencidas.
+- Datos: persistencia entre clientes y tras recarga; dos escrituras concurrentes con una única revisión ganadora; listener; backup aditivo, reimportación sin duplicados y reversión; fotos y adjuntos íntegros; cambio de foto y de usuario.
+- Interfaz: pacientes, responsables, campos obligatorios, servicios, turnos y límite de 30 minutos, caja, vacunas, reportes por período, exportación y restauración revisada con copia previa, login y correo recordado, contraseña visible y responsive Chromium.
+- Authentication: ingreso/cierre, contraseña incorrecta, usuario deshabilitado, recuperación mediante código local y claim administrativo ficticio.
+- Conexión y PWA: regla actual de Internet obligatorio, pantalla y Reintentar; recuperación de copia, timeout, conflicto y cambio de identidad. APP-RUNTIME confirma ausencia de excepciones JavaScript no controladas y de destinos externos en la prueba integrada.
+
+La captura de errores identificó un problema del runner: bloquear Service Workers mediante Playwright inyectaba código que fallaba en el iframe sandbox. Se retiró ese bloqueo artificial; no se debilitó el sandbox ni se presentó como defecto productivo. El editor ya excluía el registro SW de su contenido.
+
+## Evidencias y entorno
+
+`manifest.json` fija hashes de aplicación, adaptador, SDK, reglas y runners. Los JSON de cada suite incluyen estados reales, fechas de ejecución y alcance. Logs, screenshots de recuperación, copia previa de restauración y descargas ficticias están en `qa/resultados/correcciones/`. Las preparaciones fallidas superadas no se contaron como fallos de aplicación ni se usaron resultados de ejecución cero.
+
+Node 24.19.0, Java 21, Playwright 1.58.2, Firebase SDK 12.4.0, rules-unit-testing 5.0.0, Firestore Emulator oficial 1.22.0 y Chromium del entorno. Auth integrado en 9299 y Firestore en 8180, exclusivamente locales y con proyecto emulado jat-vet-pruebas; Auth demo separado en 9199. La aplicación corregida usa endpoints locales nativos en modo emulador; el runner no redirige solicitudes hacia Firebase remoto y aborta cualquier destino externo. La audiencia local coincide con las reglas sin credenciales productivas.
+
+Este checkout contiene artefactos web; no hay build Vite definido en esta rama. Se verificó sintaxis de módulos y se cargaron/ejecutaron realmente los archivos corregidos en Chromium. Reproducción, hashes y orden de suites: `qa/DESPLIEGUE-SEGURO.md`.
+
+## Bloqueos y riesgos pendientes
+
+| ID | Falta |
 |---|---|
-| PWA-04 | Android e iOS reales o servicio de dispositivos que permita instalar/verificar la PWA. Viewport Chromium no sustituye esos dispositivos. |
-| PWA-05 | Dispositivos con versión previa instalada y versión destino autorizada en QA para verificar actualización/migración. No se desplegó producción. |
-| OPS-01 | Permitir GET HTTPS a jat-nb.github.io en la red efectiva para comparar HTML y bundles públicos. El proxy devolvió CONNECT 403; el borrador incluye el dominio pero la instancia aún no lo permite. |
-| AUTH-REAL-01 | Entrega de correo real prohibida por alcance. Requeriría buzón exclusivo QA y autorización específica de envío; no se solicita contraseña real. El código emulado sí fue verificado. |
+| PWA-04 | Instalación real en Android e iOS o un servicio de dispositivos autorizado. Un viewport móvil Chromium no lo sustituye. |
+| PWA-05 | Actualización/migración entre versiones instaladas en esos dispositivos, usando una versión de QA aprobada. No se desplegó una versión para esta prueba. |
+| OPS-01 | Lectura HTTPS del sitio publicado: jat-nb.github.io sigue fuera de la política efectiva de esta instancia. No se afirma correspondencia con el despliegue actual. |
+| AUTH-REAL-01 | Entrega real de correo, prohibida por el alcance. Requiere buzón QA y autorización específica; el código emulado sí pasó. |
 
-No faltan credenciales de veterinarios para estas pruebas emuladas. El texto actual de reglas permitió validarlas sin permisos administrativos de producción.
+**Límite de recuperación:** la copia privada se conserva en la misma pestaña, incluso al cambiar de cuenta; no sobrevive necesariamente a cerrar, recargar, caer o terminar el proceso del navegador. Se muestra la advertencia, se usa beforeunload y se exige solicitar la descarga antes del cierre de sesión con pendientes. El propietario debe verificar el archivo antes de cerrar o descartar. No se promete un vault clínico durable ni se introduce almacenamiento offline persistente sin un diseño de seguridad aprobado.
 
-## Evidencias y reproducción
+Los clientes que ya están publicados no incorporan estas correcciones. No se afirma que SEC-05 esté corregido en producción hasta desplegar las reglas autorizadas. Los workflows existentes de publicación reconstruyen otra rama y podrían excluir estos cambios: deben revisarse antes de usarlos.
 
-Matriz completa con rutas de evidencia: `qa/resultados/matriz.csv`; resumen: `qa/casos-certificacion.csv`. Totales: `qa/resultados/continuacion/resumen.json`. JSON, logs, descargas y capturas contienen únicamente datos ficticios. Se eliminaron capturas de fallos de preparación superados; no se presentaron como defectos de aplicación.
+## Entrega y condición para publicar
 
-```sh
-bash /workspace/jatvet/qa/preparar-entorno.sh
-```
+Revisar código, propuesta de reglas y política aprobada. Completar los cuatro bloqueos para certificar comercialización completa y autorizar explícitamente el despliegue. Instrucciones de publicación coherente, comprobaciones previas y rollback sin reabrir vencimientos: `qa/DESPLIEGUE-SEGURO.md`.
 
-Arrancar en procesos separados y esperar API endpoint y All emulators ready:
-
-```sh
-bash /workspace/qa-tools/firestore-official/cloud_firestore_emulator --host 127.0.0.1 --port 8180 --project_id jat-vet-pruebas --single_project_mode true --single_project_mode_error true --rules /workspace/jatvet/qa/firestore/firestore.rules
-cd /workspace/qa-tools
-XDG_CONFIG_HOME=/workspace/qa-tools/config FIREBASE_CLI_DISABLE_TELEMETRY=1 ./node_modules/.bin/firebase emulators:start --only auth --project jat-vet-pruebas --config /workspace/jatvet/qa/firestore/firebase.json
-```
-
-Ejecutar secuencialmente desde /workspace/jatvet:
-
-```sh
-NODE_PATH=/workspace/qa-tools/node_modules node qa/firestore/integracion.cjs
-NODE_PATH=/workspace/qa-tools/node_modules node qa/firestore/navegador.cjs
-NODE_PATH=/workspace/qa-tools/node_modules node qa/offline.cjs
-NODE_PATH=/workspace/qa-tools/node_modules node qa/certificacion.cjs
-node tests/actualizacion-silenciosa.cjs
-```
-
-El runner de reglas limpia exclusivamente Firestore local del proyecto emulado; no ejecutarlo junto al navegador. Retornan 1 por fallos conocidos, 2 por preparación bloqueada y 0 solo sin fallos. Auth original (qa/auth-emulador.cjs) requiere el emulador demo de qa/firebase.json en 9199, independiente del integrado en 9299. Los runners reemplazan sus resultados; conservar esta versión en Git antes de repetir.
-
-El navegador integrado sirve en 8768, bloquea destinos externos y redirige solo Auth 9199→9299 y verificación REST de perfiles ficticios hacia 8180. Esa adaptación del test es necesaria por la URL REST remota fija que usa la aplicación incluso en modo emulador. No iniciar sesiones reales en ese servidor. Offline y editor usan 8767 y 8765; no hay previews públicos.
-
-Se prepararon instrucciones reutilizables de instalación/arranque. Guardar el borrador no publica la aplicación ni demuestra restauración en otra tarea. No se modificaron datos de Verónica ni de ningún otro veterinario.
-
-## Qué falta para comercializar
-
-Corregir y repetir vencimientos y recuperación segura de pendientes; resolver el requisito offline sin rebajar el caso existente; completar los cuatro bloqueos externos. Repetir seguridad e integridad contra la versión final aprobada. Las pruebas aprobadas de aislamiento y persistencia no bastan para certificar con los fallos actuales.
+El borrador del entorno quedó actualizado con install_script y start_skill. Para reutilizarlo, revisar y guardar en configuración del entorno y publicar el entorno; esto no publica la aplicación ni las reglas. No se verificó restauración en una tarea nueva.

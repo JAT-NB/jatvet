@@ -1,7 +1,7 @@
 // Ejecutar: NODE_PATH=/workspace/qa-tools/node_modules node qa/certificacion.cjs
 const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),assert=require('node:assert/strict');
 const {chromium}=require('playwright');
-const root=path.resolve(__dirname,'..'),out=path.join(__dirname,'resultados');fs.mkdirSync(out,{recursive:true});
+const root=path.resolve(__dirname,'..'),out=path.join(__dirname,'resultados/correcciones');fs.mkdirSync(out,{recursive:true});
 const source=fs.readFileSync(path.join(root,'assets/v4-backup-restauracion-20261019.js'),'utf8');
 // Ejecuta el adaptador real y su editor sin iniciar SDK, autenticación ni Firestore.
 const adapter=source.slice(source.indexOf('var x='),source.indexOf('var C=e=>'));
@@ -59,7 +59,7 @@ async function main(){
  await test('LOGIN-UI-03','Recuperación exige correo válido sin enviar solicitud',async()=>{await page.locator('#email').fill('');await page.locator('#reset').click();await page.locator('#jatResetDialog').waitFor({state:'visible'});assert((await page.locator('#jatResetMessage').innerText()).includes('correo válido'));await page.locator('#jatResetClose').click()});
  await test('LOGIN-UI-04','Recuerda correo precargado después de recarga',async()=>{await page.evaluate(()=>localStorage.setItem('jatvet:last-login-email:v4','recordado@qa.invalid'));await page.reload();await page.locator('#login').waitFor({state:'visible'});assert.equal(await page.locator('#email').inputValue(),'recordado@qa.invalid')});
  await page.screenshot({path:path.join(out,'login-mobile.png'),fullPage:true});
- await test('PWA-03','Navegación sin conexión utilizable',async()=>{await page.reload();await context.setOffline(true);let failed=false;try{const response=await page.reload({timeout:3000});failed=!response||!response.ok()||!(await page.title()).includes('JAT Vet')}catch{failed=true}assert.equal(failed,false,'La navegación offline no entrega la aplicación utilizable; el SW actual responde con pantalla HTTP 503');await context.setOffline(false)});await context.setOffline(false);
+ await test('PWA-03','Conexión obligatoria: pantalla offline sin operaciones clínicas',async()=>{await page.reload();await context.setOffline(true);try{const response=await page.reload({timeout:5000});assert.equal(response.status(),503);assert.equal(await page.locator('#workspace').count(),0);assert.match(await page.locator('h1').innerText(),/Sin conexión/);assert(await page.getByRole('button',{name:'Reintentar'}).isVisible())}finally{await context.setOffline(false)}});
  fs.writeFileSync(path.join(out,'ejecucion.json'),JSON.stringify({timestamp:new Date().toISOString(),commit:require('child_process').execSync('git rev-parse HEAD',{cwd:root}).toString().trim(),scope:'Editor real mediante adaptador S; guardado en memoria, sin backend. No prueba autenticación, reglas ni persistencia Firestore.',browser:browser.version(),externalRequestsBlocked:[...new Set(external)],results},null,2));
  await browser.close();server.close();process.exitCode=results.some(r=>r.status==='FAIL')?1:0;
 }

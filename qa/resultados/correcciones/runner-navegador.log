@@ -1,0 +1,13 @@
+PASS UI-REAL-01 Ingreso y cierre con perfil en emuladores 
+PASS DATA-01 Alta y persistencia tras recarga de la app 
+PASS UI-REAL-02 Importación revisada autenticada con copia previa 
+PASS DATA-06 Foto y adjunto importados íntegros después de recargar 
+PASS PHOTO-04 Cambio de foto real y persistencia tras recarga 
+PASS DATA-02 Cambio A/B sin datos clínicos residuales 
+PASS DATA-04 Desconexión durante guardado conserva copia descargable 
+PASS DATA-04-REVOKE Propietario recupera copia tras revocación sin recuperar permisos 
+PASS RECOVERY-TIMEOUT Timeout con Internet aparente conserva copia y bloquea operaciones 
+PASS RECOVERY-CONFLICT Guardados simultáneos conservan revisión ajena y copia propia 
+PASS RECOVERY-AUTH-RACE Cambio de identidad durante guardado no filtra ni guarda datos A en B 
+PASS PROFILE-METADATA Edición administrativa conserva expiry y metadatos existentes 
+PASS APP-RUNTIME Aplicación integrada sin excepciones JavaScript no controladas 
