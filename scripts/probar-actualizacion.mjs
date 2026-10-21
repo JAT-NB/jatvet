@@ -8,7 +8,7 @@ async function scenario(publishedInstallerVersion,expectedReload){
  const install=make(),body={append(node){node.isConnected=true}};
  const document={readyState:'complete',hidden:false,body,getElementById(){return install},createElement(){const e=make();elements.push(e);return e},addEventListener(){}};
  let reloads=0;
- const location={href:'https://example.test/jatvet/',replace(){reloads++}};
+ const location={href:'https://example.test/jatvet/',origin:'https://example.test',replace(){reloads++}};
  const fetch=async url=>{
   const u=String(url);
   if(u.includes('version.json'))return {ok:true,json:async()=>({version:'4.0.1'})};
