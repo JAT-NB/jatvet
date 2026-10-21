@@ -36,12 +36,12 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js',{scop
       const entry=await fetch('/jatvet/?comprobar='+Date.now(),{cache:'no-store'});
       if(!entry.ok)throw Error('No se pudo consultar la nueva publicación');
       const html=await entry.text();
-      const installer=html.match(/<script[^>]+src=["']([^"']*\\/install\\.js[^"']*)["']/);
+      const installer=html.match(/<script[^>]+src=["']([^"']*\/install\.js[^"']*)["']/);
       if(!installer)throw Error('La publicación no incluye el instalador');
       const script=await fetch(new URL(installer[1],location.origin),{cache:'no-store'});
       if(!script.ok)throw Error('No se pudo consultar el instalador nuevo');
       const source=await script.text();
-      const version=source.match(/const runningVersion\\s*=\\s*['"]([^'"]+)['"]/);
+      const version=source.match(/const runningVersion\s*=\s*['"]([^'"]+)['"]/);
       if(!version||version[1]!==availableVersion)throw Error('La nueva versión todavía no está publicada completamente');
       if('serviceWorker' in navigator){
         const registration=await navigator.serviceWorker.getRegistration('/jatvet/');
