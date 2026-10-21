@@ -1,0 +1,30 @@
+# Certificación interna JAT Vet — 2026-10-21
+
+Base auditada: c1547865e276efdd0e98d8779bc58544b7c86f76
+Alcance: v4/index.html, v4/install.js, v4/sw.js, v4/manifest.webmanifest y bundles referenciados.
+
+## Estado: NO CERTIFICADO (pendiente de evidencias)
+La existencia de código no equivale a pruebas funcionales ejecutadas. No realizar cambios de producción durante la auditoría.
+
+## Evidencias obtenidas
+- Repositorio accesible y rama QA aislada: PASS.
+- Manifiesto PWA: revisión estática PASS.
+- Registro de service worker y actualización al pageshow: revisión estática PASS.
+- Navegación desde red sin caché HTML: revisión estática PASS.
+- Verificación de perfil enabled y control periódico (~12 s): revisión estática PASS.
+- Control de UID para restauración: revisión estática PASS.
+- Integridad de restauración real: NO EJECUTADA.
+- Reglas Firestore desplegadas: NO VERIFICADAS.
+- Autorización entre usuarios con tokens reales: NO EJECUTADA.
+- Recuperación de contraseña extremo a extremo: NO EJECUTADA.
+- Instalación/actualización Android e iOS: NO EJECUTADA.
+- Pruebas de concurrencia y pérdida de conexión: NO EJECUTADAS.
+
+## Riesgos
+1. Sin reglas Firestore efectivas, no se puede acreditar aislamiento entre profesionales.
+2. Código legacy utiliza localStorage: comprobar que no persista información clínica cruzada.
+3. sw.js retorna Response.error() sin conexión en navegación.
+4. No hay evidencia de CI para commit base.
+
+## Criterio de liberación
+100% casos críticos PASS; 0 defectos bloqueantes o altos de seguridad; prueba A/B de aislamiento; restauración y reversión probadas; verificación de despliegue contra commit; respaldo recuperable y aprobación manual.
