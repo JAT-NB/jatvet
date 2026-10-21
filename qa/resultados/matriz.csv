@@ -1,0 +1,85 @@
+id,title,status,error,reason
+AUTH-EMU-01,Login válido con SDK real y cuenta ficticia,PASS,,
+AUTH-EMU-02,Cierre de sesión,PASS,,
+AUTH-EMU-03,Rechazo de contraseña inválida,PASS,,
+AUTH-EMU-04,Cuenta deshabilitada rechazada,PASS,,
+AUTH-EMU-05,Recuperación genera código local sin enviar correo,PASS,,
+AUTH-EMU-06,Cuenta admin con claim y audiencia demo,PASS,,
+REG-01,Regresión existente: 8 aserciones estáticas de actualización silenciosa,PASS,,
+SEC-01,Lectura cross-tenant A/B,BLOQUEADA,,Sin reglas Firestore exportadas ni configuración emulada efectiva; no se reemplazan por reglas inventadas.
+SEC-02,Escritura cross-tenant A/B,BLOQUEADA,,Sin reglas Firestore exportadas ni configuración emulada efectiva; no se reemplazan por reglas inventadas.
+SEC-03,Protección de perfiles y escalada de permisos,BLOQUEADA,,Sin reglas Firestore exportadas ni configuración emulada efectiva; no se reemplazan por reglas inventadas.
+SEC-04,Acceso con perfil Firestore deshabilitado,BLOQUEADA,,Sin reglas Firestore exportadas ni configuración emulada efectiva; no se reemplazan por reglas inventadas.
+SEC-05,Vencimiento de suscripciones,BLOQUEADA,,Sin reglas Firestore exportadas ni configuración emulada efectiva; no se reemplazan por reglas inventadas.
+SEC-06,Lecturas y escrituras según reglas efectivas,BLOQUEADA,,Sin reglas Firestore exportadas ni configuración emulada efectiva; no se reemplazan por reglas inventadas.
+SEC-07,"Lotes, revisiones y chunks con getAfter (prueba 21)",BLOQUEADA,,Sin reglas Firestore exportadas ni configuración emulada efectiva; no se reemplazan por reglas inventadas.
+DATA-01,Persistencia Firestore tras recarga,BLOQUEADA,,Requiere backend emulado integrado y recorridos adicionales; no ejecutado en esta auditoría.
+DATA-02,Cambio de usuario sin información residual,BLOQUEADA,,Requiere backend emulado integrado y recorridos adicionales; no ejecutado en esta auditoría.
+DATA-03,Concurrencia entre dos dispositivos,BLOQUEADA,,Requiere backend emulado integrado y recorridos adicionales; no ejecutado en esta auditoría.
+DATA-04,Recuperación tras fallo de guardado de red,BLOQUEADA,,Requiere backend emulado integrado y recorridos adicionales; no ejecutado en esta auditoría.
+DATA-05,Restauración integral Firestore y reversión,BLOQUEADA,,Requiere backend emulado integrado y recorridos adicionales; no ejecutado en esta auditoría.
+DATA-06,Integridad de fotos después de recarga desde backend,BLOQUEADA,,Requiere backend emulado integrado y recorridos adicionales; no ejecutado en esta auditoría.
+UI-REAL-01,Ingreso y cierre extremo a extremo con perfil,BLOQUEADA,,Requiere backend emulado integrado y recorridos adicionales; no ejecutado en esta auditoría.
+UI-REAL-02,Restauración revisada desde panel autenticado,BLOQUEADA,,Requiere backend emulado integrado y recorridos adicionales; no ejecutado en esta auditoría.
+PHOTO-04,Cambio de foto y persistencia tras recarga,BLOQUEADA,,La persistencia y recarga de cambios de foto requieren backend Firestore emulado integrado.
+PWA-04,Instalación real Android e iOS,BLOQUEADA,,Sin dispositivos Android/iOS ni instalación PWA nativa disponible.
+PWA-05,Migración entre versiones instaladas en dispositivos,BLOQUEADA,,Sin dispositivos Android/iOS ni instalación PWA nativa disponible.
+OPS-01,Correspondencia binaria con despliegue publicado,BLOQUEADA,,Se auditó el checkout local; no se validó el despliegue remoto.
+AUTH-REAL-01,Entrega real de recuperación de contraseña,BLOQUEADA,,Envío de correo real prohibido; solo se verificó generación de código local.
+NAV-1,Renderizar sección Inicio,PASS,,
+NAV-2,Renderizar sección Clientes y mascotas,PASS,,
+NAV-3,Renderizar sección Nuevo paciente,PASS,,
+NAV-4,Renderizar sección Turnos,PASS,,
+NAV-5,Renderizar sección Vacunación,PASS,,
+NAV-6,Renderizar sección Servicios,PASS,,
+NAV-7,Renderizar sección Caja,PASS,,
+NAV-8,Renderizar sección Informes,PASS,,
+NAV-9,Renderizar sección Cómo llegar,PASS,,
+NAV-10,Renderizar sección Respaldo,PASS,,
+NAV-11,Renderizar sección Manual,PASS,,
+PET-01,Campos obligatorios impiden alta vacía,PASS,,
+PET-02,Alta paciente y responsable ficticios,PASS,,
+SRV-01,Alta servicio,PASS,,
+SRV-02,Edición servicio,PASS,,
+TURN-01,Alta turno con relación paciente/servicio,PASS,,
+TURN-02,Intervalo 09:00,PASS,,
+TURN-03,Intervalo 09:29,PASS,,
+TURN-04,Intervalo 09:30,PASS,,
+TURN-05,Turno realizado genera un ingreso,PASS,,
+TURN-06,Sin duplicación al sincronizar ingresos,PASS,,
+CASH-01,Registro ingreso manual,PASS,,
+CASH-02,Registro egreso manual,PASS,,
+REPORT-01,Balance general consistente con movimientos,PASS,,
+BKP-01,Exportación JSON conserva colecciones y cantidades,PASS,,
+BKP-02,Validación y restauración aditiva conserva foto y adjunto,PASS,,
+BKP-03,Rechaza colección inválida,PASS,,
+BKP-04,Rechaza IDs duplicados,PASS,,
+BKP-05,Rechaza referencia huérfana,PASS,,
+BKP-06,Rechaza adjunto ejecutable,PASS,,
+BKP-07,Rechaza movimiento negativo,PASS,,
+BKP-08,Conflicto de IDs no sobrescribe original,PASS,,
+BKP-09,Importación idéntica no duplica registros,PASS,,
+SEC-UI-01,Iframe aislado y sin acceso al almacenamiento del padre,PASS,,
+SEC-UI-02,Nombre malicioso escapado al renderizar,PASS,,
+PHOTO-01,Agregar foto PNG desde selector real,PASS,,
+PHOTO-02,Foto incluida en guardado al padre,PASS,,
+PHOTO-03,Eliminar foto,PASS,,
+PET-03,Editar ficha paciente,PASS,,
+CRUD-01,Protege paciente asociado y elimina paciente sin relaciones,PASS,,
+CRUD-02,Alta y eliminación servicio sin relaciones,PASS,,
+TURN-07,Edición y eliminación de turno pendiente,PASS,,
+TURN-08,Corrección de realizado revierte ingreso y registra auditoría,PASS,,
+VACC-01,Alta edición vencimiento y eliminación vacuna con caja,PASS,,
+REPORT-02,Filtro diario mensual e histórico,PASS,,
+UI-02,Editor sin errores JavaScript no controlados,PASS,,
+UI-03,Inicio móvil sin desborde horizontal,PASS,,
+PWA-01,Manifiesto y recursos locales existentes,PASS,,
+PWA-02,Service Worker instalado con scope correcto,PASS,,
+LOGIN-UI-01,Pantalla de login visible,PASS,,
+LOGIN-UI-02,Mostrar y ocultar contraseña,PASS,,
+LOGIN-UI-03,Recuperación exige correo válido sin enviar solicitud,PASS,,
+LOGIN-UI-04,Recuerda correo precargado después de recarga,PASS,,
+PWA-03,Navegación sin conexión utilizable,FAIL,"La navegación offline falla: SW devuelve Response.error()
+
+true !== false
+",
