@@ -1,0 +1,37 @@
+name: Compilar candidato JAT Vet sin publicar
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/compilar-candidato-jatvet.yml'
+      - 'install.js'
+      - 'version.json'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  candidato:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtener código fuente V4 sin modificar producción
+        uses: actions/checkout@v4
+        with:
+          ref: desarrollo-v4-firebase
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Compilar y probar
+        run: |
+          npm ci
+          npm test
+          npm run build
+          test -s dist/v4/index.html
+          test -d dist/assets
+          test -s dist/v4/firebase-config.json
+      - name: Guardar candidato para revisión (NO publicar)
+        uses: actions/upload-artifact@v4
+        with:
+          name: jat-vet-candidato-no-publicar
+          path: dist/
+          retention-days: 7
