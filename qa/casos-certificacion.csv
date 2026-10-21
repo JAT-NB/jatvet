@@ -1,0 +1,10 @@
+ID,Area,Prueba,Prioridad,Estado
+SEC-01,Seguridad,Usuario A lee datos B,Critica,NO EJECUTADA
+SEC-02,Seguridad,Usuario A escribe datos B,Critica,NO EJECUTADA
+SEC-03,Seguridad,Usuario deshabilitado,Critica,NO EJECUTADA
+AUTH-01,Login,Ingreso y recuperacion,Alta,NO EJECUTADA
+DATA-01,Respaldo,Exportacion y restauracion,Critica,NO EJECUTADA
+DATA-02,Datos,Cambio de usuario,Critica,NO EJECUTADA
+TURN-01,Turnos,Superposicion y caja,Alta,NO EJECUTADA
+PWA-01,Actualizacion,Android e iOS,Alta,NO EJECUTADA
+OPS-01,Despliegue,Comparar version con produccion,Critica,NO EJECUTADA
