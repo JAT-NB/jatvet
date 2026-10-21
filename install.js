@@ -8,50 +8,14 @@ if(ios&&!standalone())button.hidden=false;
 button.addEventListener('click',async()=>{if(pendingInstall){await pendingInstall.prompt();const result=await pendingInstall.userChoice;pendingInstall=null;button.hidden=true;}else if(ios){alert('Para instalar JAT Vet: abrí esta página en Safari, tocá Compartir y elegí “Agregar a pantalla de inicio”.');}});
 if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js',{scope:'./'}).catch(()=>{});
 
-/* Verifica nuevas versiones sin interrumpir el trabajo del usuario. */
-(() => {
-  const runningVersion = '4.0.1';
-  let dismissedVersion = '';
-  const notice = document.createElement('aside');
-  notice.setAttribute('role','status');
-  notice.style.cssText='display:none;position:fixed;bottom:16px;left:16px;right:16px;max-width:430px;margin:auto;z-index:2147483647;background:white;color:#123b50;padding:16px;border:1px solid #cbdce3;border-radius:12px;box-shadow:0 8px 24px #0003;font:14px system-ui';
-  const description=document.createElement('p');
-  const update=document.createElement('button');
-  update.textContent='Actualizar ahora';
-  update.type='button';
-  update.style.cssText='padding:10px;margin-right:8px;background:#123b50;color:white;border:0;border-radius:8px';
-  const later=document.createElement('button');
-  later.textContent='Más tarde';
-  later.type='button';
-  later.style.cssText='padding:10px;border:0;border-radius:8px';
-  notice.append(description,update,later);
-  const mount=()=>{if(!notice.isConnected)document.body.append(notice);};
-  let availableVersion='';
-  later.addEventListener('click',()=>{dismissedVersion=availableVersion;notice.style.display='none';});
-  update.addEventListener('click',()=>{
-    const url=new URL(location.href);
-    url.searchParams.delete('jatvet_prueba_actualizacion');
-    url.searchParams.set('actualizado',String(Date.now()));
-    location.replace(url.href);
-  });
-  async function check(){
-    if(document.hidden)return;
-    try{
-      const response=await fetch('/jatvet/version.json?check='+Date.now(),{cache:'no-store'});
-      if(!response.ok)return;
-      const info=await response.json();
-      if(!info||typeof info.version!=='string')return;
-      // Prueba manual aislada: no modifica version.json ni afecta a otros usuarios.
-      if(new URL(location.href).searchParams.get('jatvet_prueba_actualizacion')==='1') info.version='4.1.0-prueba';
-      if(info.version===runningVersion||info.version===dismissedVersion){notice.style.display='none';return;}
-      availableVersion=info.version;
-      mount();
-      description.textContent='JAT Vet '+info.version+' disponible. Guardá los cambios antes de actualizar.';
-      notice.style.display='block';
-    }catch(_){/* sin red, no interrumpir */}
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',check,{once:true});else check();
-  document.addEventListener('visibilitychange',()=>{if(!document.hidden)check();});
-  window.addEventListener('focus',check);
-  setInterval(check,15*60*1000);
-})();
+/* Actualización silenciosa: nunca recargar una sesión en uso. 
+   El service worker usa red para navegación; la versión nueva se carga al abrir la app. */
+if ('serviceWorker' in navigator) {
+  const checkWorker=async()=>{
+    try {
+      const registration=await navigator.serviceWorker.getRegistration('./');
+      if(registration) await registration.update();
+    } catch (_) { /* sin red: se conserva la sesión */ }
+  };
+  window.addEventListener('pageshow',checkWorker);
+}

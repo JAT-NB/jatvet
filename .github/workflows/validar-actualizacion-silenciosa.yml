@@ -1,0 +1,22 @@
+name: Validar actualizacion silenciosa
+on:
+  pull_request:
+    paths:
+      - 'install.js'
+      - 'index.html'
+      - 'sw.js'
+      - 'manifest.webmanifest'
+      - 'tests/actualizacion-silenciosa.cjs'
+      - '.github/workflows/validar-actualizacion-silenciosa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node tests/actualizacion-silenciosa.cjs
