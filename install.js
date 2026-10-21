@@ -65,7 +65,8 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js',{scop
       if(!response.ok)return;
       const info=await response.json();
       if(!info||typeof info.version!=='string'||!/^\d+\.\d+\.\d+$/.test(info.version))return;
-      if(info.version===runningVersion||info.version===dismissedVersion){notice.style.display='none';return;}
+      const compare=(a,b)=>{const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]-y[i];}return 0;};
+      if(compare(info.version,runningVersion)<=0||info.version===dismissedVersion){notice.style.display='none';return;}
       availableVersion=info.version;
       mount();
       description.textContent='JAT Vet '+info.version+' disponible. Guardá los cambios antes de actualizar.';
