@@ -10,7 +10,7 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js',{scop
 
 /* Verifica nuevas versiones sin interrumpir el trabajo del usuario. */
 (() => {
-  const runningVersion = '4.0.0';
+  const runningVersion = '4.0.0'; // Debe coincidir con version.json de la publicación
   let dismissedVersion = '';
   const notice = document.createElement('aside');
   notice.setAttribute('role','status');
@@ -40,9 +40,7 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js',{scop
       const response=await fetch('/jatvet/version.json?check='+Date.now(),{cache:'no-store'});
       if(!response.ok)return;
       const info=await response.json();
-      if(!info||typeof info.version!=='string')return;
-      // Prueba manual aislada: no modifica version.json ni afecta a otros usuarios.
-      if(new URL(location.href).searchParams.get('jatvet_prueba_actualizacion')==='1') info.version='4.1.0-prueba';
+      if(!info||typeof info.version!=='string'||!/^\d+\.\d+\.\d+$/.test(info.version))return;
       if(info.version===runningVersion||info.version===dismissedVersion){notice.style.display='none';return;}
       availableVersion=info.version;
       mount();
