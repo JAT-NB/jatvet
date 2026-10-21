@@ -8,7 +8,7 @@ document.querySelector('#run').onclick=async()=>{
   lines.push('Versión publicada: '+info.version);
   const script=await fetch('/jatvet/install.js?nocache='+Date.now(),{cache:'no-store'});
   const code=await script.text();
-  const match=code.match(/const runningVersion\\s*=\\s*['"]([^'"]+)['"]/);
+  const match=code.match(/const runningVersion\s*=\s*['"]([^'"]+)['"]/);
   lines.push('Versión del instalador: '+(match?.[1]??'no detectada'));
   lines.push('Versiones coinciden: '+(match?.[1]===info.version?'SÍ':'NO'));
   const sw=await fetch('/jatvet/sw.js?nocache='+Date.now(),{cache:'no-store'});
