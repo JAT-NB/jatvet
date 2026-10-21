@@ -18,7 +18,8 @@ const server=http.createServer((req,res)=>{
 await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
 const browser=await chromium.launch({headless:true});
 try{
-  const page=await browser.newPage();
+  const context=await browser.newContext();
+  const page=await context.newPage();
   const base='http://127.0.0.1:'+server.address().port+'/jatvet/';
   await page.goto(base);
   await page.locator('#dato').fill('PRUEBA PERSISTENCIA 123');
@@ -30,7 +31,7 @@ try{
   // Reload above loaded the new script, so start a fresh tab before publishing in a separate scenario.
   await page.close();
   published='4.0.0';
-  const old=await browser.newPage();
+  const old=await context.newPage();
   await old.goto(base);
   published='4.0.1';
   await old.evaluate(()=>window.dispatchEvent(new Event('focus')));
@@ -41,4 +42,5 @@ try{
   assert.equal(banner,0,'New version should not offer the same update again');
   console.log('PASS: browser real navigation 4.0.0 -> 4.0.1, localStorage retained, no repeated notice');
   await old.close();
+  await context.close();
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}
