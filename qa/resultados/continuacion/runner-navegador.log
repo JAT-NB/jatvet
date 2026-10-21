@@ -1,0 +1,14 @@
+PASS UI-REAL-01 Ingreso y cierre con perfil en emuladores 
+PASS DATA-01 Alta y persistencia tras recarga de la app 
+PASS UI-REAL-02 Importación revisada autenticada con copia previa 
+PASS DATA-06 Foto y adjunto importados íntegros después de recargar 
+PASS PHOTO-04 Cambio de foto real y persistencia tras recarga 
+PASS DATA-02 Cambio A/B sin datos clínicos residuales 
+FAIL DATA-04 Desconexión durante guardado conserva copia descargable AssertionError [ERR_ASSERTION]: Tras 13 segundos sin red, la revalidación de acceso elimina el editor y la copia pendiente deja de estar disponible
+    at /workspace/jatvet/qa/firestore/navegador.cjs:27:1069
+    at async test (/workspace/jatvet/qa/firestore/navegador.cjs:15:37)
+    at async main (/workspace/jatvet/qa/firestore/navegador.cjs:27:1)
+FAIL DATA-04-REVOKE Revocación durante guardado conserva copia descargable AssertionError [ERR_ASSERTION]: El mensaje promete copia pendiente pero el botón debe seguir disponible
+    at /workspace/jatvet/qa/firestore/navegador.cjs:29:606
+    at async test (/workspace/jatvet/qa/firestore/navegador.cjs:15:37)
+    at async main (/workspace/jatvet/qa/firestore/navegador.cjs:29:1)

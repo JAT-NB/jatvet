@@ -1,0 +1,86 @@
+ID,Area,Prueba,Prioridad,Estado
+AUTH-EMU-01,AUTH,Login válido con SDK real y cuenta ficticia,Alta,PASS
+AUTH-EMU-02,AUTH,Cierre de sesión,Alta,PASS
+AUTH-EMU-03,AUTH,Rechazo de contraseña inválida,Alta,PASS
+AUTH-EMU-04,AUTH,Cuenta deshabilitada rechazada,Alta,PASS
+AUTH-EMU-05,AUTH,Recuperación genera código local sin enviar correo,Alta,PASS
+AUTH-EMU-06,AUTH,Cuenta admin con claim y audiencia demo,Alta,PASS
+REG-01,REG,Regresión existente: 8 aserciones estáticas de actualización silenciosa,Alta,PASS
+SEC-01,SEC,Lectura cross-tenant A/B,Critica,PASS
+SEC-02,SEC,Escritura cross-tenant A/B,Critica,PASS
+SEC-03,SEC,Protección de perfiles y escalada de permisos,Critica,PASS
+SEC-04,SEC,Acceso con perfil Firestore deshabilitado,Critica,PASS
+SEC-05,SEC,Vencimiento de suscripciones,Critica,FAIL
+SEC-06,SEC,Lecturas y escrituras según reglas efectivas,Critica,PASS
+SEC-07,SEC,"Lotes, revisiones y chunks con getAfter (prueba 21)",Critica,PASS
+DATA-01,DATA,Persistencia Firestore tras recarga,Critica,PASS
+DATA-02,DATA,Cambio de usuario sin información residual,Critica,PASS
+DATA-03,DATA,Concurrencia entre dos dispositivos,Critica,PASS
+DATA-04,DATA,Recuperación tras fallo de guardado de red,Critica,FAIL
+DATA-05,DATA,Restauración integral Firestore y reversión,Critica,PASS
+DATA-06,DATA,Integridad de fotos después de recarga desde backend,Critica,PASS
+UI-REAL-01,UI,Ingreso y cierre extremo a extremo con perfil,Alta,PASS
+UI-REAL-02,UI,Restauración revisada desde panel autenticado,Alta,PASS
+PHOTO-04,PHOTO,Cambio de foto y persistencia tras recarga,Alta,PASS
+PWA-04,PWA,Instalación real Android e iOS,Alta,BLOQUEADA
+PWA-05,PWA,Migración entre versiones instaladas en dispositivos,Alta,BLOQUEADA
+OPS-01,OPS,Correspondencia binaria con despliegue publicado,Alta,BLOQUEADA
+AUTH-REAL-01,AUTH,Entrega real de recuperación de contraseña,Alta,BLOQUEADA
+NAV-1,NAV,Renderizar sección Inicio,Alta,PASS
+NAV-2,NAV,Renderizar sección Clientes y mascotas,Alta,PASS
+NAV-3,NAV,Renderizar sección Nuevo paciente,Alta,PASS
+NAV-4,NAV,Renderizar sección Turnos,Alta,PASS
+NAV-5,NAV,Renderizar sección Vacunación,Alta,PASS
+NAV-6,NAV,Renderizar sección Servicios,Alta,PASS
+NAV-7,NAV,Renderizar sección Caja,Alta,PASS
+NAV-8,NAV,Renderizar sección Informes,Alta,PASS
+NAV-9,NAV,Renderizar sección Cómo llegar,Alta,PASS
+NAV-10,NAV,Renderizar sección Respaldo,Alta,PASS
+NAV-11,NAV,Renderizar sección Manual,Alta,PASS
+PET-01,PET,Campos obligatorios impiden alta vacía,Alta,PASS
+PET-02,PET,Alta paciente y responsable ficticios,Alta,PASS
+SRV-01,SRV,Alta servicio,Alta,PASS
+SRV-02,SRV,Edición servicio,Alta,PASS
+TURN-01,TURN,Alta turno con relación paciente/servicio,Alta,PASS
+TURN-02,TURN,Intervalo 09:00,Alta,PASS
+TURN-03,TURN,Intervalo 09:29,Alta,PASS
+TURN-04,TURN,Intervalo 09:30,Alta,PASS
+TURN-05,TURN,Turno realizado genera un ingreso,Alta,PASS
+TURN-06,TURN,Sin duplicación al sincronizar ingresos,Alta,PASS
+CASH-01,CASH,Registro ingreso manual,Alta,PASS
+CASH-02,CASH,Registro egreso manual,Alta,PASS
+REPORT-01,REPORT,Balance general consistente con movimientos,Alta,PASS
+BKP-01,BKP,Exportación JSON conserva colecciones y cantidades,Alta,PASS
+BKP-02,BKP,Validación y restauración aditiva conserva foto y adjunto,Alta,PASS
+BKP-03,BKP,Rechaza colección inválida,Alta,PASS
+BKP-04,BKP,Rechaza IDs duplicados,Alta,PASS
+BKP-05,BKP,Rechaza referencia huérfana,Alta,PASS
+BKP-06,BKP,Rechaza adjunto ejecutable,Alta,PASS
+BKP-07,BKP,Rechaza movimiento negativo,Alta,PASS
+BKP-08,BKP,Conflicto de IDs no sobrescribe original,Alta,PASS
+BKP-09,BKP,Importación idéntica no duplica registros,Alta,PASS
+SEC-UI-01,SEC,Iframe aislado y sin acceso al almacenamiento del padre,Critica,PASS
+SEC-UI-02,SEC,Nombre malicioso escapado al renderizar,Critica,PASS
+PHOTO-01,PHOTO,Agregar foto PNG desde selector real,Alta,PASS
+PHOTO-02,PHOTO,Foto incluida en guardado al padre,Alta,PASS
+PHOTO-03,PHOTO,Eliminar foto,Alta,PASS
+PET-03,PET,Editar ficha paciente,Alta,PASS
+CRUD-01,CRUD,Protege paciente asociado y elimina paciente sin relaciones,Alta,PASS
+CRUD-02,CRUD,Alta y eliminación servicio sin relaciones,Alta,PASS
+TURN-07,TURN,Edición y eliminación de turno pendiente,Alta,PASS
+TURN-08,TURN,Corrección de realizado revierte ingreso y registra auditoría,Alta,PASS
+VACC-01,VACC,Alta edición vencimiento y eliminación vacuna con caja,Alta,PASS
+REPORT-02,REPORT,Filtro diario mensual e histórico,Alta,PASS
+UI-02,UI,Editor sin errores JavaScript no controlados,Alta,PASS
+UI-03,UI,Inicio móvil sin desborde horizontal,Alta,PASS
+PWA-01,PWA,Manifiesto y recursos locales existentes,Alta,PASS
+PWA-02,PWA,Service Worker instalado con scope correcto,Alta,PASS
+LOGIN-UI-01,LOGIN,Pantalla de login visible,Alta,PASS
+LOGIN-UI-02,LOGIN,Mostrar y ocultar contraseña,Alta,PASS
+LOGIN-UI-03,LOGIN,Recuperación exige correo válido sin enviar solicitud,Alta,PASS
+LOGIN-UI-04,LOGIN,Recuerda correo precargado después de recarga,Alta,PASS
+PWA-03,PWA,Navegación sin conexión utilizable,Alta,FAIL
+DATA-04-REVOKE,DATA,Revocación durante guardado conserva copia descargable,Critica,FAIL
+OFFLINE-UX-01,OFFLINE,SW real entrega pantalla accesible de desconexión con HTTP 503,Alta,PASS
+OFFLINE-SEC-01,OFFLINE,Pantalla offline no expone fichas ni guarda caches clínicas,Alta,PASS
+OFFLINE-REC-01,OFFLINE,Reintentar vuelve al login al recuperar conexión,Alta,PASS

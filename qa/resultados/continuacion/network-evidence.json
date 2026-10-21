@@ -1,0 +1,8 @@
+{
+  "revisionBefore": 3,
+  "revisionWhileDisconnected": 3,
+  "offlineMilliseconds": 13000,
+  "pendingDownloadVisible": false,
+  "editorPresent": 0,
+  "status": "Failed to fetch"
+}

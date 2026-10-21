@@ -1,0 +1,23 @@
+{
+  "repository": "JAT-NB/jatvet",
+  "ref": "desarrollo-v4-firebase",
+  "commit": "11c3fc89e727a72e4004a0fbd79586dfff024d4d",
+  "rules_last_commit": null,
+  "rules_sha256": "6dac84f09a73458c96e56afc93f1ef20c14614f20e3836cc259a255fe1733cba",
+  "files": {
+    "firestore.rules": "Texto completo aportado por el usuario en esta conversación, sin cambios de lógica",
+    "repository.mjs": "v4/repository.js: solo import data.js a data.mjs y loader createRequire para compartir SDK CJS con rules-unit-testing; lógica intacta",
+    "data.mjs": "v4/data.js, copia exacta"
+  },
+  "deployed_rules_match": "Usuario confirma copia íntegra de Firestore → Reglas de jat-vet-pruebas; sin lectura administrativa independiente",
+  "source": "Firestore Console — user supplied",
+  "emulator": {
+    "distribution": "Google Cloud CLI emulators, registro oficial gcr.io",
+    "image": "gcr.io/google.com/cloudsdktool/google-cloud-cli@sha256:ba2726407ae3654d11ffdcd2eff74879f46c2ce805a8caa554d690afb615e433",
+    "version": "1.22.0",
+    "jar_sha256": "6262939c48d3d6b08495931706b8920399e57d5f5918e6af133a3d30cb3ae369",
+    "tls_verified": true,
+    "image_layers_digest_verified": true,
+    "launcher": "bash /workspace/qa-tools/firestore-official/cloud_firestore_emulator"
+  }
+}

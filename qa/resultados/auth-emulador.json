@@ -1,0 +1,59 @@
+{
+  "timestamp": "2026-10-21T22:27:08.231Z",
+  "project": "demo-jatvet-qa",
+  "scope": "SDK real y emulador Authentication local. No prueba UI login, perfiles Firestore ni reglas desplegadas.",
+  "users": [
+    {
+      "name": "normal",
+      "uid": "q2K3GCXbxi2bMAlKZTQIQ99hOeT7",
+      "disabled": false,
+      "claims": {}
+    },
+    {
+      "name": "admin",
+      "uid": "5mUNlLdKk523mtk6J9dBegYOthZh",
+      "disabled": false,
+      "claims": {
+        "jatvetAdmin": true
+      }
+    },
+    {
+      "name": "disabled",
+      "uid": "qkrBV2hhpiwQcW1THd9vKk3NALUo",
+      "disabled": true,
+      "claims": {}
+    }
+  ],
+  "results": [
+    {
+      "id": "AUTH-EMU-01",
+      "title": "Login válido con SDK real y cuenta ficticia",
+      "status": "PASS"
+    },
+    {
+      "id": "AUTH-EMU-02",
+      "title": "Cierre de sesión",
+      "status": "PASS"
+    },
+    {
+      "id": "AUTH-EMU-03",
+      "title": "Rechazo de contraseña inválida",
+      "status": "PASS"
+    },
+    {
+      "id": "AUTH-EMU-04",
+      "title": "Cuenta deshabilitada rechazada",
+      "status": "PASS"
+    },
+    {
+      "id": "AUTH-EMU-05",
+      "title": "Recuperación genera código local sin enviar correo",
+      "status": "PASS"
+    },
+    {
+      "id": "AUTH-EMU-06",
+      "title": "Cuenta admin con claim y audiencia demo",
+      "status": "PASS"
+    }
+  ]
+}

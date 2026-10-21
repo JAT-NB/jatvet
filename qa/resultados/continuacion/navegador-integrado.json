@@ -1,0 +1,52 @@
+{
+  "timestamp": "2026-10-21T22:35:33.887Z",
+  "scope": "App compilada real; Auth 9299 y Firestore 8180 locales; verifyAccess redirigido exclusivamente por el runner a REST local. No se modifica la aplicación.",
+  "externalBlocked": [],
+  "downloads": [
+    "jat-vet-antes-de-restaurar-qa-e2e-a-2026-10-21.json"
+  ],
+  "results": [
+    {
+      "id": "UI-REAL-01",
+      "title": "Ingreso y cierre con perfil en emuladores",
+      "status": "PASS"
+    },
+    {
+      "id": "DATA-01",
+      "title": "Alta y persistencia tras recarga de la app",
+      "status": "PASS"
+    },
+    {
+      "id": "UI-REAL-02",
+      "title": "Importación revisada autenticada con copia previa",
+      "status": "PASS"
+    },
+    {
+      "id": "DATA-06",
+      "title": "Foto y adjunto importados íntegros después de recargar",
+      "status": "PASS"
+    },
+    {
+      "id": "PHOTO-04",
+      "title": "Cambio de foto real y persistencia tras recarga",
+      "status": "PASS"
+    },
+    {
+      "id": "DATA-02",
+      "title": "Cambio A/B sin datos clínicos residuales",
+      "status": "PASS"
+    },
+    {
+      "id": "DATA-04",
+      "title": "Desconexión durante guardado conserva copia descargable",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Tras 13 segundos sin red, la revalidación de acceso elimina el editor y la copia pendiente deja de estar disponible\n    at /workspace/jatvet/qa/firestore/navegador.cjs:27:1069\n    at async test (/workspace/jatvet/qa/firestore/navegador.cjs:15:37)\n    at async main (/workspace/jatvet/qa/firestore/navegador.cjs:27:1)"
+    },
+    {
+      "id": "DATA-04-REVOKE",
+      "title": "Revocación durante guardado conserva copia descargable",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: El mensaje promete copia pendiente pero el botón debe seguir disponible\n    at /workspace/jatvet/qa/firestore/navegador.cjs:29:606\n    at async test (/workspace/jatvet/qa/firestore/navegador.cjs:15:37)\n    at async main (/workspace/jatvet/qa/firestore/navegador.cjs:29:1)"
+    }
+  ]
+}
