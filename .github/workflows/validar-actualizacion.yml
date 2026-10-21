@@ -1,0 +1,27 @@
+name: Validar actualización JAT Vet
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'install.js'
+      - 'version.json'
+      - 'index.html'
+      - 'sw.js'
+      - 'scripts/validar-actualizacion.mjs'
+      - 'scripts/probar-actualizacion.mjs'
+      - '.github/workflows/validar-actualizacion.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprobar coherencia de versión y archivos
+        run: |
+          node scripts/validar-actualizacion.mjs
+          node scripts/probar-actualizacion.mjs

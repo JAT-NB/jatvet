@@ -10,7 +10,7 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js',{scop
 
 /* Verifica nuevas versiones sin interrumpir el trabajo del usuario. */
 (() => {
-  const runningVersion = '4.0.0';
+  const runningVersion = '4.0.0'; // Debe coincidir con version.json de la publicación
   let dismissedVersion = '';
   const notice = document.createElement('aside');
   notice.setAttribute('role','status');
@@ -28,11 +28,35 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js',{scop
   const mount=()=>{if(!notice.isConnected)document.body.append(notice);};
   let availableVersion='';
   later.addEventListener('click',()=>{dismissedVersion=availableVersion;notice.style.display='none';});
-  update.addEventListener('click',()=>{
-    const url=new URL(location.href);
-    url.searchParams.delete('jatvet_prueba_actualizacion');
-    url.searchParams.set('actualizado',String(Date.now()));
-    location.replace(url.href);
+  update.addEventListener('click',async()=>{
+    update.disabled=true;
+    update.textContent='Verificando actualización…';
+    try{
+      // No mostrar un falso éxito si la nueva publicación aún no está disponible.
+      const entry=await fetch('/jatvet/?comprobar='+Date.now(),{cache:'no-store'});
+      if(!entry.ok)throw Error('No se pudo consultar la nueva publicación');
+      const html=await entry.text();
+      const installer=html.match(/<script[^>]+src=["']([^"']*\/install\.js[^"']*)["']/);
+      if(!installer)throw Error('La publicación no incluye el instalador');
+      const script=await fetch(new URL(installer[1],location.origin),{cache:'no-store'});
+      if(!script.ok)throw Error('No se pudo consultar el instalador nuevo');
+      const source=await script.text();
+      const version=source.match(/const runningVersion\s*=\s*['"]([^'"]+)['"]/);
+      if(!version||version[1]!==availableVersion)throw Error('La nueva versión todavía no está publicada completamente');
+      if('serviceWorker' in navigator){
+        const registration=await navigator.serviceWorker.getRegistration('/jatvet/');
+        if(registration)await registration.update();
+      }
+      const url=new URL(location.href);
+      url.searchParams.delete('jatvet_prueba_actualizacion');
+      url.searchParams.set('actualizado',String(Date.now()));
+      location.replace(url.href);
+    }catch(err){
+      description.textContent='No se pudo confirmar la actualización. Tus datos no se modificaron. Probá más tarde.';
+      update.disabled=false;
+      update.textContent='Reintentar';
+      console.warn('JAT Vet: actualización no confirmada',err);
+    }
   });
   async function check(){
     if(document.hidden)return;
@@ -40,10 +64,9 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js',{scop
       const response=await fetch('/jatvet/version.json?check='+Date.now(),{cache:'no-store'});
       if(!response.ok)return;
       const info=await response.json();
-      if(!info||typeof info.version!=='string')return;
-      // Prueba manual aislada: no modifica version.json ni afecta a otros usuarios.
-      if(new URL(location.href).searchParams.get('jatvet_prueba_actualizacion')==='1') info.version='4.1.0-prueba';
-      if(info.version===runningVersion||info.version===dismissedVersion){notice.style.display='none';return;}
+      if(!info||typeof info.version!=='string'||!/^\d+\.\d+\.\d+$/.test(info.version))return;
+      const compare=(a,b)=>{const x=a.split('.').map(Number),y=b.split('.').map(Number);for(let i=0;i<3;i++){if(x[i]!==y[i])return x[i]-y[i];}return 0;};
+      if(compare(info.version,runningVersion)<=0||info.version===dismissedVersion){notice.style.display='none';return;}
       availableVersion=info.version;
       mount();
       description.textContent='JAT Vet '+info.version+' disponible. Guardá los cambios antes de actualizar.';

@@ -1,0 +1,32 @@
+name: Probar actualización JAT Vet en navegador
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/probar-actualizacion-navegador.mjs'
+      - '.github/workflows/probar-actualizacion-navegador.yml'
+      - 'install.js'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  navegador:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar navegador de prueba
+        run: |
+          mkdir -p /tmp/jatvet-qa
+          cd /tmp/jatvet-qa
+          npm init -y
+          npm install playwright
+          npx playwright install --with-deps chromium
+          echo "NODE_PATH=/tmp/jatvet-qa/node_modules" >> "$GITHUB_ENV"
+      - name: Ejecutar prueba de actualización en Chromium
+        run: |
+          cp scripts/probar-actualizacion-navegador.mjs /tmp/jatvet-qa/probar.mjs
+          cp install.js /tmp/jatvet-qa/install.js
+          node /tmp/jatvet-qa/probar.mjs
