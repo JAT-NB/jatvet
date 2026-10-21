@@ -40,3 +40,6 @@ OBSERVACIÓN (2): código legacy persiste datos con localStorage.setItem(KEY); S
 
 ## Evidencia manual reportada — 2026-10-21
 El propietario confirmó que publicó las reglas Firestore con `access(uid)` exigiendo existencia del perfil y `enabled == true`, y que pudo ingresar con las cuentas propias y de Verónica, visualizando los datos habituales en ambas. Resultado: PASS de regresión manual de acceso de dos cuentas, basado en reporte del usuario. No implica validación de denegación cross-tenant ni inspección independiente de las reglas efectivamente desplegadas.
+
+## Evidencia manual adicional — aislamiento visual
+El propietario confirmó que al alternar entre su cuenta y la de Verónica cada uno visualiza únicamente sus propias mascotas, turnos y movimientos. PASS de segregación funcional visual (declaración del usuario). PENDIENTE prueba negativa directa de reglas Firestore con identidad A intentando leer/escribir workspace B.
