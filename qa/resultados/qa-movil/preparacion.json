@@ -1,0 +1,28 @@
+{
+  "branch": "fix/qa-seguridad-recuperacion-2026-10-21",
+  "base_commit": "d5582a94d7c9c06e0367871a4e7afaebfefffd1a",
+  "project": "jatvet-qa-movil-261022-a7c4",
+  "site": "jatvet-qa-movil-261022-a7c4",
+  "remote_created": false,
+  "deployments": 0,
+  "public_url_verified": false,
+  "physical_devices_tested": false,
+  "remote_blocker": {
+    "command": "firebase projects:list --json --non-interactive",
+    "exit_code": 2,
+    "message": "Failed to authenticate, have you run firebase login?"
+  },
+  "executed_local_checks": {
+    "synthetic_M1_build": "PASS",
+    "synthetic_M2_build": "PASS",
+    "reject_foreign_project": "PASS",
+    "reject_foreign_bucket": "PASS",
+    "reject_inconsistent_app_id": "PASS",
+    "no_existing_project_id_in_both_artifacts": "PASS",
+    "node_syntax_candidate_sdk_and_session": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "generator_sha256": "6f62a128ba31ab7f701704923374488385b8f25358ce84e724a981ebb32ea127",
+  "certification_counts_changed": false,
+  "note": "Synthetic config only; these checks do not certify remote operation or device installation."
+}
