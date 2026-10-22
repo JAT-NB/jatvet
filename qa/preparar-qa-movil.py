@@ -33,7 +33,7 @@ def build(config_path, output, version):
     if output == ROOT or ROOT in output.parents:
         raise ValueError('La salida debe estar fuera del repositorio')
     files = {f'jatvet/v4/{name}': (ROOT / 'v4' / name).read_bytes() for name in [
-        'index.html', 'app-session.js', 'sw.js', 'install.js', 'manifest.webmanifest',
+        'index.html', 'version.json', 'app-session.js', 'sw.js', 'install.js', 'manifest.webmanifest',
         'icon-192.png', 'icon-512.png', 'apple-touch-icon.png', 'login-pets.svg', 'login-logo.svg']}
     for name in ['v4-backup-restauracion-20261019.js', 'repository-CdXTqB56.js', 'repository-CQZTQ0JS.css']:
         files['jatvet/assets/' + name] = (ROOT / 'assets' / name).read_bytes()
@@ -52,7 +52,7 @@ def build(config_path, output, version):
     for name in list(files):
         if name.endswith(('.js', '.html')):
             text = files[name].decode().replace('jat-vet-pruebas', PROJECT)
-            text = text.replace('qa-recovery-20261021', version).replace('v4-network-offline-20261021', version)
+            text = text.replace('v4.0.2-rc1', version).replace('v4.0.2-rc1', version)
             if name.endswith('index.html'):
                 text = text.replace('<title>JAT Vet</title>', '<title>JAT Vet QA móvil · ' + version + '</title>')
                 text = text.replace('🐾</span> JAT Vet</h1>', '🐾</span> JAT Vet QA móvil</h1>')

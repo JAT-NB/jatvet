@@ -6,6 +6,8 @@ permissions:
   id-token: write
 jobs:
   publicar:
+    # Bloqueado: reconstruye otra rama; usar artefacto 4.0.2 revisado tras autorización.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:

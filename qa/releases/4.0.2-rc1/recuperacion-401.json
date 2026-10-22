@@ -1,0 +1,12 @@
+{
+  "4.0.1-corregida": {
+    "commit": "3d1b1b16f3c9fe56a45bb14da0579912a040ae6f",
+    "archive": "/workspace/release-artifacts/4.0.1-corregida.tar.gz",
+    "sha256": "bf7d8dd4146d39940683856107e06a015d489e0f5fe7854a0611f9ef7d522f0b"
+  },
+  "4.0.1-main-referencia": {
+    "commit": "c1547865e276efdd0e98d8779bc58544b7c86f76",
+    "archive": "/workspace/release-artifacts/4.0.1-main-referencia.tar.gz",
+    "sha256": "999cddb0e4d96192e0836535f2c25ef565664de9cb215fcbbe7150124a01c573"
+  }
+}

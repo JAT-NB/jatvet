@@ -1,6 +1,6 @@
 {
   "id": "/jatvet/v4/",
-  "name": "JAT Vet",
+  "name": "JAT Vet 4.0.2",
   "short_name": "JAT Vet",
   "lang": "es",
   "start_url": "/jatvet/v4/",
@@ -20,5 +20,6 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "version": "4.0.2"
 }

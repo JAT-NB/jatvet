@@ -1,5 +1,5 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');const {chromium}=require('playwright');
-const root=path.resolve(__dirname,'../..'),out=path.resolve(__dirname,'../resultados/correcciones'),project='jat-vet-pruebas',authHost='http://127.0.0.1:9299',firestoreHost='http://127.0.0.1:8180';
+const root=path.resolve(__dirname,'../..'),out=path.resolve(__dirname,'../resultados/4.0.2-rc1'),project='jat-vet-pruebas',authHost='http://127.0.0.1:9299',firestoreHost='http://127.0.0.1:8180';
 let browser,server;const results=[],externalBlocked=[],downloads=[],downloadWrites=[];let downloadIndex=0;
 const record=(id,title,status,extra={})=>{results.push({id,title,status,...extra});fs.writeFileSync(path.join(out,'navegador-integrado.json'),JSON.stringify({timestamp:new Date().toISOString(),scope:'App compilada real; Auth 9299 y Firestore 8180 locales; Reglas propuestas y aplicación corregida. Auth 9299 y REST Firestore 8180 nativos en modo emulador; sin redirecciones hacia Firebase. No hay solicitudes productivas.',externalBlocked:[...new Set(externalBlocked)],downloads,results},null,2));console.log(status,id,title,extra.error||'')};
 const jsonField=v=>typeof v==='boolean'?{booleanValue:v}:typeof v==='number'?{integerValue:String(v)}:{stringValue:String(v)};

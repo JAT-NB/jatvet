@@ -6,7 +6,7 @@ assert(!install.includes("setInterval("),'No se debe consultar versiones durante
 assert(!html.includes("piloto-nico-402.js"),'No cargar piloto fallido');
 assert(!html.includes("nicoRiverBadge"),'No cargar codigo del badge roto');
 assert(install.includes("registration.update()"),'Debe verificar service worker al reabrir');
-assert(sw.includes("event.request.mode==='navigate'"),'Las navegaciones deben ir a la red');
-assert(sw.includes("fetch(event.request)"),'Las navegaciones deben cargar el HTML publicado');
+assert(sw.includes("event.request.mode!=='navigate'"),'Las navegaciones deben ir a la red');
+assert(sw.includes("fetch(new Request(event.request,{cache:'no-store'}))"),'Las navegaciones deben cargar el HTML publicado');
 assert.equal(manifest.start_url,'/jatvet/');
 console.log('PASS: 8 comprobaciones estaticas de actualizacion silenciosa');

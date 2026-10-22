@@ -1,0 +1,30 @@
+// Verifica actualización real de SW en Chromium local; no sustituye celulares físicos.
+const fs=require('fs'),path=require('path'),http=require('http'),assert=require('assert/strict');
+const {execFileSync}=require('child_process'),{chromium}=require('playwright');
+const root=path.resolve(__dirname,'..'),out=path.join(__dirname,'resultados/4.0.2-rc1');
+let phase=1,browser,server;
+(async()=>{try{
+ const old=execFileSync('git',['show','3d1b1b1:v4/sw.js'],{cwd:root});
+ server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local');if(u.pathname==='/install-fixture'){res.setHeader('Content-Type','text/html');return res.end('<!doctype html><button id="installApp" hidden>Instalar app</button><script src="/jatvet/v4/install.js"></script>')}const file=path.resolve(root,'.'+u.pathname.replace(/^\/jatvet/,'')+(u.pathname.endsWith('/')?'index.html':''));if(!file.startsWith(root+'/'))return res.writeHead(403).end();
+  try{res.setHeader('Cache-Control','no-store');res.setHeader('Content-Type',file.endsWith('.js')?'text/javascript':file.endsWith('.html')?'text/html':file.endsWith('.webmanifest')?'application/manifest+json':file.endsWith('.json')?'application/json':'application/octet-stream');res.end(phase===1&&u.pathname.endsWith('/sw.js')?old:fs.readFileSync(file))}catch{res.writeHead(404).end()}});
+ await new Promise(r=>server.listen(8771,'127.0.0.1',r));browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox']});
+ const c=await browser.newContext();await c.route('**/*',r=>new URL(r.request().url()).hostname==='127.0.0.1'?r.continue():r.abort());const p=await c.newPage();
+ await p.goto('http://127.0.0.1:8771/jatvet/v4/');
+ await p.evaluate(async()=>{await navigator.serviceWorker.ready;if(!navigator.serviceWorker.controller)await new Promise(r=>navigator.serviceWorker.addEventListener('controllerchange',r,{once:true}))});
+ await p.locator('#email').fill('pendiente-ficticio@example.test');let navigations=0;p.on('framenavigated',f=>{if(f===p.mainFrame())navigations++});phase=2;
+ await p.evaluate(async()=>{window.swChanged=false;navigator.serviceWorker.addEventListener('controllerchange',()=>window.swChanged=true);const r=await navigator.serviceWorker.getRegistration();await r.update()});
+ await p.waitForFunction(()=>window.swChanged);assert.equal(navigations,0);assert.equal(await p.locator('#email').inputValue(),'pendiente-ficticio@example.test');
+ await p.reload();assert.match(await p.locator('#jatVersionLabel').textContent(),/4\.0\.2/);
+ const manifest=await (await c.request.get('http://127.0.0.1:8771/jatvet/v4/manifest.webmanifest')).json();assert.equal(manifest.version,'4.0.2');assert.equal(manifest.id,'/jatvet/v4/');assert.equal(manifest.scope,'/jatvet/v4/');
+ for(const icon of manifest.icons)assert.equal((await c.request.get(new URL(icon.src,'http://127.0.0.1:8771/jatvet/v4/').href)).status(),200);
+ const install=fs.readFileSync(path.join(root,'v4/install.js'),'utf8');assert(install.includes('beforeinstallprompt')&&install.includes('Agregar a pantalla de inicio')&&install.includes('registration.update()'));
+ // Fixture del control de instalación con install.js real: no simula autenticación ni instalación nativa.
+ await p.goto('http://127.0.0.1:8771/install-fixture');
+ await p.evaluate(()=>{const event=new Event('beforeinstallprompt',{cancelable:true});event.prompt=async()=>{window.promptCalled=true};event.userChoice=Promise.resolve({outcome:'accepted'});window.dispatchEvent(event)});
+ await p.locator('#installApp').waitFor({state:'visible'});await p.locator('#installApp').click();assert(await p.evaluate(()=>window.promptCalled));
+ await p.evaluate(()=>window.dispatchEvent(new Event('appinstalled')));assert(await p.locator('#installApp').isHidden());
+ const ios=await browser.newContext({userAgent:'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Version/18.0 Mobile/15E148 Safari/604.1'});await ios.route('**/*',r=>new URL(r.request().url()).hostname==='127.0.0.1'?r.continue():r.abort());const iphone=await ios.newPage();let instruction='';iphone.on('dialog',async d=>{instruction=d.message();await d.accept()});await iphone.goto('http://127.0.0.1:8771/install-fixture');await iphone.locator('#installApp').click();assert.match(instruction,/Safari.*Compartir.*Agregar/);await ios.close();
+ const rootContext=await browser.newContext();await rootContext.route('**/*',r=>new URL(r.request().url()).hostname==='127.0.0.1'?r.continue():r.abort());const rootPage=await rootContext.newPage();await rootPage.goto('http://127.0.0.1:8771/jatvet/');await rootPage.evaluate(async()=>{await navigator.serviceWorker.ready;if(!navigator.serviceWorker.controller)await new Promise(r=>navigator.serviceWorker.addEventListener('controllerchange',r,{once:true}))});await rootContext.setOffline(true);assert.equal((await rootPage.reload()).status(),503);assert(await rootPage.getByRole('heading',{name:'Sin conexión'}).isVisible());await rootContext.setOffline(false);await rootPage.getByRole('button',{name:'Reintentar'}).click();await rootPage.locator('#login').waitFor({state:'visible'});await rootContext.close();
+ const result={timestamp:new Date().toISOString(),status:'PASS',checks:['SW 4.0.1 → 4.0.2 cambia controlador real','Sin recarga automática ni pérdida del formulario durante update','Reapertura muestra 4.0.2','Manifiesto conserva identidad y scope; iconos HTTP 200','beforeinstallprompt sintético invoca prompt y appinstalled oculta botón','User-Agent iPhone muestra instrucciones Safari','Entrada raíz reutiliza pantalla offline aprobada y Reintentar vuelve al login'],limits:'Instalación y actualización nativas en Android/iPhone siguen BLOQUEADAS. Eventos/UA simulados no prueban instalación nativa. No se certifica HTTPS remoto.'};
+ fs.writeFileSync(path.join(out,'pwa-402.json'),JSON.stringify(result,null,2));console.log(result);
+ }finally{await browser?.close();await new Promise(r=>server?server.close(r):r())}})().catch(e=>{console.error(e);fs.writeFileSync(path.join(out,'pwa-402.json'),JSON.stringify({status:'FAIL',error:e.stack},null,2));process.exitCode=1});

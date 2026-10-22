@@ -1,5 +1,5 @@
 /* JAT Vet v4 — navegaciones desde red, sin cachear datos clínicos. */
-const SW_VERSION='v4-network-offline-20261021';
+const SW_VERSION='v4.0.2-rc1';
 self.addEventListener('install',()=>self.skipWaiting());
 self.addEventListener('activate',event=>event.waitUntil(self.clients.claim()));
 self.addEventListener('fetch',event=>{

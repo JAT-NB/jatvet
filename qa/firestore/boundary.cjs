@@ -27,6 +27,6 @@ async function main(){
   }catch(e){results.push({id:'EXP-19',title:'Admin vencido no accede ni elimina su vencimiento',status:'FAIL',error:e.stack})}
   finally{await restored.cleanup()}
  }
- fs.writeFileSync(path.resolve(__dirname,'../resultados/correcciones/expiry-boundary.json'),JSON.stringify({timestamp:new Date().toISOString(),scope:'Helper exacto extraído de reglas propuestas, invocado con instantes deterministas en reglas temporales de prueba; reglas propuestas completas restauradas al finalizar.',results},null,2));for(const r of results)console.log(r.status,r.id,r.title);process.exitCode=results.some(r=>r.status==='FAIL')?1:0;
+ fs.writeFileSync(path.resolve(__dirname,'../resultados/4.0.2-rc1/expiry-boundary.json'),JSON.stringify({timestamp:new Date().toISOString(),scope:'Helper exacto extraído de reglas propuestas, invocado con instantes deterministas en reglas temporales de prueba; reglas propuestas completas restauradas al finalizar.',results},null,2));for(const r of results)console.log(r.status,r.id,r.title);process.exitCode=results.some(r=>r.status==='FAIL')?1:0;
 }
 main().catch(e=>{console.error(e);process.exitCode=2});

@@ -1,7 +1,7 @@
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const {initializeTestEnvironment}=require('@firebase/rules-unit-testing');
 const {doc,setDoc,getDoc}=require('firebase/firestore');
-const out=path.resolve(__dirname,'../resultados/correcciones/expiry-cases.json');
+const out=path.resolve(__dirname,'../resultados/4.0.2-rc1/expiry-cases.json');
 async function main(){
  const env=await initializeTestEnvironment({projectId:'jat-vet-pruebas',firestore:{host:'127.0.0.1',port:8180,rules:fs.readFileSync(path.join(__dirname,'firestore.proposed.rules'),'utf8')}});
  const {repository}=await import('./repository.mjs'),{emptyData}=await import('./data.mjs');

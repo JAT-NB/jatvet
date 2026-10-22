@@ -9,6 +9,8 @@ permissions:
   contents: write
 jobs:
   publicar:
+    # Bloqueado: reconstruye otra rama; usar artefacto 4.0.2 revisado tras autorización.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - name: Obtener rama de desarrollo

@@ -8,7 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 QA = ROOT / "qa"
-OUT = QA / "resultados/correcciones"
+OUT = QA / "resultados/4.0.2-rc1"
 
 with (QA / "historico/matriz-85-casos.csv").open() as file:
     rows = {row["id"]: row for row in csv.DictReader(file)}
