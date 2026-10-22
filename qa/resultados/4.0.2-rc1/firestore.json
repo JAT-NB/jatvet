@@ -1,0 +1,91 @@
+{
+  "timestamp": "2026-10-22T01:42:22.007Z",
+  "project": "jat-vet-pruebas",
+  "host": "127.0.0.1:8180",
+  "baseRules": {
+    "repository": "JAT-NB/jatvet",
+    "ref": "desarrollo-v4-firebase",
+    "commit": "11c3fc89e727a72e4004a0fbd79586dfff024d4d",
+    "rules_last_commit": null,
+    "rules_sha256": "6dac84f09a73458c96e56afc93f1ef20c14614f20e3836cc259a255fe1733cba",
+    "files": {
+      "firestore.rules": "Texto completo aportado por el usuario en esta conversación, sin cambios de lógica",
+      "repository.mjs": "v4/repository.js: solo import data.js a data.mjs y loader createRequire para compartir SDK CJS con rules-unit-testing; lógica intacta",
+      "data.mjs": "v4/data.js, copia exacta"
+    },
+    "deployed_rules_match": "Usuario confirma copia íntegra de Firestore → Reglas de jat-vet-pruebas; sin lectura administrativa independiente",
+    "source": "Firestore Console — user supplied",
+    "emulator": {
+      "distribution": "Google Cloud CLI emulators, registro oficial gcr.io",
+      "image": "gcr.io/google.com/cloudsdktool/google-cloud-cli@sha256:ba2726407ae3654d11ffdcd2eff74879f46c2ce805a8caa554d690afb615e433",
+      "version": "1.22.0",
+      "jar_sha256": "6262939c48d3d6b08495931706b8920399e57d5f5918e6af133a3d30cb3ae369",
+      "tls_verified": true,
+      "image_layers_digest_verified": true,
+      "launcher": "bash /workspace/qa-tools/firestore-official/cloud_firestore_emulator"
+    }
+  },
+  "candidateRules": {
+    "path": "qa/firestore/firestore.proposed.rules",
+    "sha256": "181374298bc0b9b7b23c56027467f45128fb203b9c78eb0ae68c29286c53d62d",
+    "deployed": false
+  },
+  "scope": "Reglas PROPUESTAS de esta rama cargadas solo en emulador, basadas en copia actual del usuario. No desplegadas.",
+  "results": [
+    {
+      "id": "SEC-01",
+      "title": "Lecturas A/B y anónimo denegadas",
+      "status": "PASS"
+    },
+    {
+      "id": "SEC-02",
+      "title": "Escrituras A/B denegadas",
+      "status": "PASS"
+    },
+    {
+      "id": "SEC-03",
+      "title": "Perfiles y permisos administrativos",
+      "status": "PASS"
+    },
+    {
+      "id": "SEC-04",
+      "title": "Perfil habilitado, suspendido y ausente",
+      "status": "PASS"
+    },
+    {
+      "id": "SEC-05",
+      "title": "Suscripción vencida debe impedir lectura y escritura",
+      "status": "PASS"
+    },
+    {
+      "id": "SEC-06",
+      "title": "Validación de esquema y accesos con reglas actuales",
+      "status": "PASS"
+    },
+    {
+      "id": "SEC-07",
+      "title": "Chunks, getAfter y revisión atómica",
+      "status": "PASS"
+    },
+    {
+      "id": "DATA-01",
+      "title": "Persistencia de revisión y datos entre clientes",
+      "status": "PASS"
+    },
+    {
+      "id": "DATA-03",
+      "title": "Concurrencia real y listener de segunda sesión",
+      "status": "PASS"
+    },
+    {
+      "id": "DATA-05",
+      "title": "Backup, restauración integral y reversión",
+      "status": "PASS"
+    },
+    {
+      "id": "DATA-06",
+      "title": "Fotos y adjuntos intactos tras reabrir repositorio",
+      "status": "PASS"
+    }
+  ]
+}

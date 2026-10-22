@@ -1,0 +1,94 @@
+{
+  "pets": [
+    {
+      "id": "f2a27848-2cf7-429b-9695-afeedc36892a",
+      "pet": "QA Canino",
+      "species": "Perro",
+      "breed": "",
+      "age": "",
+      "owner": "Titular ficticio",
+      "phone": "000000",
+      "address": "Calle QA 123",
+      "weight": "",
+      "allergies": "",
+      "history": "",
+      "notes": ""
+    }
+  ],
+  "turns": [
+    {
+      "id": "5dc64787-c946-45d0-86ab-eb5ae6ddeeda",
+      "date": "2026-10-21",
+      "time": "09:00",
+      "petId": "f2a27848-2cf7-429b-9695-afeedc36892a",
+      "serviceId": "70ac9563-248c-4dbf-908b-4437b5b94b68",
+      "status": "Realizado",
+      "price": "1200",
+      "notes": "",
+      "completedAt": "2026-10-22T01:43:03.765Z"
+    },
+    {
+      "id": "a04dfa6c-e75b-42ce-822c-dd5ac90ba3c9",
+      "date": "2026-10-21",
+      "time": "09:30",
+      "petId": "f2a27848-2cf7-429b-9695-afeedc36892a",
+      "serviceId": "70ac9563-248c-4dbf-908b-4437b5b94b68",
+      "status": "Pendiente",
+      "price": "1200",
+      "notes": ""
+    }
+  ],
+  "procedures": [],
+  "services": [
+    {
+      "id": "70ac9563-248c-4dbf-908b-4437b5b94b68",
+      "name": "Consulta QA",
+      "price": "1200"
+    }
+  ],
+  "money": [
+    {
+      "id": "turn-income-5dc64787-c946-45d0-86ab-eb5ae6ddeeda",
+      "turnId": "5dc64787-c946-45d0-86ab-eb5ae6ddeeda",
+      "automatic": true,
+      "date": "2026-10-21",
+      "kind": "Ingreso",
+      "amount": 1200,
+      "concept": "Turno realizado · Consulta QA",
+      "method": "No especificado",
+      "petId": "f2a27848-2cf7-429b-9695-afeedc36892a",
+      "notes": "Ingreso automático generado desde Turnos"
+    },
+    {
+      "id": "912b42c3-0b0b-4b82-a3ab-3e589b0fd151",
+      "date": "2026-10-21",
+      "kind": "Ingreso",
+      "amount": "500",
+      "concept": "QA ingreso",
+      "method": "Transferencia",
+      "petId": "",
+      "notes": ""
+    },
+    {
+      "id": "0482ce06-b50e-474f-9a6f-f0b9ab671835",
+      "date": "2026-10-21",
+      "kind": "Gasto",
+      "amount": "200",
+      "concept": "QA gasto",
+      "method": "Transferencia",
+      "petId": "",
+      "notes": ""
+    }
+  ],
+  "studies": [],
+  "vaccinations": [],
+  "audit": [
+    {
+      "id": "af887998-523b-476d-80c5-49f42295dcbe",
+      "turnId": "5dc64787-c946-45d0-86ab-eb5ae6ddeeda",
+      "action": "REALIZADO",
+      "details": "Cobro confirmado por $ 1.200",
+      "dateTime": "2026-10-22T01:43:03.765Z"
+    }
+  ]
+}

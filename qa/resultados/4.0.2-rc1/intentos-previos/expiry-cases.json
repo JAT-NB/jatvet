@@ -1,0 +1,165 @@
+{
+  "timestamp": "2026-10-22T01:34:27.689Z",
+  "todayArgentina": "2026-10-21",
+  "policy": "ISO, día inclusivo Argentina UTC-03; ausencia/vacío compatible; inválido denegado",
+  "rules": "firestore.proposed.rules",
+  "results": [
+    {
+      "id": "EXP-01",
+      "title": "Perfil legacy sin expiry",
+      "status": "PASS",
+      "allowed": true,
+      "profile": {
+        "enabled": true,
+        "label": "QA ficticio"
+      }
+    },
+    {
+      "id": "EXP-02",
+      "title": "Expiry vacío",
+      "status": "PASS",
+      "allowed": true,
+      "profile": {
+        "enabled": true,
+        "label": "QA ficticio",
+        "expiry": ""
+      }
+    },
+    {
+      "id": "EXP-03",
+      "title": "Ayer vencido",
+      "status": "PASS",
+      "allowed": false,
+      "profile": {
+        "enabled": true,
+        "label": "QA ficticio",
+        "expiry": "2026-10-20"
+      }
+    },
+    {
+      "id": "EXP-04",
+      "title": "Hoy sigue vigente hasta fin del día argentino",
+      "status": "PASS",
+      "allowed": true,
+      "profile": {
+        "enabled": true,
+        "label": "QA ficticio",
+        "expiry": "2026-10-21"
+      }
+    },
+    {
+      "id": "EXP-05",
+      "title": "Mañana vigente",
+      "status": "PASS",
+      "allowed": true,
+      "profile": {
+        "enabled": true,
+        "label": "QA ficticio",
+        "expiry": "2026-10-22"
+      }
+    },
+    {
+      "id": "EXP-06",
+      "title": "Día inexistente",
+      "status": "PASS",
+      "allowed": false,
+      "profile": {
+        "enabled": true,
+        "label": "QA ficticio",
+        "expiry": "2026-02-30"
+      }
+    },
+    {
+      "id": "EXP-07",
+      "title": "Formato no ISO",
+      "status": "PASS",
+      "allowed": false,
+      "profile": {
+        "enabled": true,
+        "label": "QA ficticio",
+        "expiry": "21/10/2099"
+      }
+    },
+    {
+      "id": "EXP-08",
+      "title": "Bisiesto válido futuro",
+      "status": "PASS",
+      "allowed": true,
+      "profile": {
+        "enabled": true,
+        "label": "QA ficticio",
+        "expiry": "2096-02-29"
+      }
+    },
+    {
+      "id": "EXP-09",
+      "title": "Bisiesto inválido",
+      "status": "PASS",
+      "allowed": false,
+      "profile": {
+        "enabled": true,
+        "label": "QA ficticio",
+        "expiry": "2099-02-29"
+      }
+    },
+    {
+      "id": "EXP-10",
+      "title": "Tipo inválido legacy",
+      "status": "PASS",
+      "allowed": false,
+      "profile": {
+        "enabled": true,
+        "label": "QA ficticio",
+        "expiry": 42
+      }
+    },
+    {
+      "id": "EXP-11",
+      "title": "Suspendido con fecha futura",
+      "status": "PASS",
+      "allowed": false,
+      "profile": {
+        "enabled": false,
+        "label": "QA ficticio",
+        "expiry": "2099-12-31"
+      }
+    },
+    {
+      "id": "EXP-12",
+      "title": "Suspendido sin vencimiento",
+      "status": "PASS",
+      "allowed": false,
+      "profile": {
+        "enabled": false,
+        "label": "QA ficticio"
+      }
+    },
+    {
+      "id": "EXP-13",
+      "title": "Mes inexistente",
+      "status": "PASS",
+      "allowed": false,
+      "profile": {
+        "enabled": true,
+        "label": "QA ficticio",
+        "expiry": "2099-13-01"
+      }
+    },
+    {
+      "id": "EXP-14",
+      "title": "Fecha vacía parcial",
+      "status": "PASS",
+      "allowed": false,
+      "profile": {
+        "enabled": true,
+        "label": "QA ficticio",
+        "expiry": "2099-01-"
+      }
+    },
+    {
+      "id": "EXP-15",
+      "title": "Admin suspendido no accede ni se reactiva",
+      "status": "PASS"
+    }
+  ]
+}

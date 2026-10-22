@@ -1,0 +1,50 @@
+{
+  "before": {
+    "pets": [
+      {
+        "id": "original",
+        "pet": "Original ficticio"
+      }
+    ],
+    "turns": [],
+    "procedures": [],
+    "services": [],
+    "money": [],
+    "studies": [],
+    "vaccinations": [],
+    "audit": []
+  },
+  "planned": {
+    "counts": {
+      "pets": 2,
+      "turns": 1,
+      "procedures": 0,
+      "services": 1,
+      "money": 1,
+      "studies": 1,
+      "vaccinations": 1,
+      "audit": 0
+    },
+    "income": 1200,
+    "expense": 0,
+    "photos": 1,
+    "attachments": 1
+  },
+  "reverted": {
+    "counts": {
+      "pets": 1,
+      "turns": 0,
+      "procedures": 0,
+      "services": 0,
+      "money": 0,
+      "studies": 0,
+      "vaccinations": 0,
+      "audit": 0
+    },
+    "income": 0,
+    "expense": 0,
+    "photos": 0,
+    "attachments": 0
+  },
+  "revision": 3
+}

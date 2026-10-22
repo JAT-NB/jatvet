@@ -1,3 +1,7 @@
+# Candidata actual: JAT Vet 4.0.2 RC1
+
+Código congelado `a1cccbcc6393356834126c0eec6052e42e9097fe`. Informe actual: `INFORME-CERTIFICACION.md`; plan de publicación y prueba física: `releases/4.0.2-rc1/PLAN-PUBLICACION.md`. Regresión: `python3 qa/regresion-402.py` y después `python3 qa/consolidar-correcciones.py`, con emuladores locales iniciados. Evidencia nueva: `resultados/4.0.2-rc1/`. Las siguientes secciones conservan antecedentes 4.0.1. No desplegar ni ejecutar workflows históricos.
+
 ## Correcciones actuales para revisión
 
 Rama `fix/qa-seguridad-recuperacion-2026-10-21`: **109 casos, 105 PASS, 0 FAIL, 4 BLOQUEADOS**. Reglas propuestas y código corregido sin publicación. Ver [informe](INFORME-CERTIFICACION.md), [criterios aprobados](CRITERIOS-ACEPTACION.md) y [despliegue futuro](DESPLIEGUE-SEGURO.md). Los apartados siguientes conservan antecedentes históricos y no reemplazan el informe actual.

@@ -1,0 +1,25 @@
+{
+  "pets": [
+    {
+      "id": "32a93856-e4f7-4758-bc40-d57e5950f600",
+      "pet": "QA Persistente",
+      "species": "Perro",
+      "breed": "",
+      "age": "",
+      "owner": "Titular Ficticio",
+      "phone": "",
+      "address": "",
+      "weight": "",
+      "allergies": "",
+      "history": "",
+      "notes": ""
+    }
+  ],
+  "turns": [],
+  "procedures": [],
+  "services": [],
+  "money": [],
+  "studies": [],
+  "vaccinations": [],
+  "audit": []
+}

@@ -1,0 +1,20 @@
+{
+  id: 'OFFLINE-UX-01',
+  title: 'SW real entrega pantalla accesible de desconexión con HTTP 503',
+  status: 'PASS'
+}
+{
+  id: 'OFFLINE-SEC-01',
+  title: 'Pantalla offline no expone fichas ni guarda caches clínicas',
+  status: 'PASS'
+}
+{
+  id: 'PWA-03',
+  title: 'Conexión obligatoria: sin operaciones clínicas offline',
+  status: 'PASS'
+}
+{
+  id: 'OFFLINE-REC-01',
+  title: 'Reintentar vuelve al login al recuperar conexión',
+  status: 'PASS'
+}

@@ -1,0 +1,13 @@
+{
+  "tested_commit": "a1cccbc",
+  "status": "PASS",
+  "checks": [
+    "Allowlist empaquetada completa con reglas fuera de public",
+    "SHA-256 de cada archivo cotejado",
+    "Referencias src/href locales de ambas entradas resueltas",
+    "Versión 4.0.2 consistente en JSON/manifiestos raíz y V4",
+    "Generador QA-M1 y QA-M2 con configuración sintética, sin ID de backend existente"
+  ],
+  "remote_deployed": false,
+  "limitations": "No prueba configuración registrada ni identidad Google; no reemplaza dispositivos físicos."
+}

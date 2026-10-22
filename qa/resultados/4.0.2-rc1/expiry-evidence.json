@@ -1,0 +1,8 @@
+{
+  "profile": {
+    "enabled": true,
+    "expiry": "2000-01-01"
+  },
+  "readAllowed": false,
+  "writeAllowed": false
+}

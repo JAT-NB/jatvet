@@ -1,0 +1,272 @@
+[
+  {
+    "id": "NAV-1",
+    "title": "Renderizar sección Inicio",
+    "status": "PASS"
+  },
+  {
+    "id": "NAV-2",
+    "title": "Renderizar sección Clientes y mascotas",
+    "status": "PASS"
+  },
+  {
+    "id": "NAV-3",
+    "title": "Renderizar sección Nuevo paciente",
+    "status": "PASS"
+  },
+  {
+    "id": "NAV-4",
+    "title": "Renderizar sección Turnos",
+    "status": "PASS"
+  },
+  {
+    "id": "NAV-5",
+    "title": "Renderizar sección Vacunación",
+    "status": "PASS"
+  },
+  {
+    "id": "NAV-6",
+    "title": "Renderizar sección Servicios",
+    "status": "PASS"
+  },
+  {
+    "id": "NAV-7",
+    "title": "Renderizar sección Caja",
+    "status": "PASS"
+  },
+  {
+    "id": "NAV-8",
+    "title": "Renderizar sección Informes",
+    "status": "PASS"
+  },
+  {
+    "id": "NAV-9",
+    "title": "Renderizar sección Cómo llegar",
+    "status": "PASS"
+  },
+  {
+    "id": "NAV-10",
+    "title": "Renderizar sección Respaldo",
+    "status": "PASS"
+  },
+  {
+    "id": "NAV-11",
+    "title": "Renderizar sección Manual",
+    "status": "PASS"
+  },
+  {
+    "id": "PET-01",
+    "title": "Campos obligatorios impiden alta vacía",
+    "status": "PASS"
+  },
+  {
+    "id": "PET-02",
+    "title": "Alta paciente y responsable ficticios",
+    "status": "PASS"
+  },
+  {
+    "id": "SRV-01",
+    "title": "Alta servicio",
+    "status": "PASS"
+  },
+  {
+    "id": "SRV-02",
+    "title": "Edición servicio",
+    "status": "PASS"
+  },
+  {
+    "id": "TURN-01",
+    "title": "Alta turno con relación paciente/servicio",
+    "status": "PASS"
+  },
+  {
+    "id": "TURN-02",
+    "title": "Intervalo 09:00",
+    "status": "PASS"
+  },
+  {
+    "id": "TURN-03",
+    "title": "Intervalo 09:29",
+    "status": "PASS"
+  },
+  {
+    "id": "TURN-04",
+    "title": "Intervalo 09:30",
+    "status": "PASS"
+  },
+  {
+    "id": "TURN-05",
+    "title": "Turno realizado genera un ingreso",
+    "status": "PASS"
+  },
+  {
+    "id": "TURN-06",
+    "title": "Sin duplicación al sincronizar ingresos",
+    "status": "PASS"
+  },
+  {
+    "id": "CASH-01",
+    "title": "Registro ingreso manual",
+    "status": "PASS"
+  },
+  {
+    "id": "CASH-02",
+    "title": "Registro egreso manual",
+    "status": "PASS"
+  },
+  {
+    "id": "REPORT-01",
+    "title": "Balance general consistente con movimientos",
+    "status": "PASS"
+  },
+  {
+    "id": "BKP-01",
+    "title": "Exportación JSON conserva colecciones y cantidades",
+    "status": "PASS"
+  },
+  {
+    "id": "BKP-02",
+    "title": "Validación y restauración aditiva conserva foto y adjunto",
+    "status": "PASS"
+  },
+  {
+    "id": "BKP-03",
+    "title": "Rechaza colección inválida",
+    "status": "PASS"
+  },
+  {
+    "id": "BKP-04",
+    "title": "Rechaza IDs duplicados",
+    "status": "PASS"
+  },
+  {
+    "id": "BKP-05",
+    "title": "Rechaza referencia huérfana",
+    "status": "PASS"
+  },
+  {
+    "id": "BKP-06",
+    "title": "Rechaza adjunto ejecutable",
+    "status": "PASS"
+  },
+  {
+    "id": "BKP-07",
+    "title": "Rechaza movimiento negativo",
+    "status": "PASS"
+  },
+  {
+    "id": "BKP-08",
+    "title": "Conflicto de IDs no sobrescribe original",
+    "status": "PASS"
+  },
+  {
+    "id": "BKP-09",
+    "title": "Importación idéntica no duplica registros",
+    "status": "PASS"
+  },
+  {
+    "id": "SEC-UI-01",
+    "title": "Iframe aislado y sin acceso al almacenamiento del padre",
+    "status": "PASS"
+  },
+  {
+    "id": "SEC-UI-02",
+    "title": "Nombre malicioso escapado al renderizar",
+    "status": "PASS"
+  },
+  {
+    "id": "PHOTO-01",
+    "title": "Agregar foto PNG desde selector real",
+    "status": "PASS"
+  },
+  {
+    "id": "PHOTO-02",
+    "title": "Foto incluida en guardado al padre",
+    "status": "PASS"
+  },
+  {
+    "id": "PHOTO-03",
+    "title": "Eliminar foto",
+    "status": "PASS"
+  },
+  {
+    "id": "PET-03",
+    "title": "Editar ficha paciente",
+    "status": "PASS"
+  },
+  {
+    "id": "CRUD-01",
+    "title": "Protege paciente asociado y elimina paciente sin relaciones",
+    "status": "PASS"
+  },
+  {
+    "id": "CRUD-02",
+    "title": "Alta y eliminación servicio sin relaciones",
+    "status": "PASS"
+  },
+  {
+    "id": "TURN-07",
+    "title": "Edición y eliminación de turno pendiente",
+    "status": "PASS"
+  },
+  {
+    "id": "TURN-08",
+    "title": "Corrección de realizado revierte ingreso y registra auditoría",
+    "status": "PASS"
+  },
+  {
+    "id": "VACC-01",
+    "title": "Alta edición vencimiento y eliminación vacuna con caja",
+    "status": "PASS"
+  },
+  {
+    "id": "REPORT-02",
+    "title": "Filtro diario mensual e histórico",
+    "status": "PASS"
+  },
+  {
+    "id": "UI-02",
+    "title": "Editor sin errores JavaScript no controlados",
+    "status": "PASS"
+  },
+  {
+    "id": "UI-03",
+    "title": "Inicio móvil sin desborde horizontal",
+    "status": "PASS"
+  },
+  {
+    "id": "PWA-01",
+    "title": "Manifiesto y recursos locales existentes",
+    "status": "PASS"
+  },
+  {
+    "id": "PWA-02",
+    "title": "Service Worker instalado con scope correcto",
+    "status": "PASS"
+  },
+  {
+    "id": "LOGIN-UI-01",
+    "title": "Pantalla de login visible",
+    "status": "PASS"
+  },
+  {
+    "id": "LOGIN-UI-02",
+    "title": "Mostrar y ocultar contraseña",
+    "status": "PASS"
+  },
+  {
+    "id": "LOGIN-UI-03",
+    "title": "Recuperación exige correo válido sin enviar solicitud",
+    "status": "PASS"
+  },
+  {
+    "id": "LOGIN-UI-04",
+    "title": "Recuerda correo precargado después de recarga",
+    "status": "PASS"
+  },
+  {
+    "id": "PWA-03",
+    "title": "Conexión obligatoria: pantalla offline sin operaciones clínicas",
+    "status": "PASS"
+  }
+]

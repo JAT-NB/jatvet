@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-10-22T01:45:44.513374+00:00",
+  "total": 109,
+  "version": "4.0.2-rc1",
+  "tested_commit": "a1cccbcc6393356834126c0eec6052e42e9097fe",
+  "counts": {
+    "PASS": 105,
+    "FAIL": 0,
+    "BLOQUEADA": 4
+  },
+  "executed_unique": 105,
+  "acceptance": "qa/CRITERIOS-ACEPTACION.md",
+  "production_changed": false,
+  "rules_deployed": false,
+  "verdict": "Correcciones listas para revisión; certificación comercial final pendiente de bloqueos externos"
+}

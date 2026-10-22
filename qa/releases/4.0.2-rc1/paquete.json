@@ -1,0 +1,6 @@
+{
+  "archive": "/workspace/release-artifacts/jatvet-4.0.2-rc1.tar.gz",
+  "sha256": "75b4f3a3770312376e9f085a5578a7a4886d941574479786be40ed9eeef11068",
+  "tested_code_commit": "a1cccbcc6393356834126c0eec6052e42e9097fe",
+  "deployed": false
+}

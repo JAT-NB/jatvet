@@ -1,0 +1,41 @@
+PASS SEC-01 Lecturas A/B y anónimo denegadas
+[2026-10-22T01:42:19.789Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x573b50e1 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L88, false for 'create' @ L117, false for 'update' @ L88, false for 'update' @ L117
+[2026-10-22T01:42:19.808Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x573b50e2 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L88, false for 'create' @ L117, false for 'update' @ L88, false for 'update' @ L117
+PASS SEC-02 Escrituras A/B denegadas
+[2026-10-22T01:42:19.843Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x573b50e3 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L63, false for 'create' @ L117, false for 'update' @ L63, false for 'update' @ L117
+[2026-10-22T01:42:19.857Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x573b50e4 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L63, false for 'create' @ L117, false for 'update' @ L63, false for 'update' @ L117
+[2026-10-22T01:42:19.952Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x573b50e6 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L63, false for 'create' @ L117, false for 'update' @ L63, false for 'update' @ L117
+[2026-10-22T01:42:19.983Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x573b50e7 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'delete' @ L82, false for 'delete' @ L117
+PASS SEC-03 Perfiles y permisos administrativos
+PASS SEC-04 Perfil habilitado, suspendido y ausente
+PASS SEC-05 Suscripción vencida debe impedir lectura y escritura
+[2026-10-22T01:42:20.810Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x573b50f2 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+evaluation error at L88:32 for 'create' @ L88, false for 'create' @ L117, evaluation error at L88:32 for 'update' @ L88, false for 'update' @ L117, false for 'update' @ L88, false for 'update' @ L117
+[2026-10-22T01:42:20.842Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x573b50f3 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L88, false for 'create' @ L117, false for 'update' @ L88, false for 'update' @ L117
+[2026-10-22T01:42:20.871Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x573b50f4 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L88, false for 'create' @ L117, false for 'update' @ L88, false for 'update' @ L117
+[2026-10-22T01:42:20.898Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x573b50f5 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L88, false for 'create' @ L117, false for 'update' @ L88, false for 'update' @ L117
+[2026-10-22T01:42:20.914Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x573b50f6 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L88, false for 'create' @ L117, false for 'update' @ L88, false for 'update' @ L117
+[2026-10-22T01:42:20.930Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x573b50f7 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'create' @ L117, false for 'update' @ L117
+[2026-10-22T01:42:20.948Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x573b50f8 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+false for 'delete' @ L98, false for 'delete' @ L117
+PASS SEC-06 Validación de esquema y accesos con reglas actuales
+[2026-10-22T01:42:21.016Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x573b50fa error. Code: 7 Message: 7 PERMISSION_DENIED: 
+evaluation error at L103:25 for 'create' @ L103, false for 'create' @ L117, evaluation error at L103:25 for 'update' @ L103, false for 'update' @ L117, Null value error. for 'create' @ L103, false for 'create' @ L117
+[2026-10-22T01:42:21.202Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x573b5102 error. Code: 7 Message: 7 PERMISSION_DENIED: 
+evaluation error at L103:25 for 'create' @ L103, false for 'create' @ L117, evaluation error at L103:25 for 'update' @ L103, false for 'update' @ L117, false for 'update' @ L103, false for 'update' @ L117
+PASS SEC-07 Chunks, getAfter y revisión atómica
+PASS DATA-01 Persistencia de revisión y datos entre clientes
+PASS DATA-03 Concurrencia real y listener de segunda sesión
+PASS DATA-05 Backup, restauración integral y reversión
+PASS DATA-06 Fotos y adjuntos intactos tras reabrir repositorio

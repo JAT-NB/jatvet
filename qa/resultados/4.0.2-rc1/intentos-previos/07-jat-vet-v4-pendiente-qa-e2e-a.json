@@ -1,0 +1,72 @@
+{
+  "pets": [
+    {
+      "id": "12d7ff25-0340-49fc-a24b-01781606cff6",
+      "pet": "QA Persistente",
+      "species": "Perro",
+      "breed": "",
+      "age": "",
+      "owner": "Titular Ficticio",
+      "phone": "",
+      "address": "",
+      "weight": "",
+      "allergies": "",
+      "history": "",
+      "notes": "Cambio de otra sesión"
+    },
+    {
+      "id": "qa-import-p",
+      "pet": "QA Importado",
+      "owner": "QA",
+      "photo": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCAACAAIDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AIyAD//Z"
+    },
+    {
+      "id": "261bda66-fcb1-4cef-93ff-7a94fa932ebe",
+      "pet": "QA SinRed",
+      "species": "Gato",
+      "breed": "",
+      "age": "",
+      "owner": "QA",
+      "phone": "",
+      "address": "",
+      "weight": "",
+      "allergies": "",
+      "history": "",
+      "notes": ""
+    },
+    {
+      "id": "d7030df8-6e79-4b8c-8d08-e1a962c56656",
+      "pet": "QA AuthRace A",
+      "species": "Perro",
+      "breed": "",
+      "age": "",
+      "owner": "QA",
+      "phone": "",
+      "address": "",
+      "weight": "",
+      "allergies": "",
+      "history": "",
+      "notes": ""
+    }
+  ],
+  "turns": [],
+  "procedures": [],
+  "services": [],
+  "money": [
+    {
+      "id": "qa-import-m",
+      "kind": "Ingreso",
+      "amount": 500,
+      "concept": "Ingreso sintético"
+    }
+  ],
+  "studies": [
+    {
+      "id": "qa-import-study",
+      "petId": "qa-import-p",
+      "file": "data:application/pdf;base64,JVBERi0xLjQKJSBmaWN0aWNpbwo="
+    }
+  ],
+  "vaccinations": [],
+  "audit": []
+}

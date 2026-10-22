@@ -1,0 +1,7 @@
+{
+  "revisionBefore": 3,
+  "revisionWhileDisconnected": 3,
+  "offlineMilliseconds": 13000,
+  "pendingDownloadVisible": true,
+  "clinicalWorkspaceVisible": false
+}

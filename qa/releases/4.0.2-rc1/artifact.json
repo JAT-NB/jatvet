@@ -1,0 +1,31 @@
+{
+  "version": "4.0.2",
+  "channel": "rc1",
+  "branch": "fix/qa-seguridad-recuperacion-2026-10-21",
+  "commit": "a1cccbcc6393356834126c0eec6052e42e9097fe",
+  "warning": "Backend original fijado en configuraci\u00f3n; para QA m\u00f3vil usar preparar-qa-movil.py y configuraci\u00f3n QA verificada. NO desplegar este paquete sin revisi\u00f3n de destino.",
+  "sha256": {
+    "private/firestore.proposed.rules": "181374298bc0b9b7b23c56027467f45128fb203b9c78eb0ae68c29286c53d62d",
+    "public/jatvet/version.json": "641d5c5339866c571faa572b290a18bf0e035a0cb4f568ae069b01983dea0def",
+    "public/jatvet/manifest.webmanifest": "0dde7ed555daac88fba55b69393d03ad8a723be805a10d175723286b8fa2401d",
+    "public/jatvet/sw.js": "5ed4219ff8fa1e34e73e5c661f8d97983c8b6d6e47a92a9b8bd5611881688ea9",
+    "public/jatvet/firebase-config.json": "7fb067d0e5df26d4b7c6bf36e02e398bd8a936d6a699df720343bdf2637f9d61",
+    "public/jatvet/index.html": "bc3acf5827ca087b1b01c9954b919ab1f088cb6ba93af71086a4978d73134296",
+    "public/jatvet/install.js": "c510e2a98970f97c65cffd135de03c8338d3bfe3d3613d913994757440d0335a",
+    "public/jatvet/assets/repository-CdXTqB56.js": "88b05ab6885bc25c73df1dde6765fc056c835401c553eb4b5402603e372710fc",
+    "public/jatvet/assets/v4-backup-restauracion-20261019.js": "222b1334c94f83c72e0b51dc08339a70332743061c2fda14b775ca880d04adb7",
+    "public/jatvet/assets/repository-CQZTQ0JS.css": "2f4dc6d6bcb1a701eb5fa230d9ec650719fc38d1444d281ac9362f8c25e32335",
+    "public/jatvet/v4/icon-192.png": "d68b927db58c198fa1492fdcab06daf9cb091370852eef51c406e42cdb601a99",
+    "public/jatvet/v4/version.json": "641d5c5339866c571faa572b290a18bf0e035a0cb4f568ae069b01983dea0def",
+    "public/jatvet/v4/icon-512.png": "5f79ecf180da6440aa2c40bbabd8da4791429ffeb4c8fa6c5e7b6bef026dc77a",
+    "public/jatvet/v4/login-logo.svg": "67920405a473289bce2449ec717e2968e42d5eab1f6afde662cdafac49e32bba",
+    "public/jatvet/v4/manifest.webmanifest": "474fd234aebb6c2b4fdb850765f1955071351c8d164442c734578243c04527a4",
+    "public/jatvet/v4/sw.js": "5ed4219ff8fa1e34e73e5c661f8d97983c8b6d6e47a92a9b8bd5611881688ea9",
+    "public/jatvet/v4/firebase-config.json": "7fb067d0e5df26d4b7c6bf36e02e398bd8a936d6a699df720343bdf2637f9d61",
+    "public/jatvet/v4/index.html": "d9ba1443f0c683d362a57df8179cda65203b32508e4ab771fa04cf3661f8f3e4",
+    "public/jatvet/v4/app-session.js": "32dd15897aff637bd4ac59672bd1f3fd37b3b9f68d1437a130c314c12e7416fc",
+    "public/jatvet/v4/login-pets.svg": "c7c522fae191593fd371e2fabe8abcd90e0e11ee039781cd7752faf638b9aa2d",
+    "public/jatvet/v4/install.js": "fb6e66d120ff2384d6aa42b6fc65a91e5ff0c0dac36287bad4757c4eaf219abe",
+    "public/jatvet/v4/apple-touch-icon.png": "33565bbdd940327c3bd8ef7bb0a6bd7234e000d28cc4f0bc4931340141cec352"
+  }
+}

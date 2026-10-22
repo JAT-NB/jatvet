@@ -19,6 +19,8 @@ La lista ejecutable y auditable está en `qa/empaquetar-402.py`, constante FILES
 
 El generador copia únicamente estos archivos, preservando `/jatvet/` y `/jatvet/v4/`. Escribe hashes SHA-256 y commit en `artifact.json`. No hace npm build ni usa código de otra rama. No publicar informes, fixtures, scripts, backups o el repositorio completo. El paquete general conserva la configuración del backend original: NO sirve como preview aislada sin adaptación.
 
+El inventario corresponde a la aplicación, no a todo el sitio institucional. El editor conserva un enlace público a `/jatvet/soluciones/`, fuera del paquete clínico; esa navegación debe verificarse en OPS-01. Antes de una publicación productiva completa de Hosting, preservar expresamente los demás recursos públicos existentes en el artefacto del sitio, para no eliminarlos por omisión. No reemplazar todo un sitio existente con esta allowlist sin ese inventario adicional. En QA móvil no se afirma que ese enlace institucional esté disponible.
+
 ```sh
 python3 qa/empaquetar-402.py /tmp/jatvet-402-paquete-revisado
 ```

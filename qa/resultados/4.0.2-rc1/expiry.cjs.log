@@ -1,0 +1,17 @@
+[2026-10-22T01:42:23.950Z]  @firebase/firestore: Firestore (12.4.0): GrpcConnection RPC 'Write' stream 0x417a558a error. Code: 7 Message: 7 PERMISSION_DENIED: 
+evaluation error at L63:32 for 'create' @ L63, false for 'create' @ L117, evaluation error at L63:32 for 'update' @ L63, false for 'update' @ L117, false for 'update' @ L63, false for 'update' @ L117
+PASS EXP-01 Perfil legacy sin expiry
+PASS EXP-02 Expiry vacío
+PASS EXP-03 Ayer vencido
+PASS EXP-04 Hoy sigue vigente hasta fin del día argentino
+PASS EXP-05 Mañana vigente
+PASS EXP-06 Día inexistente
+PASS EXP-07 Formato no ISO
+PASS EXP-08 Bisiesto válido futuro
+PASS EXP-09 Bisiesto inválido
+PASS EXP-10 Tipo inválido legacy
+PASS EXP-11 Suspendido con fecha futura
+PASS EXP-12 Suspendido sin vencimiento
+PASS EXP-13 Mes inexistente
+PASS EXP-14 Fecha vacía parcial
+PASS EXP-15 Admin suspendido no accede ni se reactiva

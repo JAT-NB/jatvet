@@ -9,6 +9,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 QA = ROOT / "qa"
 OUT = QA / "resultados/4.0.2-rc1"
+run = json.loads((OUT / "exit-codes.json").read_text())
+assert len(run["commands"]) == 9 and all(item["exit_code"] == 0 for item in run["commands"]), "Regresión final incompleta o fallida"
+started = datetime.fromisoformat(run["started_at"].replace("Z", "+00:00"))
 
 with (QA / "historico/matriz-85-casos.csv").open() as file:
     rows = {row["id"]: row for row in csv.DictReader(file)}
@@ -21,6 +24,7 @@ for name in sources:
     path = OUT / name
     data = json.loads(path.read_text())
     assert data.get("timestamp"), f"Falta fecha de ejecución: {name}"
+    assert datetime.fromisoformat(data["timestamp"].replace("Z", "+00:00")) >= started, f"Evidencia anterior a esta ejecución: {name}"
     for result in data["results"]:
         groups[result["id"]].append((str(path.relative_to(ROOT)), result))
 
@@ -45,6 +49,9 @@ rows["PWA-03"]["evidence"] += "; qa/CRITERIOS-ACEPTACION.md"
 for case_id in ["PWA-04", "PWA-05", "OPS-01", "AUTH-REAL-01"]:
     # No convertir bloqueos externos en PASS mediante inferencia o cambio de criterio.
     rows[case_id]["evidence"] = "qa/INFORME-CERTIFICACION.md"
+rows["OPS-01"]["reason"] = "Candidata 4.0.2 aún no publicada; falta cotejo HTTPS del artefacto, destino y backend autorizados."
+rows["AUTH-REAL-01"]["reason"] = "Falta entrega real de recuperación a buzón exclusivo QA controlado y autorizado; flujo emulado ejecutado."
+assert all(row["id"] in groups for row in rows.values() if row["status"] == "PASS"), "No heredar PASS sin ejecución nueva"
 
 with (QA / "resultados/matriz.csv").open("w", newline="") as file:
     writer = csv.DictWriter(file, fieldnames=["id", "title", "status", "error", "reason", "evidence"], lineterminator="\n")
@@ -59,6 +66,7 @@ with (QA / "casos-certificacion.csv").open("w", newline="") as file:
 
 counts = Counter(row["status"] for row in rows.values())
 summary = {"timestamp": datetime.now(timezone.utc).isoformat(), "total": len(rows),
+           "version": "4.0.2-rc1", "tested_commit": run["commit"],
            "counts": {status: counts[status] for status in ("PASS", "FAIL", "BLOQUEADA")}, "executed_unique": counts["PASS"] + counts["FAIL"],
            "acceptance": "qa/CRITERIOS-ACEPTACION.md",
            "production_changed": False, "rules_deployed": False,

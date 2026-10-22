@@ -1,0 +1,14 @@
+{
+  timestamp: '2026-10-22T01:39:15.106Z',
+  status: 'PASS',
+  checks: [
+    'SW 4.0.1 → 4.0.2 cambia controlador real',
+    'Sin recarga automática ni pérdida del formulario durante update',
+    'Reapertura muestra 4.0.2',
+    'Manifiesto conserva identidad y scope; iconos HTTP 200',
+    'beforeinstallprompt sintético invoca prompt y appinstalled oculta botón',
+    'User-Agent iPhone muestra instrucciones Safari',
+    'Entrada raíz reutiliza pantalla offline aprobada y Reintentar vuelve al login'
+  ],
+  limits: 'Instalación y actualización nativas en Android/iPhone siguen BLOQUEADAS. Eventos/UA simulados no prueban instalación nativa. No se certifica HTTPS remoto.'
+}

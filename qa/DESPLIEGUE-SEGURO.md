@@ -1,3 +1,5 @@
+> Para 4.0.2 RC1 usar `qa/releases/4.0.2-rc1/PLAN-PUBLICACION.md`. Este documento conserva instrucciones históricas y arranque de emuladores. No ejecutar el comando productivo histórico en esta preparación. Los runners ahora escriben en `qa/resultados/4.0.2-rc1/`.
+
 # Despliegue futuro — requiere autorización explícita
 
 Este documento contiene instrucciones para una publicación posterior. **No se ejecutó ningún despliegue ni merge.** La aplicación y las reglas publicadas siguen sin estos cambios.

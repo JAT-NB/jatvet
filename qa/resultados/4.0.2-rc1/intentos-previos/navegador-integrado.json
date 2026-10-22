@@ -1,0 +1,81 @@
+{
+  "timestamp": "2026-10-22T01:35:08.105Z",
+  "scope": "App compilada real; Auth 9299 y Firestore 8180 locales; Reglas propuestas y aplicación corregida. Auth 9299 y REST Firestore 8180 nativos en modo emulador; sin redirecciones hacia Firebase. No hay solicitudes productivas.",
+  "externalBlocked": [],
+  "downloads": [
+    "01-jat-vet-antes-de-restaurar-qa-e2e-a-2026-10-22.json",
+    "02-jat-vet-v4-pendiente-qa-e2e-a.json",
+    "03-jat-vet-v4-pendiente-qa-e2e-a.json",
+    "04-jat-vet-v4-pendiente-qa-e2e-a.json",
+    "05-jat-vet-v4-pendiente-qa-e2e-a.json",
+    "06-jat-vet-v4-pendiente-qa-e2e-a.json",
+    "07-jat-vet-v4-pendiente-qa-e2e-a.json"
+  ],
+  "results": [
+    {
+      "id": "UI-REAL-01",
+      "title": "Ingreso y cierre con perfil en emuladores",
+      "status": "PASS"
+    },
+    {
+      "id": "DATA-01",
+      "title": "Alta y persistencia tras recarga de la app",
+      "status": "PASS"
+    },
+    {
+      "id": "UI-REAL-02",
+      "title": "Importación revisada autenticada con copia previa",
+      "status": "PASS"
+    },
+    {
+      "id": "DATA-06",
+      "title": "Foto y adjunto importados íntegros después de recargar",
+      "status": "PASS"
+    },
+    {
+      "id": "PHOTO-04",
+      "title": "Cambio de foto real y persistencia tras recarga",
+      "status": "PASS"
+    },
+    {
+      "id": "DATA-02",
+      "title": "Cambio A/B sin datos clínicos residuales",
+      "status": "PASS"
+    },
+    {
+      "id": "DATA-04",
+      "title": "Desconexión durante guardado conserva copia descargable",
+      "status": "PASS"
+    },
+    {
+      "id": "DATA-04-REVOKE",
+      "title": "Propietario recupera copia tras revocación sin recuperar permisos",
+      "status": "PASS"
+    },
+    {
+      "id": "RECOVERY-TIMEOUT",
+      "title": "Timeout con Internet aparente conserva copia y bloquea operaciones",
+      "status": "PASS"
+    },
+    {
+      "id": "RECOVERY-CONFLICT",
+      "title": "Guardados simultáneos conservan revisión ajena y copia propia",
+      "status": "PASS"
+    },
+    {
+      "id": "RECOVERY-AUTH-RACE",
+      "title": "Cambio de identidad durante guardado no filtra ni guarda datos A en B",
+      "status": "PASS"
+    },
+    {
+      "id": "PROFILE-METADATA",
+      "title": "Edición administrativa conserva expiry y metadatos existentes",
+      "status": "PASS"
+    },
+    {
+      "id": "APP-RUNTIME",
+      "title": "Aplicación integrada sin excepciones JavaScript no controladas",
+      "status": "PASS"
+    }
+  ]
+}
