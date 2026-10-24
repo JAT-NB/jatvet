@@ -1,0 +1,101 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JAT Vet</title>  <script type="module" crossorigin src="/jatvet/assets/v4-backup-restauracion-20261019.js?v=turnos-fix-20261023"></script>
+  <link rel="modulepreload" crossorigin href="/jatvet/assets/repository-CdXTqB56.js">
+  <link rel="stylesheet" crossorigin href="/jatvet/assets/repository-CQZTQ0JS.css">
+<style>
+header{flex-wrap:nowrap}header .brand{flex:1;min-width:0;display:flex;align-items:center;gap:16px}header .brand p{margin:0;font-size:14px}#logout{flex-shrink:0}@media(max-width:640px){header .brand{display:block}header .brand p{font-size:12px;margin-top:4px}}#status:empty{display:none}#status{padding:8px 20px;font-size:13px;background:transparent;color:#526a75}#workspace{padding:0}#settings{margin:0 16px 12px;background:#fff;border-radius:12px}#settings>summary{cursor:pointer;color:#526a75;font-size:14px}#editor iframe{height:calc(100dvh - 80px);min-height:480px}header{position:sticky;top:0;z-index:90}#status:empty{display:none}#logout{font-size:13px}#settings[open]{position:fixed;z-index:1000;top:50%;left:50%;transform:translate(-50%,-50%);width:min(680px,calc(100vw - 32px));max-height:85dvh;overflow:auto;box-sizing:border-box;padding:20px 24px;border:1px solid #d9e4e8;box-shadow:0 0 0 100vmax rgba(5,27,41,.52),0 16px 45px rgba(0,0,0,.22);border-radius:16px}#settings[open]>summary{font-size:19px;font-weight:700;color:#123b50;margin-bottom:16px}#settings #review{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;max-height:250px;overflow:auto;background:#f5f8fa;border-radius:8px;padding:10px}#settings input[type=file]{max-width:100%}#closeBackup{float:right;border:0;border-radius:8px;padding:7px 12px;cursor:pointer;background:#e9f1f3;color:#123b50}
+header{justify-content:center;text-align:center}header .brand{flex:0 1 auto;display:flex;flex-direction:column;align-items:center;gap:4px}header .brand p{margin:0}</style><meta name="theme-color" content="#123b50"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="JAT Vet"><style id="jatVetLoginClean">
+body:has(#login:not([hidden])){margin:0!important;min-height:100dvh;background:radial-gradient(circle at 100% 0%,#d9efff 0,transparent 32%),linear-gradient(165deg,#fafdff,#edf7ff 75%,#d9effb)!important;color:#10365a;font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+body:has(#login:not([hidden]))>header{position:relative!important;display:block!important;background:transparent!important;border:0!important;box-shadow:none!important;padding:28px 12px 8px!important;text-align:center!important}
+body:has(#login:not([hidden]))>header .brand{display:flex!important;flex-direction:column!important;align-items:center!important;gap:0!important}
+body:has(#login:not([hidden]))>header .brand h1,body:has(#login:not([hidden]))>header .brand p{display:none!important}
+body:has(#login:not([hidden])) #jatLoginBrand{display:flex!important;flex-direction:column;align-items:center;gap:3px}
+body:has(#login:not([hidden])) #jatLoginBrand .jatVetLogo{display:block;width:116px;height:106px;object-fit:contain}
+body:has(#login:not([hidden])) .jatBrandName{font-size:clamp(37px,10vw,52px);font-weight:850;letter-spacing:-2px;line-height:1.1;color:#0c3159}
+body:has(#login:not([hidden])) .jatBrandName strong{color:#298acb}
+body:has(#login:not([hidden])) .jatBrandTag{font-size:11px;letter-spacing:2.7px;text-transform:uppercase;color:#254c72;line-height:1.5;margin-top:5px}
+body:has(#login:not([hidden])) #installApp{display:none!important}
+body:has(#login:not([hidden])) #status:empty{display:none!important}
+#login:not([hidden]){display:block!important;box-sizing:border-box!important;width:calc(100% - 28px)!important;max-width:440px!important;margin:18px auto 0!important;padding:28px 23px 20px!important;background:#ffffffed!important;border:1px solid #e6f0fa!important;border-radius:25px!important;box-shadow:0 18px 48px #163f6520!important;position:relative!important;z-index:1}
+#login:not([hidden]) h2{font-size:clamp(22px,6vw,28px)!important;line-height:1.18!important;letter-spacing:-.7px!important;margin:0 0 9px!important;text-align:center!important;color:#0c3159!important;font-weight:800!important}
+#login:not([hidden]) #jatLoginHint{text-align:center!important;font-size:14px!important;color:#70849b!important;margin:0 0 25px!important}
+#login:not([hidden]) #loginForm{display:flex!important;flex-direction:column!important;gap:0!important;background:none!important;border:0!important;padding:0!important;margin:0!important;box-shadow:none!important}
+#login:not([hidden]) #loginForm label{display:block!important;position:relative!important;color:#10365a!important;font-weight:700!important;font-size:14px!important;margin:0 0 16px!important}
+#login:not([hidden]) #loginForm input{box-sizing:border-box!important;display:block!important;width:100%!important;min-width:0!important;height:54px!important;margin:8px 0 0!important;padding:0 43px 0 15px!important;border:1px solid #d1e0ee!important;border-radius:12px!important;background:#fafdff!important;color:#153858!important;font:16px system-ui!important;box-shadow:none!important}
+#login:not([hidden]) #loginForm input:focus{outline:2px solid #5da8e65c!important;border-color:#398ecf!important}
+#login:not([hidden]) #loginForm button:not(#reset):not(#jatEye){width:100%!important;min-height:54px!important;margin:7px 0 0!important;border:0!important;border-radius:13px!important;background:linear-gradient(100deg,#2589ca,#2d80c2)!important;color:#fff!important;font-size:17px!important;font-weight:800!important;box-shadow:0 7px 16px #2d80c22c!important}
+#login:not([hidden]) #reset{display:block!important;align-self:center!important;background:transparent!important;border:0!important;color:#247fc0!important;font-size:14px!important;margin:18px auto 0!important;padding:5px!important}
+#login:not([hidden]) #jatEye{display:block!important;position:absolute!important;right:9px!important;bottom:9px!important;width:37px!important;height:36px!important;background:transparent!important;border:0!important;color:#5e7991!important;font-size:21px!important;padding:0!important;margin:0!important;cursor:pointer!important}
+
+
+#login:not([hidden]) #jatLoginFooter{display:block!important;text-align:center!important;font-size:11px!important;color:#8096a8!important;margin:13px 0 0!important}
+#login:not([hidden]) #jatSwitchUser{display:block!important;margin:0 auto 14px!important;background:none!important;border:0!important;color:#2783bf!important;font-size:13px!important}
+#login:not([hidden]) #jatSwitchUser[hidden],#login:not([hidden]) #jatLastUser[hidden]{display:none!important}
+#login:not([hidden]) #jatLastUser{display:flex!important;align-items:center;gap:8px;background:#eef6ff;border-radius:10px;padding:10px;margin:0 0 15px;color:#173a5a;font-size:13px}
+#login:not([hidden]) #jatLastUserEmail{flex:1;overflow-wrap:anywhere}
+#login:not([hidden]) #jatLastUserChange{border:0;background:transparent;color:#267fc2;font-weight:700}
+@media(max-height:740px){body:has(#login:not([hidden]))>header{padding-top:12px!important}body:has(#login:not([hidden])) #jatLoginBrand .jatVetLogo{width:85px;height:77px}#login:not([hidden]){margin-top:10px!important;padding-top:19px!important}}
+@media(max-width:365px){#login:not([hidden]){padding:22px 17px 15px!important}}
+</style><style id="jatPetsRemovalFinal">#jatLoginPets,#jatLoginPets img,img[src*="login-pets"],[style*="login-pets"]{display:none!important;visibility:hidden!important;height:0!important;max-height:0!important;margin:0!important;padding:0!important}#login:not([hidden]){overflow:hidden!important}#login:not([hidden]) #jatLoginFooter{margin:12px 0 0!important}</style><style id="jatVetNewMark">body:has(#login:not([hidden])) #jatLoginBrand .jatNewVetMark{display:block!important;width:100px!important;height:100px!important;margin:0 auto 6px!important;filter:drop-shadow(0 7px 12px #164c7920)}body:has(#login:not([hidden]))>header .brand h1:before{content:none!important;display:none!important}body:has(#login:not([hidden]))>header .brand h1:after{content:none!important;display:none!important}body:has(#login:not([hidden])) #jatLoginBrand{display:flex!important;visibility:visible!important}body:has(#login:not([hidden])) #jatLoginBrand .jatBrandName{display:block!important}</style><style id="jatVetNoFlash">html{background:#eef4f8}body{visibility:hidden!important}body.jat-ready{visibility:visible!important}body:has(#login:not([hidden]))>header .brand h1{display:none!important}</style><script>document.addEventListener('DOMContentLoaded',()=>{const login=document.getElementById('login'),workspace=document.getElementById('workspace');const ready=()=>{if((login&&!login.hidden)||(workspace&&!workspace.hidden)){document.body.classList.add('jat-ready');return true}return false};if(!ready()){const observer=new MutationObserver(()=>{if(ready())observer.disconnect()});if(login)observer.observe(login,{attributes:true,attributeFilter:['hidden']});if(workspace)observer.observe(workspace,{attributes:true,attributeFilter:['hidden']})}});</script><style id="jatLoginIsolation">body:not(:has(#login:not([hidden]))) #jatLoginBrand{display:none!important}body:not(:has(#login:not([hidden])))>header .brand h1{display:block!important}body:not(:has(#login:not([hidden])))>header .brand p{display:block!important}</style><style id="jatQaUxFive">
+/* QA only: accesibilidad, login, mensajes, estados de carga */
+#login:not([hidden]){outline:1px solid #d8e8f3!important}
+#login:not([hidden]) #jatLoginHint{line-height:1.55!important}
+#login:not([hidden]) #reset:focus-visible,#login:not([hidden]) button:focus-visible,#login:not([hidden]) input:focus-visible{outline:3px solid #257fc1!important;outline-offset:3px!important}
+#jatQaLoginNotice{margin:12px 0 0;padding:12px 14px;border-radius:12px;background:#eaf5ff;color:#143f62;font:600 14px/1.45 system-ui}
+#jatQaLoginNotice[hidden]{display:none!important}
+#jatQaLoading{position:fixed;inset:0;z-index:1100;display:flex;align-items:center;justify-content:center;background:#edf5fb;color:#143f62;font:600 16px system-ui;text-align:center;padding:24px}
+#jatQaLoading[hidden]{display:none!important}
+#jatQaUpdate{position:fixed;bottom:14px;left:12px;right:12px;max-width:460px;margin:auto;z-index:1200;background:#103e63;color:white;border-radius:16px;padding:17px;box-shadow:0 12px 36px #142a4050;font:14px/1.5 system-ui}
+#jatQaUpdate[hidden]{display:none!important}
+#jatQaUpdate button{margin:8px 8px 0 0;padding:9px 14px;border-radius:9px;background:white;color:#123f64;font-weight:750}
+#jatQaUpdate button.secondary{background:transparent;color:white;border:1px solid #ffffff88}
+</style></head><body><div id="qa-isolation-label" style="position:relative;z-index:1300;background:#fff0bb;color:#513b00;text-align:center;padding:9px;font:700 13px system-ui">ENTORNO QA · Firebase jat-vet-pruebas · Usar solamente cuenta ficticia · No es producción</div>
+<header><div class="brand"><h1><span aria-hidden="true">🐾</span> JAT Vet</h1><div id="jatLoginBrand" aria-hidden="true"><svg class="jatNewVetMark" viewBox="0 0 120 120" width="96" height="96" aria-label="JAT Vet, huella y cruz veterinaria" role="img" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="vetMarkBlue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#123e70"/><stop offset="1" stop-color="#2b91ce"/></linearGradient></defs><rect x="5" y="5" width="110" height="110" rx="29" fill="url(#vetMarkBlue)"/><circle cx="38" cy="38" r="9" fill="#fff"/><circle cx="58" cy="29" r="9" fill="#fff"/><circle cx="79" cy="37" r="9" fill="#fff"/><circle cx="91" cy="55" r="8" fill="#fff"/><path d="M31 73c4-10 14-23 28-23 12 0 20 10 25 21 5 11-2 21-13 21-7 0-10-4-16-4s-11 4-17 4c-12 0-14-10-7-19Z" fill="#fff"/><circle cx="88" cy="86" r="20" fill="#e7f5ff" stroke="#123e70" stroke-width="3"/><path d="M88 75v22M77 86h22" stroke="#1688c7" stroke-width="6" stroke-linecap="round"/></svg><div class="jatBrandName">JAT <strong>Vet</strong></div><div class="jatBrandTag">Gestión de servicios<br>veterinarios a domicilio</div></div><p>Gestión de servicios veterinarios a domicilio</p></div><span id="identity" hidden></span></header><div style="text-align:center"><button id="installApp" hidden>Instalar app</button></div><button id="logout" hidden style="display:none" aria-hidden="true" tabindex="-1">Cerrar sesión</button>
+<p id="status" role="status">Cargando configuración…</p>
+<section id="login" hidden><h2 id="jatLoginTitle">¡Bienvenido a JAT Vet!</h2><p id="jatLoginHint">Ingresá con tu cuenta para continuar</p><div id="jatLastUser" hidden><span id="jatLastUserEmail"></span><button type="button" id="jatLastUserChange">Cambiar</button></div><button type="button" id="jatSwitchUser" hidden>Usar otra cuenta</button><form id="loginForm"><label>Correo electrónico<input id="email" type="email" autocomplete="username" placeholder="tu@email.com" required></label><label>Contraseña<input id="password" type="password" autocomplete="current-password" placeholder="Ingresá tu contraseña" required><button type="button" id="jatEye" aria-label="Mostrar contraseña">◉</button></label><button>Ingresar</button><button type="button" id="reset">Recuperar contraseña</button></form><p id="jatLoginFooter">JAT Soluciones Informáticas</p></section>
+<section id="workspace" hidden><div id="jatVersionLabel" aria-label="Versión de JAT Vet" style="font:12px system-ui;color:#526a75;text-align:right;padding:4px 16px 6px">JAT Vet · QA cinco mejoras (4.0.1)</div><div id="admin" hidden style="display:none !important" aria-hidden="true"><h2>Soporte de usuarios</h2><p>Seleccioná explícitamente el UID del profesional. Los cambios afectan ese espacio.</p><label>UID del profesional<input id="targetUid"></label><button id="openWorkspace">Abrir espacio</button><label>Nombre de referencia<input id="profileLabel" maxlength="120"></label><label><input type="checkbox" id="enabled" checked> Acceso habilitado</label><button id="saveProfile">Guardar acceso</button></div>
+<details id="settings" hidden><summary>Importar datos de tu respaldo</summary><button id="closeBackup" type="button" onclick="document.getElementById('settings').open=false;document.getElementById('settings').hidden=true">Cerrar ✕</button><details open><summary>Importar respaldo anterior</summary><p>La importación agrega registros, exige revisión y nunca borra el respaldo ni los datos locales originales. Exportá primero una copia desde la versión anterior.</p><label>Archivo JSON<input id="backup" type="file" accept="application/json,.json"></label><pre id="review"></pre><label><input type="checkbox" id="confirmOwner"> Confirmo que el respaldo pertenece al titular del espacio indicado</label><button id="importBackup" disabled>Confirmar importación revisada</button></details>
+<button id="reloadWorkspace">Actualizar datos</button></details><button id="download" hidden>Descargar copia pendiente</button><div id="editor"></div></section><script id="jatLoginBehavior">
+(()=>{const email=document.getElementById('email'),password=document.getElementById('password'),workspace=document.getElementById('workspace'),login=document.getElementById('login');if(!email||!password||!workspace||!login)return;
+const key='jatvet:last-login-email:v4';let saved='';try{saved=localStorage.getItem(key)||''}catch(e){}
+if(saved){email.value=saved;document.getElementById('jatLoginTitle').textContent='Bienvenido nuevamente';document.getElementById('jatLoginHint').textContent='Ingresá tu contraseña para continuar';}
+document.getElementById('jatEye')?.addEventListener('click',()=>{const show=password.type==='password';password.type=show?'text':'password';document.getElementById('jatEye').setAttribute('aria-label',show?'Ocultar contraseña':'Mostrar contraseña')});document.getElementById('jatSwitchUser')?.addEventListener('click',()=>{email.value='';password.value='';email.focus();document.getElementById('jatLoginTitle').textContent='¡Bienvenido a JAT Vet!';document.getElementById('jatLoginHint').textContent='Ingresá con tu cuenta para continuar';});new MutationObserver(()=>{if(!workspace.hidden){const value=email.value.trim();if(value){try{localStorage.setItem(key,value)}catch(e){}}}}).observe(workspace,{attributes:true,attributeFilter:['hidden']});
+})();
+</script><script id="jatQaUxBehavior">
+(()=>{
+ const byId=id=>document.getElementById(id);
+ const loading=document.createElement('div');loading.id='jatQaLoading';loading.setAttribute('role','status');loading.textContent='Cargando JAT Vet…';document.body.appendChild(loading);
+ const login=byId('login'),workspace=byId('workspace'),email=byId('email'),password=byId('password');
+ const note=document.createElement('p');note.id='jatQaLoginNotice';note.hidden=true;note.setAttribute('role','status');note.setAttribute('aria-live','polite');byId('loginForm')?.after(note);
+ const notice=(text)=>{note.textContent=text;note.hidden=false;};
+ const showReady=()=>{if(!login.hidden||!workspace.hidden){loading.hidden=true;document.body.classList.add('jat-ready');return true}return false};
+ const observer=new MutationObserver(showReady);observer.observe(login,{attributes:true,attributeFilter:['hidden']});observer.observe(workspace,{attributes:true,attributeFilter:['hidden']});
+ showReady();
+ // El error de conexión no debe dejar la app invisible indefinidamente.
+ setTimeout(()=>{if(!showReady()){loading.textContent='No pudimos iniciar JAT Vet. Comprobá tu conexión.';const retry=document.createElement('button');retry.type='button';retry.textContent='Reintentar';retry.style.cssText='display:block;margin:16px auto;padding:12px 24px;background:#176caa;color:white;border:0;border-radius:10px';retry.onclick=()=>location.reload();loading.appendChild(retry)}},12000);
+ const reset=byId('reset');reset?.addEventListener('click',()=>{
+   if(!email.value.trim()||!email.checkValidity())notice('Ingresá un correo válido para recuperar tu contraseña.');
+   else notice('Procesando la solicitud de recuperación…');
+ });
+ email?.addEventListener('input',()=>{note.hidden=true});
+ // Evitar duplicar el envío del formulario y comunicar el estado.
+ const form=byId('loginForm'),submit=form?.querySelector('button:not([type])');
+ form?.addEventListener('submit',()=>{if(submit){submit.textContent='Ingresando…';setTimeout(()=>{submit.textContent='Ingresar'},9000)}});
+ // Regreso desde segundo plano: no forzar login ni recargar datos sin necesidad.
+ const restore=()=>{showReady();if(!workspace.hidden){const frame=byId('editor')?.querySelector('iframe');if(frame&&frame.contentWindow){try{frame.contentWindow.dispatchEvent(new Event('pageshow'))}catch(_){/* cross-origin */}}}};
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)restore()});
+ window.addEventListener('pageshow',restore);
+ window.addEventListener('focus',restore);
+ // Aviso de actualización accesible. El SW debe avisar con waiting/updatefound.
+ const banner=document.createElement('section');banner.id='jatQaUpdate';banner.hidden=true;banner.setAttribute('role','status');banner.setAttribute('aria-live','polite');
+ banner.innerHTML='<strong>Hay una nueva versión de JAT Vet</strong><div>Guardá tus cambios antes de actualizar.</div><button type="button" id="jatQaUpdateNow">Actualizar ahora</button><button type="button" class="secondary" id="jatQaUpdateLater">Más tarde</button>';
+ document.body.appendChild(banner);
+ const present=reg=>{if(!reg?.waiting)return;banner.hidden=false;byId('jatQaUpdateNow').onclick=()=>{reg.waiting.postMessage({type:'SKIP_WAITING'});setTimeout(()=>{if(!document.hidden)location.reload()},1600)};byId('jatQaUpdateLater').onclick=()=>{banner.hidden=true}};
+ if('serviceWorker'in navigator){
+  navigator.serviceWorker.getRegistration('./').then(reg=>{
+   if(!reg)return;present(reg);
+   reg.addEventListener('updatefound',()=>{const worker=reg.installing;if(worker)worker.addEventListener('statechange',()=>{if(worker.state==='installed'&&navigator.serviceWorker.controller)present(reg)})});
+  }).catch(()=>{});
+  let reloading=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!reloading&&!document.hidden){reloading=true;location.reload()}});
+ }
+})();
+</script></body></html>
