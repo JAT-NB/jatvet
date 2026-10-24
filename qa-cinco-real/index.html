@@ -81,7 +81,7 @@ document.getElementById('jatEye')?.addEventListener('click',()=>{const show=pass
  const form=byId('loginForm'),submit=form?.querySelector('button:not([type])');
  form?.addEventListener('submit',()=>{if(submit){submit.textContent='Ingresando…';setTimeout(()=>{submit.textContent='Ingresar'},9000)}});
  // Regreso desde segundo plano: no forzar login ni recargar datos sin necesidad.
- const restore=()=>{showReady();if(!workspace.hidden){const frame=byId('editor')?.querySelector('iframe');if(frame&&frame.contentWindow){try{frame.contentWindow.dispatchEvent(new Event('pageshow'))}catch(_){/* cross-origin */}}}};
+ const restore=()=>{showReady(); /* QA: no emitir pageshow artificial: puede disparar recargas/consultas duplicadas al volver de WhatsApp. La sesión y el estado quedan bajo control de la aplicación. */};
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)restore()});
  window.addEventListener('pageshow',restore);
  window.addEventListener('focus',restore);
