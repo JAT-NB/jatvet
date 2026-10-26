@@ -1,0 +1,33 @@
+name: JAT Vet QA - regression
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'qa-cinco-real/**'
+      - '.github/workflows/jatvet-qa-regression.yml'
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprobaciones de código
+        run: node --test qa-cinco-real/tests/regression.test.cjs
+      - name: Instalar Playwright
+        run: |
+          npm install --no-save @playwright/test@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Pruebas de navegador (sin credenciales)
+        run: npx playwright test qa-cinco-real/tests/public.spec.cjs --browser=chromium --reporter=line
+      - name: Guardar evidencia si falla
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jatvet-qa-evidencia
+          path: test-results/
+          if-no-files-found: ignore
