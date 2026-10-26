@@ -21,6 +21,7 @@ test('Caja conserva vínculo entre ingresos automáticos y turnos',()=>{
  assert.match(app,/function syncAllTurnIncome\(\)/);
  assert.match(app,/m\.turnId!==item\.id/);
 });
+test('JV-022 historial Android y JV-024 indicador cancelado',()=>{assert.match(app,/window\\.addEventListener\\('popstate'/);assert.match(app,/turn-cancelled/);assert.match(app,/pill-cancelled/);});
 test('La página apunta al código aislado QA',()=>{
  assert.match(html,/qa-cinco-real\/qa-app-fixes-20261026\.js\?v=2/);
 });
