@@ -19,7 +19,7 @@ test('La página QA utiliza exclusivamente el módulo de pruebas', async ({ requ
   const response = await request.get(QA);
   expect(response.ok()).toBeTruthy();
   const html = await response.text();
-  expect(html).toContain('/jatvet/qa-cinco-real/qa-app-fixes-20261026.js?v=2');
+  expect(html).toContain('/jatvet/qa-cinco-real/qa-app-fixes-20261026.js?v=3');
   expect(html).toContain('ENTORNO QA');
   expect(html).not.toContain('src="/jatvet/assets/v4-backup-restauracion-20261019.js');
 });
